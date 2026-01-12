@@ -1,0 +1,12 @@
+{
+  "portal": {
+    "type": "monster",
+    "name": "Portal",
+    "explanation": "Open a portal to different maps and instances"
+  },
+  "self_healing": {
+    "type": "monster",
+    "name": "Healing",
+    "explanation": "Periodical self healing"
+  }
+}

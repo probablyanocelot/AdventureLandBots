@@ -99,3 +99,5 @@ const proxied_require = (() => {
   }
   return proxied_require;
 })();
+
+export { proxied_require };

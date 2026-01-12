@@ -1,3 +1,7 @@
+import { filterObjectsByProperty } from "./lib/functions_data";
+import { proxied_require } from "./lib/proxied_require";
+//const { utils, combat } = await proxied_require("utils.js", "combat.js"); // Example usage
+
 // Code for Adventure Land the coding MMORPG
 // Character Class
 class Character {
@@ -6,6 +10,7 @@ class Character {
     // Most fields on `parent.character` change over time; copying them here would create a snapshot.
     this.data = data;
     this.action = null;
+    this.skills = filterObjectsByProperty(G.skills, "class", this.ctype);
   }
 
   // Identity / stats (live)
@@ -84,5 +89,7 @@ class Character {
     this.action = null;
     log(`Action cleared`);
   }
-  skills() {}
+  skills() {
+    let;
+  }
 }
