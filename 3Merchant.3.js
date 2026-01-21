@@ -12,10 +12,10 @@ load_code("46BankOverview");
 load_code("98Telegram");
 
 //load_code(53) // upgrade_all2 WILL ADD MORE
-performance_trick();
+//performance_trick();
 
-// const { webFrame } = require('electron');
-// webFrame.setZoomFactor(1);
+const { webFrame } = require('electron');
+webFrame.setZoomFactor(0.75);
 
 let lastScare;
 let lastBankUpdate = false;
