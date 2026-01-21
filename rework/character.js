@@ -1,6 +1,11 @@
-import { filterObjectsByProperty } from "./lib/functions_data";
-import { proxied_require } from "./lib/proxied_require";
-//const { utils, combat } = await proxied_require("utils.js", "combat.js"); // Example usage
+// IN-GAME IMPORTS
+load_code(53); // functions_data.js
+load_code(54); // functions_game.js
+
+// STANDARD LIBRARY IMPORTS
+// import { filterObjectsByProperty } from "./lib/functions_data";
+// import { proxied_require } from "./lib/proxied_require";
+// const { utils, combat } = await proxied_require("utils.js", "combat.js"); // Example usage
 
 // Code for Adventure Land the coding MMORPG
 // Character Class
@@ -9,10 +14,42 @@ class Character {
     // Keep a LIVE reference to the in-game character object.
     // Most fields on `parent.character` change over time; copying them here would create a snapshot.
     this.data = data;
+    // action and skills are set during async init
     this.action = null;
-    this.skills = filterObjectsByProperty(G.skills, "class", this.ctype);
+    this.skills = [];
+    this.mp_use_avg = 0;
   }
 
+  // async initializer since constructors can't be async
+  async init() {
+    // populate any async or dynamic properties
+    this.skills = filterObjectsByProperty(G.skills, "class", this.ctype);
+
+    // wire up async event handler
+    parent.character.on("cm", async (m) => {
+      if (!is_friendly(m.name)) return;
+      let data = m.message;
+
+      if (!data.cmd) return;
+
+      switch (data.cmd) {
+        case "clear":
+          switch (character.ctype) {
+            case "merchant":
+              merchantBot.clear_current_action();
+              break;
+            default:
+              char.clear_current_action();
+              break;
+          }
+          break;
+      }
+    });
+
+    return this;
+  }
+
+  // ###### GETTERS AND SETTERS FOR CHARACTER PROPERTIES ######
   // Identity / stats (live)
   get name() {
     return this.data?.name;
@@ -74,22 +111,96 @@ class Character {
   }
   showInfo() {
     log(
-      `Name: ${this.name}, Level: ${this.level}, Class: ${this.ctype}, HP: ${this.hp}/${this.max_hp}%, MP: ${this.mp}/${this.max_mp}%, Position: (${this.x}, ${this.y}), Map: ${this.map}`
+      `Name: ${this.name}, Level: ${this.level}, Class: ${this.ctype}, HP: ${this.hp}/${this.max_hp}%, MP: ${this.mp}/${this.max_mp}%, Position: (${this.x}, ${this.y}), Map: ${this.map}`,
     );
   }
   isAlive() {
     return !this.data?.rip;
   }
-  setAction(action) {
+  async setAction(action) {
     this.action = action;
     log(`Action set to: ${action}`);
+    return this.action;
   }
-  clearAction() {
+  async clearAction() {
     // try not to have to use this!
     this.action = null;
     log(`Action cleared`);
+    return null;
   }
-  skills() {
-    let;
+
+  // ###### CHARACTER METHODS ######
+  //    Below are methods for universal character actions.
+
+  // Inventory management
+  async buyItems() {
+    // implement buying logic; placeholder
+    return;
+  }
+  async sellItems() {
+    // implement selling logic; placeholder
+    return;
+  }
+
+  async useSkill(skillName, target) {
+    // implement skill usage; placeholder
+    // e.g., await parent.use_skill(skillName, target);
+    return;
+  }
+
+  // Movement
+  async go(loc) {
+    const keys = Object.keys(loc);
+    if (keys.includes("map")) {
+      if (parent.character.map !== loc.map) {
+        if (keys.includes("x") && keys.includes("y")) {
+          await parent.character.smart_move(loc.map, loc.x, loc.y);
+          return;
+        }
+        await parent.character.smart_move(loc.map);
+        return;
+      }
+    }
+    if (keys.includes("x") && keys.includes("y")) {
+      await parent.character.xmove(loc.x, loc.y);
+      return;
+    }
+    return;
+  }
+
+  // Party management
+  partyInvite(playerName) {
+    parent.party_invite(playerName);
+    return;
+  }
+  partyAccept() {
+    parent.party_accept();
+    return;
+  }
+  partyLeave() {
+    parent.party_leave();
+    return;
+  }
+  get mpUseAvg() {
+    // TODO
+    let sampleCount = 0;
+    let timeout = setTimeout(() => {
+      let mp_used = parent.character.max_mp - parent.character.mp;
+      this.mp_use_avg = (this.mp_use_avg * 9 + mp_used) / 10; // simple moving average over 10 samples
+    }, 6000); // every 6 seconds
+    if (sampleCount >= 10) {
+      clearTimeout(timeout);
+      return this.mp_use_avg;
+    } else {
+      sampleCount++;
+      return this.mp_use_avg;
+    }
   }
 }
+// STANDARD LIBRARY EXPORTS
+// export { Character };
+// create bot asynchronously
+let bot;
+(async () => {
+  bot = await new Character().init();
+})();

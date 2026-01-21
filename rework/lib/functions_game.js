@@ -17,4 +17,4 @@ function getNearestMonsterOfType(mtype) {
   }
   return nearestMonster;
 }
-export { getNearestMonsterOfType };
+// export { getNearestMonsterOfType };
