@@ -2,7 +2,7 @@
 const proxied_require = (() => {
   const NODE_BASE = ".";
   const WEB_BASE =
-    "https://github.com/probablyanocelot/AdventureLandBots/tree/rework/rework";
+    "https://github.com/probablyanocelot/AdventureLandBots/tree/rework/";
   const FOLDER = "/codes/";
   const tick_delay = () =>
     new Promise((r) => {
@@ -22,15 +22,15 @@ const proxied_require = (() => {
         ]);
         if (result == null) {
           game_log(
-            `(${character.name})[${path_name}]: Module ${name} found in cache, but not completed. Waiting for finish.`
+            `(${character.name})[${path_name}]: Module ${name} found in cache, but not completed. Waiting for finish.`,
           );
           ret[lib_name] = (await module_cache[name]).exports;
           game_log(
-            `(${character.name})[${path_name}]: Module ${name} finished loading.`
+            `(${character.name})[${path_name}]: Module ${name} finished loading.`,
           );
         } else {
           game_log(
-            `(${character.name})[${path_name}]: Module ${name} found in cache.`
+            `(${character.name})[${path_name}]: Module ${name} found in cache.`,
           );
           ret[lib_name] = (await module_cache[name]).exports;
         }
@@ -49,17 +49,22 @@ const proxied_require = (() => {
       await func(
         _module,
         _module.exports,
-        proxied_require.bind({ name: path_name + ":" + name })
+        proxied_require.bind({ name: path_name + ":" + name }),
       );
       game_log(`(${character.name})[${path_name}]: Executed ${name}`);
       resolve(_module);
       ret[lib_name] = _module.exports;
     } catch (e) {
       console.log(
-        "(" + character.name + ")[" + path_name + "]: ERROR ENCOUNTERED: " + e
+        "(" + character.name + ")[" + path_name + "]: ERROR ENCOUNTERED: " + e,
       );
       console.log(
-        "(" + character.name + ")[" + path_name + "]: Offending script: " + name
+        "(" +
+          character.name +
+          ")[" +
+          path_name +
+          "]: Offending script: " +
+          name,
       );
       throw e;
     }
@@ -99,3 +104,9 @@ const proxied_require = (() => {
   }
   return proxied_require;
 })();
+
+exports.proxied_require = proxied_require;
+
+const { moveInCircle } = await proxied_require("move_in_circle.js");
+
+await moveInCircle({ x: 100, y: 100 }, 50, Math.PI);

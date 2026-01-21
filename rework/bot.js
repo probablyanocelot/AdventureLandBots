@@ -110,11 +110,6 @@ class BotCharacter {
   get target() {
     return this.data?.target;
   }
-  showInfo() {
-    log(
-      `Name: ${this.name}, Level: ${this.level}, Class: ${this.ctype}, HP: ${this.hp}/${this.max_hp}%, MP: ${this.mp}/${this.max_mp}%, Position: (${this.x}, ${this.y}), Map: ${this.map}`,
-    );
-  }
   isAlive() {
     return !this.data?.rip;
   }
