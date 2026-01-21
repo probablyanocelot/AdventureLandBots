@@ -101,3 +101,29 @@ let sell_dict = {
   ], // 'xmasshoes', 'xmashat', 'eears', 'eslippers',
   merchTradeSell: [],
 };
+
+function sell_extras() {
+  merchantBot.full_sell();
+  // index of item in inv
+  for (let itemSlot in character.items) {
+    // idx, 0-41
+    let item = character.items[itemSlot];
+    if (!item) continue;
+
+    if (item.level && item.level > 3) continue;
+
+    let itemName = item.name;
+    // don't sell if not in list or is shiny
+    if (!sell_dict["merchSell"].includes(itemName) || item.p || item.acc)
+      continue;
+
+    log(`selling ${itemName}`);
+    if (item.q) {
+      sell(itemSlot, item.q);
+      continue;
+    }
+    if (sell_dict["merchSell"].includes(itemName) && item.level <= 2)
+      sell(itemSlot);
+  }
+  setTimeout(sell_extras, 3000); //1440 * 1000
+}

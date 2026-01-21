@@ -12,3 +12,5 @@ let itemMobDict = {
   snake: ["stramulet", "intamulet", "dexamulet"],
   arcticbee: ["strring", "vitring", "intring", "dexring"],
 };
+
+// TODO: Gather data from G.monsters to handle this better

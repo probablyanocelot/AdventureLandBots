@@ -1,3 +1,6 @@
+// Code for Adventure Land the coding MMORPG
+// THIS IS THE CLASS FOR ALL UNIVERSAL CHARACTER ACTIONS AND PROPERTIES
+
 // IN-GAME IMPORTS
 load_code(53); // functions_data.js
 load_code(54); // functions_game.js
@@ -7,17 +10,22 @@ load_code(54); // functions_game.js
 // import { proxied_require } from "./lib/proxied_require";
 // const { utils, combat } = await proxied_require("utils.js", "combat.js"); // Example usage
 
-// Code for Adventure Land the coding MMORPG
 // Character Class
-class Character {
+class BotCharacter {
   constructor(data = parent.character) {
     // Keep a LIVE reference to the in-game character object.
     // Most fields on `parent.character` change over time; copying them here would create a snapshot.
     this.data = data;
+
+    this.idleCounter = 0;
+
     // action and skills are set during async init
     this.action = null;
     this.skills = [];
     this.mp_use_avg = 0;
+
+    // cooldown trackers
+    this.lastScare;
   }
 
   // async initializer since constructors can't be async
@@ -26,7 +34,7 @@ class Character {
     this.skills = filterObjectsByProperty(G.skills, "class", this.ctype);
 
     // wire up async event handler
-    parent.character.on("cm", async (m) => {
+    character.on("cm", async (m) => {
       if (!is_friendly(m.name)) return;
       let data = m.message;
 
@@ -34,14 +42,7 @@ class Character {
 
       switch (data.cmd) {
         case "clear":
-          switch (character.ctype) {
-            case "merchant":
-              merchantBot.clear_current_action();
-              break;
-            default:
-              char.clear_current_action();
-              break;
-          }
+          this.clear_current_action();
           break;
       }
     });
@@ -149,24 +150,7 @@ class Character {
   }
 
   // Movement
-  async go(loc) {
-    const keys = Object.keys(loc);
-    if (keys.includes("map")) {
-      if (parent.character.map !== loc.map) {
-        if (keys.includes("x") && keys.includes("y")) {
-          await parent.character.smart_move(loc.map, loc.x, loc.y);
-          return;
-        }
-        await parent.character.smart_move(loc.map);
-        return;
-      }
-    }
-    if (keys.includes("x") && keys.includes("y")) {
-      await parent.character.xmove(loc.x, loc.y);
-      return;
-    }
-    return;
-  }
+  async go(loc) {}
 
   // Party management
   partyInvite(playerName) {
@@ -181,26 +165,11 @@ class Character {
     parent.party_leave();
     return;
   }
-  get mpUseAvg() {
-    // TODO
-    let sampleCount = 0;
-    let timeout = setTimeout(() => {
-      let mp_used = parent.character.max_mp - parent.character.mp;
-      this.mp_use_avg = (this.mp_use_avg * 9 + mp_used) / 10; // simple moving average over 10 samples
-    }, 6000); // every 6 seconds
-    if (sampleCount >= 10) {
-      clearTimeout(timeout);
-      return this.mp_use_avg;
-    } else {
-      sampleCount++;
-      return this.mp_use_avg;
-    }
-  }
 }
 // STANDARD LIBRARY EXPORTS
 // export { Character };
 // create bot asynchronously
 let bot;
 (async () => {
-  bot = await new Character().init();
+  bot = await new BotCharacter().init();
 })();
