@@ -213,7 +213,7 @@ let sell_dict = {
     "feather0",
 
     // EXCHANGE
-    "gemo0",
+    "gem0",
     "candycane",
     "mistletoe",
     "basketofeggs",
