@@ -1,7 +1,7 @@
 const proxied_require = (() => {
   const WEB_BASE =
     "https://raw.githubusercontent.com/probablyanocelot/AdventureLandBots/refs/heads/rework/";
-  const FOLDER = "/LIB/";
+  const FOLDER = "/lib/";
   const AsyncFunction = (async () => {}).constructor;
   const module_cache = new Map();
   const run = async (path_name, name, handler) => {
@@ -51,3 +51,22 @@ const proxied_require = (() => {
     return ret;
   };
 })();
+
+// Replace the direct (non-async) require/use with an async IIFE that awaits the proxied_require result
+(async () => {
+  // Load the module (await the proxied_require call)
+  const libs = await proxied_require("move_in_circle.js");
+  // Module base name is the filename without extension: "move_in_circle"
+  const { moveInCircle } = libs.move_in_circle || {};
+  if (typeof moveInCircle !== "function") {
+    throw new Error("moveInCircle not found in move_in_circle.js exports");
+  }
+
+  async function doMove() {
+    await moveInCircle({ x: 100, y: 100 }, 50, Math.PI);
+  }
+
+  await doMove();
+})().catch((e) => {
+  log("Error loading/calling move_in_circle:", e);
+});
