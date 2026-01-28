@@ -1,9 +1,22 @@
-import { BotCharacter } from "app.51.js";
+// import { BotCharacter } from "app.51.js";
+import { buyFromGoblin, buyFromGoblin2 } from "./lib/npcs/goblin.js";
+import { buyFromPonty } from "./lib/npcs/ponty.js";
 
-class Merchant extends BotCharacter {
+export class Merchant extends BotCharacter {
   constructor(data) {
     super(data);
     this.home = { map: "main", x: -202, y: -50 };
+  }
+
+  async botLoop() {
+    // main bot loop logic goes here
+    this.stander();
+    this.gather();
+    this.doVendorRuns();
+    this.check_for_tools();
+    this.replaceTools();
+    this.goHomeIfIdle();
+    setTimeout(() => this.botLoop(), 250); // loop every 1/4 second
   }
 
   stander() {
@@ -17,12 +30,9 @@ class Merchant extends BotCharacter {
     } else {
       parent.close_merchant(6);
     }
-    setTimeout(() => {
-      this.stander;
-    }, 1000);
   }
 
-  gather() {
+  async gather() {
     // TODO
     // only use this if we're not moving
     if (smart.moving || character.moving) return;

@@ -2,7 +2,7 @@
 const proxied_require = (() => {
   const NODE_BASE = ".";
   const WEB_BASE =
-    "https://raw.githubusercontent.com/probablyanocelot/AdventureLandBots/rework/";
+    "https://raw.githubusercontent.com/probablyanocelot/AdventureLandBots/refs/heads/rework/";
   const FOLDER = "/codes/";
   const tick_delay = () =>
     new Promise((r) => {

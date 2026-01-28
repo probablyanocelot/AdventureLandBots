@@ -1,4 +1,4 @@
-function moveInCircle(center, radius = 30, angle = Math.PI / 2) {
+export function moveInCircle(center, radius = 30, angle = Math.PI / 2) {
   //\
   if (can_move_to(center.x, center.y)) {
     const angleFromCenterToCurrent = Math.atan2(
@@ -16,5 +16,3 @@ function moveInCircle(center, radius = 30, angle = Math.PI / 2) {
     xmove(center);
   }
 }
-
-exports.moveInCircle = moveInCircle;

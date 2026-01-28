@@ -171,6 +171,41 @@ function doUpgrade(scrollType, itemIndex) {
   if (canUpgrade) upgrade(itemIndex, scrollSlot);
 }
 
+function upgrade_replacement() {
+  let TIMEOUT = 1000;
+  let maxLevel = 8;
+  for (let level = 0; level <= maxLevel; level++) {
+    for (let itemIndex in character.items) {
+      let item = character.items[itemIndex];
+      if (!item || item.level != level) continue;
+
+      let itemName = item.name;
+      if (itemName == "rod" || itemName == "pickaxe") continue;
+
+      if (!isUpgradable(itemName)) continue;
+
+      let grade = item_grade(item);
+      if (item.p && item.p != "shiny") continue;
+      if (item.ps || item.acc || item.ach) continue;
+      if (item.p && grade >= 1) continue;
+      if (grade == 0) {
+        doUpgrade("scroll0", itemIndex);
+      }
+      if (grade == 1 && item.level < 7) {
+        doUpgrade("scroll1", itemIndex);
+      }
+      if (grade == 1 && item.level >= 7) {
+        doUpgrade("scroll2", itemIndex);
+      }
+      if (grade == 2 && item.level < 8) {
+        doUpgrade("scroll2", itemIndex);
+      }
+      if (grade == 2 && item.level >= 8) continue;
+    }
+  }
+  setTimeout(upgrade_replacement, TIMEOUT);
+}
+
 let last_shiny_alert;
 
 function upgrade_all() {
