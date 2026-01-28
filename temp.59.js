@@ -4,6 +4,12 @@ const proxied_require = (() => {
   const FOLDER = "/lib/";
   const AsyncFunction = (async () => {}).constructor;
   const module_cache = new Map();
+
+  const handler = async (file_name) => {
+    const response = await fetch(WEB_BASE + file_name);
+    return response.text();
+  };
+
   const run = async (path_name, name, handler) => {
     let data = await handler(FOLDER + name);
     let func = new AsyncFunction("module", "exports", "require", data);
@@ -15,44 +21,13 @@ const proxied_require = (() => {
     );
     return _module;
   };
+
   const get_module = async (path_name, ret, name, handler) => {
-    try {
-      let lib_name = name.split(".")[0];
-      if (!module_cache.has(name)) {
-        module_cache.set(name, run(path_name, name, handler));
-      }
-      ret[lib_name] = (await module_cache.get(name)).exports;
-    } catch (e) {
-      console.log(
-        "(" + character.name + ")[" + path_name + "]: ERROR ENCOUNTERED: " + e,
-      );
-      console.log(
-        "(" +
-          character.name +
-          ")[" +
-          path_name +
-          "]: Offending script: " +
-          name,
-      );
-      throw e;
+    let lib_name = name.split(".")[0];
+    if (!module_cache.has(name)) {
+      module_cache.set(name, run(path_name, name, handler));
     }
-  };
-  // const isNode =
-  //   typeof process !== "undefined" && process.versions && process.versions.node;
-
-  // const handler = isNode
-  //   ? async (file_name) => {
-  //       const fs = require("fs");
-  //       return fs.promises.readFile("." + file_name, "utf8");
-  //     }
-  //   : async (file_name) => {
-  //       const response = await fetch(WEB_BASE + file_name);
-  //       return response.text();
-  //     };
-
-  const handler = async (file_name) => {
-    const response = await fetch(WEB_BASE + file_name);
-    return response.text();
+    ret[lib_name] = (await module_cache.get(name)).exports;
   };
 
   return async function proxied_require(...libraries) {
@@ -65,21 +40,10 @@ const proxied_require = (() => {
   };
 })();
 
-// Replace the direct (non-async) require/use with an async IIFE that awaits the proxied_require result
+// Load module + expose globally
 (async () => {
-  // Load the module (await the proxied_require call)
   const libs = await proxied_require("test.js");
-  // Module base name is the filename without extension: "move_in_circle"
-  const { test } = libs.test || {};
-  if (typeof test !== "function") {
-    throw new Error("test not found in test.js exports");
-  }
+  const { test } = libs.test;
 
-  async function doTest() {
-    await test();
-  }
-
-  await test();
-})().catch((e) => {
-  log("Error loading/calling test:", e);
-});
+  window.test = test;   // <-- REQUIRED
+})();
