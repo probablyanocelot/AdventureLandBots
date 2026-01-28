@@ -1,100 +1,72 @@
-// Adventure Land MMORPG - Common Functions
-
-// DATA MANIPULATION FUNCTIONS
-
-class StaticIndex {
-  // Build static reverse index once
-  // Precompute Map<value, key> (or Map<value, key[]> if values aren’t unique). Lookups are O(1).
-
-  constructor(staticObj) {
-    this.data = new Map();
-    for (const [k, v] of Object.entries(staticObj)) {
-      // Use JSON.stringify for object values, primitive values as-is
-      const key = typeof v === "object" && v !== null ? JSON.stringify(v) : v;
-      this.data.set(key, k); // unique values
-    }
-  }
-}
-
-class DynamicIndex {
-  // Build and maintain dynamic index
-  // For the parts that change, update the reverse index incrementally
-  //      whenever a change occurs (instead of rescanning the whole dataset).
-  constructor(dynamicObj) {
-    this.data = new Map();
-    for (const [k, v] of Object.entries(dynamicObj)) {
-      const key = typeof v === "object" && v !== null ? JSON.stringify(v) : v;
-      this.data.set(key, k); // unique values; use array if non-unique
-    }
-  }
-
-  update(key, newValue) {
-    // When dynamicObj changes, update indexes incrementally:
-    const oldValue = dynamicObj[key];
-
-    // Update the object
-    dynamicObj[key] = newValue;
-
-    // Update the index: remove old mapping, add new mapping
-    const oldKey =
-      typeof oldValue === "object" && oldValue !== null
-        ? JSON.stringify(oldValue)
-        : oldValue;
-    const newKey =
-      typeof newValue === "object" && newValue !== null
-        ? JSON.stringify(newValue)
-        : newValue;
-    if (oldValue !== undefined) this.data.delete(oldKey);
-    this.data.set(newKey, key);
-  }
-}
-
-// Lookup function that prefers dynamic overrides
-function getKeyByValue(index, value) {
-  const key =
-    typeof value === "object" && value !== null ? JSON.stringify(value) : value;
-  if (index.has(key)) return index.get(key);
-  return undefined;
-}
-
-// Data manipulation function to count occurrences of items in an array
-function countItems(arr) {
-  const itemCount = {};
-  for (const item of arr) {
-    if (itemCount[item]) {
-      itemCount[item]++;
-    } else {
-      itemCount[item] = 1;
-    }
-  }
-  return itemCount;
-}
-
-class StaticIndexByProperty {
-  // Indexes by a given property (e.g., 'name')
-  constructor(staticObj, prop) {
-    this.data = new Map();
-    for (const [k, v] of Object.entries(staticObj)) {
-      if (v && v[prop] !== undefined) {
-        this.data.set(v[prop], k);
+const proxied_require = (() => {
+  const WEB_BASE =
+    "https://raw.githubusercontent.com/probablyanocelot/AdventureLandBots/refs/heads/rework/";
+  const FOLDER = "/LIB/";
+  const AsyncFunction = (async () => {}).constructor;
+  const module_cache = new Map();
+  const run = async (path_name, name, handler) => {
+    let data = await handler(FOLDER + name);
+    let func = new AsyncFunction("module", "exports", "require", data);
+    let _module = { exports: {} };
+    await func(
+      _module,
+      _module.exports,
+      proxied_require.bind({ name: path_name + ":" + name }),
+    );
+    return _module;
+  };
+  const get_module = async (path_name, ret, name, handler) => {
+    try {
+      let lib_name = name.split(".")[0];
+      if (!module_cache.has(name)) {
+        module_cache.set(name, run(path_name, name, handler));
       }
+      ret[lib_name] = (await module_cache.get(name)).exports;
+    } catch (e) {
+      console.log(
+        "(" + character.name + ")[" + path_name + "]: ERROR ENCOUNTERED: " + e,
+      );
+      console.log(
+        "(" +
+          character.name +
+          ")[" +
+          path_name +
+          "]: Offending script: " +
+          name,
+      );
+      throw e;
     }
-  }
-  getKeyByProperty(value) {
-    return this.data.get(value);
-  }
-}
+  };
+  const handler =
+    typeof parent.module != "undefined"
+      ? async (file_name) =>
+          await require("node:fs/promises").readFile("." + file_name, "utf8")
+      : async (file_name) => await (await fetch(WEB_BASE + file_name)).text();
+  return async function proxied_require(...libraries) {
+    const path_name = this?.name ?? character.name + ".js";
+    let ret = {};
+    await Promise.all(
+      libraries.map((name) => get_module(path_name, ret, name, handler)),
+    );
+    return ret;
+  };
+})();
 
-// Universal filter function: returns all objects in obj where obj[prop] === value
-function filterObjectsByProperty(obj, prop, value) {
-  return Object.values(obj).filter((item) => item[prop] === value);
-}
+// Replace the direct (non-async) require/use with an async IIFE that awaits the proxied_require result
+(async () => {
+  // Load the module (await the proxied_require call)
+  const libs = await proxied_require("move_in_circle.js");
+  // Module base name is the filename without extension: "move_in_circle"
+  const { moveInCircle } = libs.move_in_circle || {};
+  if (typeof moveInCircle !== "function") {
+    throw new Error("moveInCircle not found in move_in_circle.js exports");
+  }
 
-// export {
-//   StaticIndex,
-//   DynamicIndex,
-//   getKeyByValue,
-//   countItems,
-//   StaticIndexByProperty,
-//   filterObjectsByProperty,
-// };
+  async function doMove() {
+    await moveInCircle({ x: 100, y: 100 }, 50, Math.PI);
+  }
+
+  await doMove();
+})().catch((e) => {
+  log("Error loading/calling move_in_circle:", e);
+});

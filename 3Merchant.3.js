@@ -14,7 +14,7 @@ load_code("98Telegram");
 //load_code(53) // upgrade_all2 WILL ADD MORE
 //performance_trick();
 
-const { webFrame } = require('electron');
+const { webFrame } = require("electron");
 webFrame.setZoomFactor(0.75);
 
 let lastScare;
@@ -114,13 +114,21 @@ function buyScrolls() {
   // if (!is_in_range('lucas')) return
   let scroll0_idx = locate_item("scroll0");
   let scroll1_idx = locate_item("scroll1");
+  let scroll2_idx = locate_item("scroll2");
   let cscroll0_idx = locate_item("cscroll0");
   let cscroll1_idx = locate_item("cscroll1");
 
-  if (scroll0_idx == -1) buy_with_gold("scroll0", 10);
-  if (scroll1_idx == -1) buy_with_gold("scroll1", 10);
-  if (cscroll0_idx == -1) buy_with_gold("cscroll0", 10);
-  if (cscroll1_idx == -1) buy_with_gold("cscroll1", 10);
+  if (scroll0_idx == -1 || character.items[scroll0_idx].q == 1)
+    buy_with_gold("scroll0", 10);
+  if (scroll1_idx == -1 || character.items[scroll1_idx].q == 1)
+    buy_with_gold("scroll1", 10);
+  if (scroll2_idx == -1 || character.items[scroll2_idx].q == 1)
+    buy_with_gold("scroll2", 10);
+
+  if (cscroll0_idx == -1 || character.items[cscroll0_idx].q == 1)
+    buy_with_gold("cscroll0", 10);
+  if (cscroll1_idx == -1 || character.items[cscroll1_idx].q == 1)
+    buy_with_gold("cscroll1", 10);
 }
 
 class Merchant extends Character {
@@ -208,7 +216,7 @@ class Merchant extends Character {
           locate_item(
             "pickaxe" ||
               (character.slots.mainhand &&
-                character.slots.mainhand.name == "pickaxe")
+                character.slots.mainhand.name == "pickaxe"),
           ) >= 0
         )
           this.do_action("mining");
@@ -358,8 +366,8 @@ class Merchant extends Character {
           "lostandfound_" +
             parent.server_region +
             " " +
-            parent.server_identifier
-        )
+            parent.server_identifier,
+        ),
       );
       // let updated = false;
       parent.socket._callbacks.$lostandfound.unshift(function (data) {
@@ -858,7 +866,7 @@ function upgrade_all() {
           log(
             `${itemName} grade: ${grade} level: ${item.level} -> ${
               item.level + 1
-            }`
+            }`,
           );
 
           scrollType = "scroll1";
@@ -903,6 +911,41 @@ function upgrade_all() {
   setTimeout(upgrade_all, TIMEOUT);
 }
 
+function upgrade_replacement() {
+  let TIMEOUT = 1000;
+  let maxLevel = 8;
+  for (let level = 0; level <= maxLevel; level++) {
+    for (let itemIndex in character.items) {
+      let item = character.items[itemIndex];
+      if (!item || item.level != level) continue;
+
+      let itemName = item.name;
+      if (itemName == "rod" || itemName == "pickaxe") continue;
+
+      if (!isUpgradable(itemName)) continue;
+
+      let grade = item_grade(item);
+      if (item.p && item.p != "shiny") continue;
+      if (item.ps || item.acc || item.ach) continue;
+      if (item.p && grade >= 1) continue;
+      if (grade == 0) {
+        doUpgrade("scroll0", itemIndex);
+      }
+      if (grade == 1 && item.level < 7) {
+        doUpgrade("scroll1", itemIndex);
+      }
+      if (grade == 1 && item.level >= 7) {
+        doUpgrade("scroll2", itemIndex);
+      }
+      if (grade == 2 && item.level < 8) {
+        doUpgrade("scroll2", itemIndex);
+      }
+      if (grade == 2 && item.level >= 8) continue;
+    }
+  }
+  setTimeout(upgrade_replacement, TIMEOUT);
+}
+
 // TODO: replace whitelists with if(upgradable && !blackList)?
 function high_upgrade_all() {
   let TIMEOUT = 1000;
@@ -912,67 +955,66 @@ function high_upgrade_all() {
   let maxLevel = 7;
 
   for (let level = 0; level < maxLevel; level++) {
-    for (let idx in itemList) {
-      let itemName = itemList[idx];
-      let itemSlots = locate_items(itemName, level);
+    // for (let idx in itemList) {
+    // let itemName = itemList[idx];
+    // let itemSlots = locate_items(character.items, level);
 
-      for (let listIndex in itemSlots) {
-        let itemIndex = itemSlots[listIndex];
+    for (let listIndex in character.items) {
+      let item = character.items[listIndex];
+      //let item = character.items[itemIndex]
+      //let itemLevel = item.level
 
-        //let item = character.items[itemIndex]
-        //let itemLevel = item.level
+      // get item grade
+      let grade = item_grade(item);
 
-        // get item grade
-        let grade = item_grade(character.items[itemIndex]);
+      // if (character.items[itemIndex].level == 7){
+      // 	scrollType = "scroll2";
+      // 	scrollSlot = locate_item(scrollType)
+      // 	if (!character.items[scrollSlot]) buy_with_gold(scrollType, 1)
+      // 	if (!parent.character.q.upgrade) {
+      // 		if (character.ctype == "merchant" && !character.s.massproductionpp && character.mp > 400) use_skill("massproductionpp")
+      //         upgrade(itemIndex, scrollSlot)
+      //         break;
+      // 	}
+      // }
 
-        // if (character.items[itemIndex].level == 7){
-        // 	scrollType = "scroll2";
-        // 	scrollSlot = locate_item(scrollType)
-        // 	if (!character.items[scrollSlot]) buy_with_gold(scrollType, 1)
-        // 	if (!parent.character.q.upgrade) {
-        // 		if (character.ctype == "merchant" && !character.s.massproductionpp && character.mp > 400) use_skill("massproductionpp")
-        //         upgrade(itemIndex, scrollSlot)
-        //         break;
-        // 	}
-        // }
+      // grade 1+ = +7
+      if (grade == 0) {
+        //|| itemName == "shoes1" && level >= 5
+        log("grade is under 1");
+        continue;
+      }
+      if (item && item.p) {
+        log("has some modifier");
+        continue;
+      }
 
-        // grade 1+ = +7
-        if (grade == 0) {
-          //|| itemName == "shoes1" && level >= 5
-          log("grade is under 1");
-          continue;
-        }
-        if (character.items[itemIndex] && character.items[itemIndex].p) {
-          log("has some modifier");
-          continue;
-        }
+      let rareUpList = ["bataxe", "harbringer", "oozingterror"];
 
-        let rareUpList = ["bataxe", "harbringer", "oozingterror"];
+      if (grade == 2 && level >= 7) continue;
+      if (level >= 4) {
+        //&& rareUpList.includes(item.name
+        // save money
+        // continue
+        scrollType = "scroll2";
+      }
+      if (grade == 2 && level >= 6) continue;
 
-        if (grade == 2 && level >= 6) continue;
-        if (level >= 4 && rareUpList.includes(itemName)) {
-          // save money
-          // continue
-          scrollType = "scroll2";
-        }
-        if (grade == 2 && level >= 6) continue;
+      let scrollSlot = locate_item(scrollType);
 
-        let scrollSlot = locate_item(scrollType);
+      // buy scroll if not in inv
+      if (!character.items[scrollSlot]) buy_with_gold(scrollType, 1);
 
-        // buy scroll if not in inv
-        if (!character.items[scrollSlot]) buy_with_gold(scrollType, 1);
-
-        // upgrade if we got here
-        if (!parent.character.q.upgrade) {
-          if (
-            character.ctype == "merchant" &&
-            !character.s.massproductionpp &&
-            character.mp > 400
-          )
-            use_skill("massproductionpp");
-          upgrade(itemIndex, scrollSlot);
-          break;
-        }
+      // upgrade if we got here
+      if (!parent.character.q.upgrade) {
+        if (
+          character.ctype == "merchant" &&
+          !character.s.massproductionpp &&
+          character.mp > 400
+        )
+          use_skill("massproductionpp");
+        upgrade(itemIndex, scrollSlot);
+        break;
       }
     }
   }
@@ -1378,8 +1420,9 @@ function initMerch() {
   setInterval(hanoi, 30000);
   sell_extras();
   compound_loop();
-  upgrade_all();
-  high_upgrade_all();
+  upgrade_replacement();
+  // upgrade_all();
+  // high_upgrade_all();
 
   //upgrade_all2();
   alertSystem();
