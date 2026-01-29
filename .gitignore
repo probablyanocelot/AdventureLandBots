@@ -8,3 +8,4 @@ strategy_pattern/context.ts
 strategy_pattern/strategies/gui.ts
 ./adventure-land.code-workspace
 adventure-land.code-workspace
+.env
