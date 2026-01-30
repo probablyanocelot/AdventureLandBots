@@ -214,6 +214,11 @@ let itemsToBuy = [
   "wbookhs",
   "exoarm",
 
+  "ecape",
+  "eears",
+  "epyjamas",
+  "eslippers",
+
   "wbreeches", // 'wattire',
 
   "tracker",
@@ -222,7 +227,6 @@ let itemsToBuy = [
 ];
 // "vitring",
 // "candy1",
-// 'ecape', 'eears', 'epyjamas','eslippers',
 
 const shinyBlackList = [
   "hpamulet",
@@ -241,14 +245,14 @@ const shinyBlackList = [
   "spear",
   "iceskates",
   "phelmet",
-  "eears",
-  "epyjamas",
-  "eslippers",
-  "xmasshoes",
-  "xmashat",
-  "xmaspants",
-  "xmasrobe",
-  "xmassweater",
+  // "eears",
+  // "epyjamas",
+  // "eslippers",
+  // "xmasshoes",
+  // "xmashat",
+  // "xmaspants",
+  // "xmasrobe",
+  // "xmassweater",
 ];
 
 function buyFromPonty() {
