@@ -14,8 +14,8 @@ let farmDefault = {
 
 let priTank = [
   "oxhelmet",
-  "harmor",
-  "frankypants",
+  "vattire",
+  "starkillers",
   "xboots",
   "vgloves",
   "sshield",
@@ -221,6 +221,7 @@ let sell_dict = {
     // 'candy1', 'candy0',
   ],
   farmer_keep: [
+    "computer",
     "hpot0",
     "hpot1",
     "mpot0",
@@ -251,7 +252,7 @@ let sell_dict = {
     "hpbelt",
     "hpamulet",
     "whiteegg",
-    "smoke",
+    // "smoke",
     "phelmet",
     "gphelmet",
     "pants1",
@@ -280,6 +281,7 @@ let sell_dict = {
     "xmassweater",
   ], // 'xmasshoes', 'xmashat', 'eears', 'eslippers',
   merchTradeSell: [],
+  farmerSell: ["hpamulet", "hpbelt", "stinger", "slimestaff", "mushroomstaff"],
 };
 
 let upgradeDict = {

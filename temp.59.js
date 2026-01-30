@@ -42,8 +42,9 @@ const proxied_require = (() => {
 
 // Load module + expose globally
 (async () => {
-  const libs = await proxied_require("test.js");
-  const { test } = libs.test;
+  const libs = await proxied_require("main.js");
+  const { main } = libs.main;
 
-  window.test = test;   // <-- REQUIRED
+  window.start = main;   // <-- REQUIRED
+	main();
 })();
