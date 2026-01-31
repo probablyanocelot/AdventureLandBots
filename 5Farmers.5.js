@@ -5,6 +5,7 @@ load_code("16Relations"); // cm
 load_code("13Skills"); //skill3shot(), get_nearby_entitties()
 load_code("14Partying"); // PARTY, bots
 load_code("15Combat");
+load_code("17Idle");
 load_code("19management"); //sell extras -- merge this and 12Inv?
 load_code("40Gui");
 load_code("98Telegram");
@@ -180,6 +181,41 @@ class Farmer {
     if (character.ctype == "paladin") this.turret = false;
 
     setTimeout(savePosition(), 10000);
+
+    this.idleBandAid = new Idle();
+    this.idleBandAid.startIdle();
+
+    character.on(
+      "target_hit",
+      function (data) {
+        if (get_entity(data.target)?.mtype == this.current_action) {
+          this.idleBandAid.idleCounter = 0;
+          data.idle_reset = true;
+          console.log(data);
+        }
+      }.bind(this),
+    );
+
+    // ATTEMPT TO FIX GETTING LOST WHILE WORKING ON THE REFACTOR
+    (async () => {
+      await this.stayOnTask();
+    })();
+  }
+  async stayOnTask() {
+    if (this.idleBandAid.idleCounter >= 30) {
+      this.clear_current_action();
+      try {
+        if (G.monsters[this.current_action]) {
+          let monster = get_nearest_monster({ type: this.current_action });
+          if (monster) await smart_move(monster.x, monster.y);
+          else await smart_move(this.current_action);
+        }
+      } catch (e) {
+        console.log(e);
+        await use_skill("home");
+      }
+      setTimeout(this.stayOnTask, 1000);
+    }
   }
 
   set_current_action(action) {
@@ -237,9 +273,9 @@ class Farmer {
     if (!parent.S.wabbit.live) this.clear_current_action();
   }
 
-  serverMiniEvents() {
+  async serverMiniEvents() {
     // TODO: snowman, rabbit support -- smart_move('snowman') gives 'Unrecognized Location'
-    let bosses = ["mrpumpkin", "mrgreen", "snowman"]; //'snowman', 'rabbit'
+    let bosses = ["grinch", "wabbit", "mrpumpkin", "mrgreen", "snowman"]; //'snowman', 'rabbit'
     let rareBosses = [];
 
     // if (this.current_action && this.current_action != 'farming') return
@@ -265,10 +301,10 @@ class Farmer {
 
         if (is_in_range(get_nearest_monster({ type: boss }))) break;
 
-        let bossLocation = mobLocationDict[boss].loc; // imported data set
+        let bossLocation = mobLocationDict[boss]?.loc || null; // imported data set
         if (!bossLocation) {
           log("no boss location defined!!");
-          if (!smart.moving) smart_move(boss);
+          if (!smart.moving) await smart_move(boss);
           return;
         }
         if (
@@ -276,28 +312,32 @@ class Farmer {
           !get_nearest_monster({ type: boss }) &&
           !smart.moving
         )
-          smart_move(bossLocation);
+          await smart_move(bossLocation);
       }
 
       if (!this.current_action == boss) continue;
       if (
         parent.S[boss] &&
         !parent.S[boss].live &&
-        this.current_action == boss &&
-        !smart.moving
-      )
-        this.moveToThen(myFarmLocation, this.clear_current_action());
+        this.current_action == boss
+      ) {
+        this.clear_current_action();
+        leave();
+      }
+      if (
+        bosses.includes(this.current_action) &&
+        !parent.S[this.current_action]?.live &&
+        !get_monster({ type: this.current_action })
+      ) {
+        this.clear_current_action();
+        leave();
+      }
     }
-    if (
-      bosses.includes(this.current_action) &&
-      !parent.S[this.current_action]?.live
-    )
-      this.clear_current_action();
   }
 
   joinEvent(event) {
     // event = 'icegolem', etc
-    if (character.ctype == "ranger") return;
+    // if (character.ctype == "ranger") return;
     if (!parent.S[event]) return; // no event
     // if (event == 'franky') return;
     if (parent.S.halloween) return; // nobody farming in season
@@ -318,29 +358,27 @@ class Farmer {
     return true;
   }
 
-  serverEventEnd() {
+  async serverEventEnd() {
     if (
       G.events.hasOwnProperty(this.current_action) &&
-      !parent.S[this.current_action]
+      !parent.S[this.current_action]?.live
     ) {
       // ?.live
       this.eventJoined = false;
-      use_skill("use_town").then(() => {
-        this.clear_current_action();
-        smart_move(myFarmLocation);
-      });
+      leave();
+      this.clear_current_action();
     }
   }
 
-  serverEvents() {
+  async serverEvents() {
     if (character.ctype == "merchant") return;
-    if (character.ctype == "ranger") return;
+    // if (character.ctype == "ranger") return;
     for (let event in G.events) {
       // event = String(event)
       if (!parent.S[event]) continue;
 
       // seasonal events are global, not joinable
-      if (seasonalEvents.includes(event)) continue;
+      if (!G.events[event].hasOwnProperty("join")) continue;
 
       // set event as current action if it's live
       if (parent.S[event]) this.current_action = event; // && parent.S[event].live
@@ -349,12 +387,6 @@ class Farmer {
         join(event);
         this.eventJoined = true;
       }
-      if (parent.S[event] == "franky")
-        smart_move({
-          x: -49.63502742251986,
-          y: 10.794962400312897,
-          map: "level2w",
-        });
       // if checks return true, set action to event
       // if (this.joinEvent(event)) this.current_action = event // && G.monsters[event]
 
@@ -409,13 +441,14 @@ class Farmer {
     }
   }
 
-  fixStuck() {
-    if (smart.moving) return;
+  async fixStuck() {
     // stuck in main
-    if (character.x == 0 && character.y == 0) {
-      this.clear_current_action();
+    if ((character.x == 0 && character.y == 0) || this.idle_counter >= 30) {
       log("stuck move");
-      smart_move(myFarmLocation);
+      if (smart.moving) return;
+      this.clear_current_action();
+
+      await smart_move(myFarmLocation);
     }
 
     // !TODO: replace farmDefault with 'is in' dict logic. maybe .hasOwnProperty()
@@ -581,7 +614,7 @@ class Farmer {
     }
   }
 
-  handleMonsterHunt() {
+  async handleMonsterHunt() {
     if (character.ctype == "merchant" || character.id == "camelCase") return;
     let monsterHunterLocation = {
       map: "main",
@@ -623,28 +656,25 @@ class Farmer {
 
         // if not there, go!
         log("monsterhunt move");
-        if (!nearest && !smart.moving) smart_move(mobType);
+        if (!nearest && !smart.moving) await smart_move(mobType);
       }
 
-      // if finished, turn in.
-      if (character.s.monsterhunt.c == 0 && !smart.moving) {
-        log("monsterhunt complete move");
-        smart_move(monsterHunterLocation).then(() => {
-          parent.socket.emit("monsterhunt");
-          this.clear_current_action();
-        });
-      }
-    }
-    if (!character.s.monsterhunt && !smart.moving) {
-      // get quest from Daisy
-      log("monsterhunt get quest move");
-      smart_move(monsterHunterLocation).then(() => {
-        parent.socket.emit("monsterhunt");
-        setTimeout(function () {
-          parent.socket.emit("monsterhunt");
-        }, character.ping);
-        this.set_current_action("monsterhunt");
-      });
+      // THIS IS TRASSSSH
+      //   // if finished, turn in.
+      //   if (character.s.monsterhunt.c == 0 && !smart.moving) {
+      //     log("monsterhunt complete move");
+      //     await smart_move(monsterHunterLocation);
+      //     parent.socket.emit("monsterhunt");
+      //     this.clear_current_action();
+      //   }
+      // }
+      // if (!character.s.monsterhunt && !smart.moving) {
+      //   // get quest from Daisy
+      //   log("monsterhunt get quest move");
+      //   await smart_move(monsterHunterLocation)
+      //     parent.socket.emit("monsterhunt");
+      //     this.set_current_action("monsterhunt");
+      //   };
     }
   }
 
@@ -761,6 +791,10 @@ class Farmer {
     };
 
     // kite(target)
+
+    if (!G.monsters.hasOwnProperty(this.current_action) && this.eventJoined) {
+      target = get_nearest_monster();
+    }
 
     if (is_in_range(target)) change_target(target);
 
@@ -999,10 +1033,10 @@ character.on("cm", async (m) => {
   if (data.cmd == "move") {
     char.clear_current_action();
     if (data.loc) {
-      smart_move(data.loc);
+      await smart_move(data.loc);
       return;
     }
-    smart_move(myFarmLocation);
+    await smart_move(myFarmLocation);
   }
 
   switch (data.cmd) {
