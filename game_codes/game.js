@@ -73,7 +73,7 @@ var M={},GEO={}; // M - old x_lines/y_lines, - GEO - new logic
 /* start map entities */
 var total_map_tiles=0;
 var tiles=null,dtile=null,wtile=null; // cached_map entities
-var map_npcs=[],map_doors=[],map_lights=[],map_animatables={};
+var map_npcs=[],map_doors=[],map_nights=[],map_lights=[],map_animatables={};
 var map_tiles=[],map_entities=[],map_machines={},dtile_size=32,dtile_width=0,dtile_height=0,wtile_name=null,wtile_width=0,wtile_height=0;
 var map_animations={};
 var quirks={};
@@ -470,7 +470,7 @@ function draw_entities()
 	for(entity in entities)
 	{
 		var current=entities[entity];
-		if(character && !within_xy_range(character,current) || !character && !within_xy_range({map:current_map,"in":current_map,vision:[700,500],x:map.real_x,y:map.real_y},current))
+		if(character && !within_xy_range(character,current) || !character && !within_xy_range({map:current_map,"in":current_in,vision:[700,500],x:map.real_x,y:map.real_y},current))
 		{
 			// console.log("character x,y: "+round(character.real_x)+","+round(character.real_y)+" entity moving outside range: ["+current.id+"] x,y: "+round(current.x)+","+round(current.y));
 			call_code_function("on_disappear",current,{outside:true});
@@ -795,7 +795,7 @@ function update_overlays()
 	if(mode.dom_tests || no_html) return;
 	if(character)
 	{
-		if(!cached("att",character.attack)) $(".attackui").html((character.ctype=="priest"&&"HEAL "||"ATT ")+character.attack);
+		if(!cached("att",character.attack)) $(".attackui").html((character.ctype=="priest"&&"HEAL "||"ATT ")+(character.ctype=="priest"&&character.heal||character.attack));
 		if(!cached("inv",character.esize+"|"+character.isize)) $(".invui").html("INV "+(character.isize-character.esize)+"/"+character.isize);
 		if(!cached("hptop",character.hp,character.max_hp))
 		{
@@ -827,7 +827,7 @@ function update_overlays()
 	}
 	
 
-	var c=new Date(),h=c.getHours(),m=c.getMinutes();
+	var c=new Date(),h=c.getUTCHours(),m=c.getUTCMinutes();
 	if(S.schedule && S.schedule.time_offset) h=(24+S.schedule.time_offset+h)%24;
 	if(!cached("time",("0"+h).slice(-2)+":"+("0"+m).slice(-2)))
 	{
@@ -1150,7 +1150,11 @@ function init_socket(args)
 	}
 	$(".disconnected").hide();
 	if(is_sdk && (Cookies.get("windows") || Cookies.get("local_ip") || window.location.host=="advanture.land" || window.location.host=="x.thegame.com")) server_addr="192.168.1.125"; // Cookies.set('windows','1',{expires:12*365});
-	else if(is_sdk) server_addr="0.0.0.0";
+	else if(is_sdk)
+	{
+		if(window.location.origin=='http://127.0.0.1/') server_addr="127.0.0.1";
+		else server_addr="0.0.0.0";
+	}
 	var query=args.secret&&"desktop="+(!is_comm&&1||"")+"&secret="+args.secret||undefined;
 	if(location.protocol=="https:") window.socket=io('wss://'+server_addr+':'+server_port,{secure:true,transports:['websocket'],query:query});
 	else window.socket=io(server_addr+':'+server_port,{transports:['websocket'],query:query});
@@ -1166,6 +1170,10 @@ function init_socket(args)
 		{
 			original_emit.apply(socket,arguments);
 			if(is_transport) transporting=new Date();
+		}
+		else
+		{
+			resolve_deferred(arguments["0"],{success:false,in_progress:true,place:"emit_override_in_gamejs"});
 		}
 	};
 	socket.onevent=function(packet){
@@ -1264,9 +1272,10 @@ function init_socket(args)
 		// console.log("create_map: "+mssince(cm_timer));
 		position_map();
 		new_map_logic("map",data);
-		call_code_function("trigger_event","new_map",data);
 		handle_entities(data.entities,{new_map:true});
 		if(data.eval) eval(data.eval);
+		call_code_function("trigger_event","new_map",data);
+		call_code_function("trigger_character_event","new_map",data);
 	});
 	socket.on('start',function(data){
 		// alert(JSON.stringify(data));
@@ -1301,6 +1310,7 @@ function init_socket(args)
 		pings=[character.ping];
 		if(!data.vision) character.vision=[700,500];
 		friends=data.friends;
+		character.home=data.home;
 		character.emx=data.emx;
 		character.acx=data.acx;
 		character.xcx=data.xcx;
@@ -1312,7 +1322,7 @@ function init_socket(args)
 		}
 		if(character.ctype=="merchant" || recording_mode || 1) options.show_names=true;
 		clear_game_logs(); add_log("Connected!");
-		// add_holiday_log();
+		if(S.holidayseason) add_holiday_log();
 		// add_greenlight_log();
 		if(gameplay=="hardcore")
 		{
@@ -1320,6 +1330,10 @@ function init_socket(args)
 			$(".saferespawn").show();
 		}
 		else add_log("Note: Game dynamics and drops aren't final, they are evolving with every update","gray");
+		if(data.blessed_by)
+		{
+			add_chat("","This server has been blessed by "+data.blessed_by,"#8F70D8");
+		}
 		// add_log("Warning: A Chrome bug is causing memory leaks, very small but it adds up. They patched the bug, however, that patch didn't make it to our browsers yet","#E08583");
 		$(".charactername").html(character.name);
 		page.title=character.name;
@@ -1458,7 +1472,7 @@ function init_socket(args)
 			no_chat_notification=false;
 		});
 	});
-	socket.on("light",function(data){
+	socket.on('light',function(data){
 		draw_trigger(function(){
 			if(data.affected)
 			{
@@ -1480,7 +1494,7 @@ function init_socket(args)
 			}
 		});
 	});
-	socket.on("game_event",function(data){
+	socket.on('game_event',function(data){
 		if(!data.name) data={name:data};
 		if(data.name=="pinkgoo")
 		{
@@ -1514,48 +1528,102 @@ function init_socket(args)
 		call_code_function("on_game_event",data);
 		call_code_function("trigger_event","event",data);
 	});
-	socket.on("achievement_progress",function(data){
+	socket.on('achievement_progress',function(data){
 		add_log("AP["+data.name+"]: "+to_pretty_num(data.count)+"/"+to_pretty_num(data.needed),"#6DCC9E");
 	});
-	socket.on("achievement_success",function(data){
+	socket.on('achievement_success',function(data){
 		add_log("AP["+data.name+"]: Complete!","#58CF40");
 	});
-	socket.on("game_response",function(data){
+	socket.on('skill_timeout',function(data){
+		skill_timeout(data.name,data.ms);
+	});
+	socket.on('game_response',function(data){
+		if(is_sdk) console.log(["game_response",data]);
 		var response=data.response||data;
+		try{
+			var cevent=false,event=false;
+			if(data.cevent) cevent=data.cevent,delete data.cevent; if(cevent===true) cevent=response;
+			if(data.event) event=data.event,delete data.event; if(event===true) event=response;
+			
+			if(data.place && data.failed)
+			{
+				if(!data.reason) data.reason=data.response;
+				reject_deferred(data.place,data);
+			}
+			else if(data.place)
+			{
+				resolve_deferred(data.place,data);
+			}
+			if(cevent) call_code_function("trigger_character_event",cevent,data);
+			if(event) call_code_function("trigger_event",event,data);
+
+		}catch(e){
+			if(is_sdk) console.error(e);
+		}
 		if(response=="upgrade_success" || response=="upgrade_fail") u_retain_t=options.retain_upgrades;
 		draw_trigger(function(){
 			if(response=="elixir"){ ui_log("Consumed the elixir","gray"); d_text("YUM",character,{color:"elixir"}); }
-			else if(response=="resolve_skill")
+			else if(response=="data"){}
+			else if(response=="invalid"){
+				d_text("INVALID",character);
+			}
+			else if(response=="error")
 			{
-				resolve_deferred("skill",{done:true});
+				ui_error("Server error!");
 			}
 			else if(response=="storage_full")
 			{
 				ui_log("Storage is full","gray");
 				reopen();
 			}
+			else if(response=="safety_check");
 			else if(response=="inventory_full")
 			{
+				d_text("NO SPACE",character);
 				ui_log("Inventory is full","gray");
 				reopen();
 			}
+			else if(response=="home_set")
+			{
+				render_interaction({auto:true,skin:"lionsuit",message:"Set your home to: "+data.home});
+				character.home=data.home;
+			}
+			else if(response=="sh_time")
+			{
+				render_interaction({auto:true,skin:"lionsuit",message:"You can't change your home server for another "+to_pretty_float(data.hours)+" hours!"});
+			}
 			else if(response=="invalid") ui_log("Invalid","gray");
+			else if(response=="only_in_home") ui_log("You can only do this in your home server!","gray");
+			else if(response=="cant_when_sick")
+			{
+				if(data.goblin) render_interaction({auto:true,skin:G.npcs.lostandfound.skin,message:"Ugh, you're sick! Come back when you are healed!"});
+				ui_log("You can't do this when you are sick!","gray");
+			}
+			else if(response=="party_full") ui_log("The party is full","gray");
+			else if(response=="already_in_party") ui_log("Already in this party","gray");
+			else if(response=="player_gone") ui_log(data.name+" is gone","gray");
+			else if(response=="invitation_expired") ui_log("Invitation expired","gray");
+			else if(response=="request_expired") ui_log("Request expired","gray");
+			else if(response=="cant_kick") ui_log("You can't kick someone who's above you.","gray");
 			else if(response=="compound_success")
 			{
 				tut("compound");
 				ui_log("Item combination succeeded",data.up&&"#1ABEFF"||"white");
-				resolve_deferred("compound",{success:true,level:data.level,num:data.num});
+				if(!data.stale) resolve_deferred("compound",{success:true,level:data.level,num:data.num});
 			}
 			else if(response=="compound_fail")
 			{
 				tut("compound");
 				ui_error("Item combination failed");
-				resolve_deferred("compound",{failed:true,success:false,level:data.level,num:data.num});
+				if(!data.stale) resolve_deferred("compound",{success:false,level:data.level,num:data.num});
+			}
+			else if(response=="compound_no_scroll")
+			{
+				reject_deferred("compound",{reason:"no_scroll"});
 			}
 			else if(response=="compound_in_progress")
 			{
 				ui_log("Another combination in progress","gray");
-				reject_deferred("compound",{reason:"in_progress"});
 			}
 			else if(response=="compound_invalid_offering")
 			{
@@ -1566,10 +1634,6 @@ function init_socket(args)
 			{
 				ui_log("Items are different","gray");
 				reject_deferred("compound",{reason:"mismatch"});
-			}
-			else if(response=="compound_no_item")
-			{
-				reject_deferred("compound",{reason:"no_item"});
 			}
 			else if(response=="compound_cant")
 			{
@@ -1585,29 +1649,28 @@ function init_socket(args)
 			else if(response=="misc_fail")
 			{
 				ui_log(":)","#FF5D54");
-				if(data.place) reject_deferred(data.place,{reason:"misc"});
 			}
 			else if(response=="upgrade_success")
 			{
 				tut("upgrade");
 				ui_log("Item upgrade succeeded","white");
-				resolve_deferred("upgrade",{success:true,level:data.level,num:data.num});
+				if(!data.stale) resolve_deferred("upgrade",{success:true,level:data.level,num:data.num});
 			}
 			else if(response=="upgrade_fail")
 			{
 				tut("upgrade");
 				ui_error("Item upgrade failed");
-				resolve_deferred("upgrade",{failed:true,success:false,level:data.level,num:data.num});
+				if(!data.stale) resolve_deferred("upgrade",{failed:true,success:false,level:data.level,num:data.num});
 			}
 			else if(response=="upgrade_success_stat")
 			{
 				tut("addstats");
-				resolve_deferred("upgrade",{stat:true,stat_type:data.stat_type,num:data.num});
+				if(!data.stale) resolve_deferred("upgrade",{stat:true,stat_type:data.stat_type,num:data.num});
 			}
 			else if(response=="upgrade_offering_success")
 			{
 				ui_log("Offering succeeded","white");
-				resolve_deferred("upgrade",{success:true});
+				if(!data.stale) resolve_deferred("upgrade",{success:true});
 			}
 			else if(response=="upgrade_no_item")
 			{
@@ -1679,98 +1742,74 @@ function init_socket(args)
 			else if(response=="upgrade_chance" || response=="compound_chance")
 			{
 				set_uchance(data.chance);
-				var d=clone(data); delete d.type; delete d.response;
-				d.calculate=true;
-				if(response=="upgrade_chance") resolve_deferred("upgrade",d);
-				if(response=="compound_chance") resolve_deferred("compound",d);
 			}
 			else if(response=="max_level")
 			{
 				set_uchance("?");
-				if(data.place) reject_deferred(data.place,{reason:"max_level"});
 				ui_log("Already +"+data.level,"white");
 			}
 			else if(response=="exception")
 			{
-				if(data.place) reject_deferred(data.place,{reason:"exception"});
 				ui_error("ERROR!");
 			}
-			else if(response=="nothing"){ ui_log("Nothing happens","gray"); }
-			else if(response=="not_ready") { d_text("NOT READY",character); }
+			else if(response=="got_picked") ui_log("Felt a touch","#D8866C");
+			else if(response=="picked") { yes_yes_yes(); ui_log("Got something!","#3AD585"); }
+			else if(response=="pick_failed") { no_no_no(); ui_log("Couldn't pick anything","gray"); }
+			else if(response=="nothing") ui_log("Nothing happens","gray");
+			else if(response=="inviter_gone") ui_log("Inviter gone","gray");
+			else if(response=="not_ready") d_text("NOT READY",character);
+			else if(response=="cant_equip") d_text("CAN'T EQUIP",character);
+			else if(response=="cant") d_text("CAN'T",character);
+			else if(response=="muted") d_text("MUTED",character);
+			else if(response=="cant_consume") d_text("CAN'T CONSUME",character);
+			else if(response=="giveaway") d_text("GIVEAWAY?!",character);
+			else if(response=="no_merchants") ui_log("No merchants!","gray");
+			else if(response=="join_too_late") ui_log("Too late to join","gray");
+			else if(response=="receiver_unavailable") ui_log("Receiver unavailable","gray");
 			else if(response=="no_mp")
 			{
-				if(data.place=="attack" || data.place=="heal") reject_deferred(data.place,{reason:"no_mp"});
 				d_text("NO MP",character);
 			}
 			else if(response=="friendly")
 			{
 				var safe=false,phrase="FRIENDLY";
 				if(G.maps[character.map].safe) safe=true,phrase="SAFE ZONE";
-				if(data.place=="attack" || data.place=="heal") reject_deferred(data.place,{reason:"friendly"});
 				if(get_entity(data.id)) d_text(phrase,get_entity(data.id));
 				else d_text(phrase,character);
 				if(safe) ui_log("You can't attack in a safe zone","gray");
 			}
 			else if(response=="cooldown")
 			{
-				if(data.place=="attack" || data.place=="heal") reject_deferred(data.place,{reason:"cooldown",remaining:data.ms});
 				if(data.id && get_entity(data.id)) d_text("WAIT",get_entity(data.id));
 				else d_text("WAIT",character);
 			}
-			else if(response=="too_far")
-			{
-				if(data.place=="attack" || data.place=="heal") reject_deferred(data.place,{reason:"too_far",distance:data.dist,origin:"server"});
-				if(data.id && get_entity(data.id)) d_text("TOO FAR",get_entity(data.id));
-				else d_text("TOO FAR",character);
-			}
+			else if(response=="too_far") d_text("TOO FAR",data.id && get_entity(data.id) || character);
+			else if(response=="invalid_target") d_text("DOESN'T WORK",data.id && get_entity(data.id) || character);
 			else if(response=="miss")
 			{
-				if(data.place=="attack" || data.place=="heal") reject_deferred(data.place,{reason:"miss"});
 				if(get_entity(data.id)) d_text("MISS",get_entity(data.id));
 				else d_text("MISS",character);
 			}
 			else if(response=="disabled")
 			{
-				if(data.place) reject_deferred(data.place,{reason:"disabled"});
 				d_text("DISABLED",character);
 			}
 			else if(response=="attack_failed")
 			{
-				if(data.place=="attack" || data.place=="heal") reject_deferred(data.place,{reason:"failed"});
 				if(get_entity(data.id)) d_text("FAILED",get_entity(data.id));
 				else d_text("FAILED",character);
 				if(data.reason=="level") ui_log("Level gap higher than 10","gray");
 			}
-			else if(response=="skill_too_far") d_text("TOO FAR",character);
-			else if(response=="skill_success")
-			{
-				var name=data.name;
-				skill_timeout(name);
-				resolve_deferred("skill",{success:true});
-			}
-			else if(response=="skill_fail")
-			{
-				var name=data.name;
-			}
+			else if(response=="no_skill") ui_log("Skill doesn't exist","gray");
 			else if(response=="target_alive") d_text("LOOKS LIVE?",character);
 			else if(response=="slot_occuppied") ui_log("Slot occuppied","gray");
-			else if(response=="no_target")
-			{
-				if(!ctarget) d_text("NO TARGET",character);
-				else d_text("INVALID TARGET",character);
-			}
-			else if(response=="non_friendly_target")
-			{
-				d_text("NON FRIENDLY",character);
-			}
-			else if(response=="challenge_sent")
-			{
-				add_chat("","Challenged "+data.name+" to duel","white");
-			}
-			else if(response=="challenge_accepted")
-			{
-				add_chat("",data.name+" accepted the challenge!","#DF231B");
-			}
+			else if(response=="no_target") d_text(!ctarget && "NO TARGET" || "INVALID TARGET",character);
+			else if(response=="non_friendly_target") d_text("NON FRIENDLY",character);
+			else if(response=="cant_respawn") ui_log("Can't respawn yet.","gray");
+			else if(response=="chat_slowdown") ui_log("You can't chat this fast.","gray");
+			else if(response=="not_in_party") ui_log("You are not in a party.","gray");
+			else if(response=="challenge_sent") add_chat("","Challenged "+data.name+" to duel","white");
+			else if(response=="challenge_accepted") add_chat("",data.name+" accepted the challenge!","#DF231B");
 			else if(response=="challenge_received")
 			{
 				add_challenge(data.name);
@@ -1793,7 +1832,6 @@ function init_socket(args)
 			else if(response=="skill_cant_slot") { ui_log("Item not equipped","gray"); d_text("NOPE",character); }
 			else if(response=="skill_cant_requirements") { ui_log("Skill requirements not met","gray"); d_text("NOPE",character); }
 			else if(response=="cruise") ui_log("Cruise speed set at "+data.speed,"gray");
-			else if(response=="exchange_full") { d_text("NO SPACE",character); ui_log("Inventory is full","gray"); reopen(); }
 			else if(response=="exchange_existing") { d_text("WAIT",character); ui_log("Existing exchange in progress","gray"); reopen(); }
 			else if(response=="exchange_notenough") { d_text("NOT ENOUGH",character); ui_log("Need more","gray"); reopen(); }
 			else if(in_arr(response,["mistletoe_success","leather_success","candycane_success","ornament_success","seashell_success","gemfragment_success"])) { render_interaction(response); }
@@ -1836,6 +1874,26 @@ function init_socket(args)
 				ui_log("Can't enter","gray");
 				transporting=false;
 			}
+			else if(response=="cant_in_bank")
+			{
+				ui_log("Operation unavailable in bank","gray");
+			}
+			else if(response=="bank_unavailable") ui_log("Bank unavailable","gray");
+			else if(response=="bank_withdraw") ui_log("Withdrew "+to_pretty_num(data.gold)+" gold","gray");
+			else if(response=="bank_store") ui_log("Stored "+to_pretty_num(data.gold)+" gold","gray");
+			else if(response=="bank_new_pack")
+			{
+				if(data.gold) ui_log("Opened an account for "+to_pretty_num(data.gold)+" gold","gray");
+				else ui_log("Opened an account for "+to_pretty_num(data.shells)+" shells","gray");
+			}
+			else if(response=="locked") ui_log("Locked","gray");
+			else if(response=="seller_gone") ui_log("Seller gone","gray");
+			else if(response=="buyer_gone") ui_log("Buyer gone","gray");
+			else if(response=="item_gone") ui_log("Item gone","gray");
+			else if(response=="hmm") ui_log("Hmm.","gray");
+			else if(response=="sneaky") ui_log("Sneaky sneaky.","gray");
+			else if(response=="need_auth") ui_log("To perform this action your account needs a game client authorization","gray");
+			else if(response=="giveaway_join") ui_log(data.name+" joined your giveaway!","gray");
 			else if(response=="bank_opi")
 			{
 				ui_log("Bank connection in progress","gray");
@@ -1875,6 +1933,10 @@ function init_socket(args)
 				close_chests();
 				ui_log("Can't loot","gray");
 			}
+			else if(response=="no_space")
+			{
+				d_text("NO SPACE",character);
+			}
 			else if(response=="loot_no_space")
 			{
 				close_chests();
@@ -1883,6 +1945,11 @@ function init_socket(args)
 			else if(response=="transport_cant_reach")
 			{
 				ui_log("Can't reach","gray");
+				transporting=false;
+			}
+			else if(response=="transport_cant_invalid")
+			{
+				ui_log("Instance not found","gray");
 				transporting=false;
 			}
 			else if(response=="transport_cant_item")
@@ -1914,18 +1981,13 @@ function init_socket(args)
 			{
 				ui_log("Destroyed "+G.items[data.name].name,"gray");
 			}
-			else if(response=="get_closer" || response=="buy_get_closer" || response=="sell_get_closer" || response=="trade_get_closer" || response=="ecu_get_closer") 
-			{
-				if(data.place) reject_deferred(data.place,{reason:"distance"});
-				ui_log("Get closer","gray");
-			}
+			else if(response=="distance") ui_log("Get closer","gray");
 			else if(response=="trade_bspace")
 			{
 				ui_log("No space on buyer","gray");
 			}
 			else if(response=="bank_restrictions")
 			{
-				if(data.place) reject_deferred(data.place,{reason:"bank"});
 				ui_log("You can't buy, trade or upgrade in the bank.","gray");
 			}
 			else if(response=="tavern_too_late") ui_log("Too late to bet!","gray");
@@ -1936,7 +1998,7 @@ function init_socket(args)
 			else if(response=="condition")
 			{
 				var def=G.conditions[data.name],from=data.from;
-				if(def.bad)
+				if(def.debuff)
 				{
 					ui_log("Afflicted by "+def.name,"gray");
 				}
@@ -1989,27 +2051,21 @@ function init_socket(args)
 			}
 			else if(response=="buy_success")
 			{
-				var event={cost:data.cost,num:data.num,name:data.name,q:data.q||1};
 				ui_log("Spent "+to_pretty_num(data.cost)+" gold","gray");
-				call_code_function("trigger_character_event","buy",event);
-				resolve_deferred("buy",event);
 			}
 			else if(response=="buy_cant_npc")
 			{
 				ui_log("Can't buy this from an NPC","gray");
-				reject_deferred("buy",{reason:"not_buyable"});
 			}
-			else if(response=="buy_cant_space")
+			else if(response=="buy_cant_space" || response=="cant_space")
 			{
 				d_text("SPACE",character);
 				ui_log("No space","gray");
-				reject_deferred("buy",{reason:"space"});
 			}
 			else if(response=="buy_cost")
 			{
 				d_text("INSUFFICIENT",character);
 				ui_log("Not enough gold","gray");
-				reject_deferred("buy",{reason:"cost"});
 			}
 			else if(response=="emotion_cant")
 			{
@@ -2021,11 +2077,15 @@ function init_socket(args)
 			}
 			else if(response=="cant_reach") ui_log("Can't reach","gray");
 			else if(response=="no_item") ui_log("No item provided","gray");
+			else if(response=="not_enough") ui_log("Not enough","gray");
+			else if(response=="buyer_gold") ui_log("Not enough gold on buyer","gray");
+			else if(response=="dont_have_enough") ui_log("Don't have enough","gray");
 			else if(response=="op_unavailable") add_chat("","Operation unavailable","gray");
 			else if(response=="send_no_space") add_chat("","No space on receiver","gray");
 			else if(response=="send_no_item") add_chat("","Nothing to send","gray");
 			else if(response=="send_no_cx") add_chat("","Don't have or not enough","gray");
 			else if(response=="send_diff_owner") add_chat("","This is not one of ours!","gray");
+			else if(response=="insufficient_q") ui_log("There aren't that many available","gray");
 			else if(response=="signed_up") ui_log("Signed Up!","#39BB54");
 			else if(response=="item_placeholder")
 			{
@@ -2033,12 +2093,10 @@ function init_socket(args)
 			}
 			else if(response=="item_locked")
 			{
-				if(data.place) reject_deferred(data.place,"locked");
 				ui_log("Item is locked","gray");
 			}
 			else if(response=="item_blocked")
 			{
-				if(data.place) reject_deferred(data.place,"blocked");
 				ui_log("Item is in use","gray");
 			}
 			else if(response=="item_received" || response=="item_sent")
@@ -2062,8 +2120,7 @@ function init_socket(args)
 				if(data.item.q>1) additional="(x"+data.item.q+")",prefix="";
 				add_log("Received "+prefix+G.items[data.item.name].name+additional,"#3B9358");
 			}
-			else if(response=="log_gold_not_enough") ui_log("Not enough gold","gray");
-			else if(response=="gold_not_enough") add_chat("","Not enough gold",colors.gold);
+			else if(response=="gold_not_enough") ui_log("Not enough gold","gray");
 			else if(response=="gold_sent")
 			{
 				add_chat("","Sent "+to_pretty_num(data.gold)+" gold to "+data.name,colors.gold);
@@ -2084,6 +2141,8 @@ function init_socket(args)
 			else if(response=="gold_use") ui_log("Used "+to_pretty_num(data.gold)+" gold","gray");
 			else if(response=="slots_success") ui_log("Machine went crazy","#9733FF");
 			else if(response=="slots_fail") ui_log("Machine got stuck","gray");
+			else if(response=="temporalsurge_none") ui_log("Temporal surge failed","gray");
+			else if(response=="temporalsurge") ui_log("Temporal surge hastened respawns!","gray");
 			else if(response=="craft")
 			{
 				var def=G.craft[data.name];
@@ -2141,6 +2200,15 @@ function init_socket(args)
 			}
 			else if(response=="magiport_failed") ui_log("Magiport failed","gray"),no_no_no(2);
 			else if(response=="revive_failed") ui_log("Revival failed","gray"),no_no_no(1);
+			else if(response=="scrollsmith_cant")
+			{
+				ui_log("Can't destat this item","gray")
+			}
+			else if(response=="scrollsmith_success")
+			{
+				ui_log("Spent " + data.gold.toLocaleString() + " gold","gray");
+				ui_log("De-statted the item","gray");
+			}
 			else if(response=="locksmith_cant")
 			{
 				ui_log("Can't lock/unlock this item","gray")
@@ -2181,6 +2249,14 @@ function init_socket(args)
 			{
 				ui_log("Spent 250,000 gold","gray");
 				ui_log("Sealed the item","gray");
+			}
+			else if(response=="blessed")
+			{
+				render_interaction({auto:true,skin:"favore",message:"Thank you! The server has been blessed."});
+			}
+			else if(response=="blessed_fail")
+			{
+				render_interaction({auto:true,skin:"favore",message:"Ooops! It failed."});
 			}
 			else if(response=="monsterhunt_started" || response=="monsterhunt_already")
 			{
@@ -2230,7 +2306,7 @@ function init_socket(args)
 			else add_chat("",data.message,data.color); // <- add_chat needs a different color logic
 		});
 	});
-	socket.on("chat_log",function(data){ // <- bad naming [22/10/16]
+	socket.on('chat_log',function(data){ // <- bad naming [22/10/16]
 		draw_trigger(function(){
 			var entity=get_entity(data.id);
 			if(data.id=="mainframe")
@@ -2265,23 +2341,23 @@ function init_socket(args)
 		});
 	});
 	socket.on('ui',function(data){
+		if(data.event) call_code_function("trigger_event",data.event===true&&data.type||data.event,data);
+		if(data.cevent && data.name==character.name) call_code_function("trigger_character_event",data.cevent===true&&data.type||data.cevent,data);
 		// show_json(data);
 		draw_trigger(function(){
 			if(in_arr(data.type,["+$","-$"]))
 			{
-				var npc=get_npc(data.id),player=get_player(data.name);
+				var npc=get_npc(data.npc),player=get_player(data.name);
 				if(topleft_npc=="merchant" && merchant_id) npc=get_npc(merchant_id)||npc;
 				if(data.type=="-$")
 				{
 					if(npc) d_text(data.type,npc,{color:colors.white_negative});
 					if(player) d_text("+$",player,{color:colors.white_positive});
-					call_code_function("trigger_event","sell",{item:data.item,name:data.name,npc:data.id,num:data.num});
 				}
 				else
 				{
 					if(npc) d_text(data.type,npc,{color:colors.white_positive});
 					if(player) d_text("-$",player,{color:colors.white_negative});
-					call_code_function("trigger_event","buy",{item:data.item,name:data.name,npc:data.id,num:data.num});
 				}
 			}
 			else if(data.type=="+$p")
@@ -2290,6 +2366,11 @@ function init_socket(args)
 				if(npc) d_text("+$",npc,{color:"#7E65D3"}); //,start_animation(npc,"purple_success");
 				if(player) d_text("-$",player,{color:"#7E65D3"});
 				call_code_function("trigger_event","sbuy",{item:data.item,name:data.name});
+			}
+			else if(data.type=="+M")
+			{
+				var player=get_player(data.name);
+				if(player) d_text("+M",player,{color:"#67D385"});
 			}
 			else if(data.type=="restore_mp")
 			{
@@ -2309,24 +2390,22 @@ function init_socket(args)
 				if(seller) d_text(data.type,seller,{color:colors.white_positive});
 				if(buyer) d_text("-$$",buyer,{color:colors.white_negative});
 				call_code_function("trigger_event","trade",{seller:data.seller,buyer:data.buyer,item:data.item,num:data.num,slot:data.slot});
+				if(seller.me) call_code_function("trigger_event","sale",{buyer:data.buyer,item:data.item,num:data.num,slot:data.slot});
 			}
 			else if(data.type=="gold_sent")
 			{
 				var sender=get_player(data.sender),receiver=get_player(data.receiver);
 				if(sender && receiver) d_line(sender,receiver,{color:"gold"});
-				call_code_function("trigger_event","gold_sent",{sender:data.sender,receiver:data.receiver,gold:data.gold});
 			}
 			else if(data.type=="item_sent")
 			{
 				var sender=get_player(data.sender),receiver=get_player(data.receiver);
 				if(sender && receiver) d_line(sender,receiver,{color:"item"});
-				call_code_function("trigger_event","item_sent",{sender:data.sender,receiver:data.receiver,item:data.item,num:data.num,fnum:data.fnum});
 			}
 			else if(data.type=="cx_sent")
 			{
 				var sender=get_player(data.sender),receiver=get_player(data.receiver);
 				if(sender && receiver) d_line(sender,receiver,{color:"cx"});
-				call_code_function("trigger_event","cx_sent",{sender:data.sender,receiver:data.receiver,cx:data.cx});
 			}
 			else if(data.type=="magiport")
 			{
@@ -2341,6 +2420,49 @@ function init_socket(args)
 			{
 				var m=get_entity(data.id);
 				if(m) d_text(data.mult==-1&&"-1"||"+1",m,{color:"#9C76D3",size:"huge"});
+			}
+			else if(data.type=="disengage")
+			{
+				const m = get_entity(data.id);
+				if(!m) {
+					return
+				}
+				
+				// disengage |  event_lop can cause monsters to randomly disengage, this is during the grinch event.
+				// cant_move_smart |  if smart move fails to move the monster to the target
+				// kill_monster |  call relates to free_last_hits
+				// firecrackers | 
+				// stop() | mechagnomes
+				// defeat | defeated_by_a_monster function
+				// redirect | something with the rage_list
+				// anger
+				// warpstomp
+				// exceeds_range
+				// cant_move
+				let text = "FFT..";
+				let color = "#84A1D1";
+				switch (data.cause) {
+					case "taunt redirect":
+						text = "GRR.."
+						break;
+					case "agitate redirect":
+						text = "GRRRR.."
+						break;
+					case "absorb redirect":
+						text = "GRRR.."
+						break;
+					case "bored":
+						// if last attack is too long ago.
+						text = "Yawns.."
+					case "player_gone":
+						// different instance, dead player, invis player
+						text = "Huh?!"
+					case "scare":
+						text = "EEP.."
+						break;
+				}
+
+				d_text(text, m, {color});
 			}
 			else if(data.type=="mheal")
 			{
@@ -2396,6 +2518,11 @@ function init_socket(args)
 				var sender=get_player(data.name);
 				if(sender) d_text("OMG!",sender,{size:"huge",color:"#B9A08C"});
 			}
+			else if(data.type=="mfrenzy")
+			{
+				var sender=get_player(data.name);
+				if(sender) d_text("OMG!!",sender,{size:"huge",color:"#B9A08C"});
+			}
 			else if(data.type=="fishing_fail")
 			{
 				var sender=get_player(data.name);
@@ -2434,20 +2561,25 @@ function init_socket(args)
 					sender.a_direction=sender.direction=data.direction;
 				}
 			}
-			else if(data.type=="poison_resist")
+			else if(data.type=="poisoned_resist")
 			{
 				var target=get_entity(data.id);
 				if(target) d_text("RESIST!",target,{color:"#68B84B"});
 			}
-			else if(data.type=="freeze_resist")
+			else if(data.type=="frozen_resist"||data.type=="deepfreezed_resist")
 			{
 				var target=get_entity(data.id);
 				if(target) d_text("RESIST!",target,{color:"#66C1C8"});
 			}
-			else if(data.type=="fire_resist")
+			else if(data.type=="burned_resist")
 			{
 				var target=get_entity(data.id);
 				if(target) d_text("RESIST!",target,{color:"#B22F1A"});
+			}
+			else if(data.type=="stunned_resist")
+			{
+				var target=get_entity(data.id);
+				if(target) d_text("RESIST!",target,{color:"crit"});
 			}
 			else if(data.type=="huntersmark")
 			{
@@ -2560,6 +2692,8 @@ function init_socket(args)
 					}
 				}
 			}
+			else if(is_sdk)
+				console.log("Unhandled 'ui': "+data.type);
 		});
 	});
 	socket.on("tavern",function(data){
@@ -2642,6 +2776,10 @@ function init_socket(args)
 				{
 					start_animation(npc,"exchange");
 				}
+				if(npc.role=="friendtokens" && data.type=="friendtokens")
+				{
+					start_animation(npc,"exchange");
+				}
 				if(npc.role=="monstertokens" && data.type=="monstertokens")
 				{
 					start_animation(npc,"exchange");
@@ -2682,6 +2820,7 @@ function init_socket(args)
 	socket.on('chest_opened',function(data){
 		tut("firstloot");
 		call_code_function("trigger_character_event","loot",data);
+		if(data.opener==character.name || data.gone) resolve_deferred("open_chest",data);
 		draw_trigger(function(){
 			if(chests[data.id])
 			{
@@ -2790,8 +2929,11 @@ function init_socket(args)
 	socket.on('disconnect_reason',function(reason){ window.disconnect_reason=reason; });
 	socket.on('limitdcreport',function(data){
 		window.rc_delay=16;
-		data.mcalls['!']="You've made "+data.climit+" callcosts in 4 seconds. That's tooooo much. This is most probably because you are calling a function like 'move' consecutively. Some calls are also more expensive than others. If you are experiencing issues please email hello@adventure.land or ask for help in Discord/#code_beginner. Ps. You made "+to_pretty_num(data.total)+" calls in total.";
-		show_json(data.mcalls);
+		data.calls['!']="You've made "+data.climit+" callcosts in 4 seconds. That's tooooo much. This is most probably because you are calling a function like 'move' consecutively. Some calls are also more expensive than others. If you are experiencing issues please email hello@adventure.land or ask for help in Discord/#code_beginner. Ps. You made "+to_pretty_num(data.total)+" calls in total.";
+		show_json(data.calls);
+	});
+	socket.on('ccreport',function(data){
+		call_code_function("trigger_event","ccreport",data);
 	});
 	socket.on('action',function(data){
 		if(is_sdk) console.log(data);
@@ -2810,8 +2952,6 @@ function init_socket(args)
 				event_data[name]=data[name];
 		if(data.heal) event_data.heal=data.heal;
 		else if(data.damage) event_data.damage=data.damage;
-		if(attacker && attacker.me && (data.source=="heal" || data.source=="attack")) resolve_deferred("heal",event_data); // cupid can respond with source/"attack"
-		else if(attacker && attacker.me && data.source=="attack") resolve_deferred("attack",event_data);
 
 		call_code_function("trigger_event","action",event_data);
 		if(target.me) call_code_function("trigger_character_event","incoming",event_data);
@@ -2855,7 +2995,7 @@ function init_socket(args)
 		call_code_function("trigger_event","hit",attack_data);
 
 		draw_trigger(function(){
-			var evade=false;
+			var evade=false,offsets=0;
 			if(entity && data.evade) sfx("whoosh",entity.real_x,entity.real_y);
 			if(entity && data.reflect) sfx("reflect",entity.real_x,entity.real_y);
 			if(data.reflect)
@@ -2906,11 +3046,25 @@ function init_socket(args)
 				sfx("monster_hit",entity.real_x,entity.real_y);
 			if(entity && data.projectile && !evade && G.projectiles[data.projectile].hit_text)
 			{
-				d_text(G.projectiles[data.projectile].hit_text[0],entity,{color:G.projectiles[data.projectile].hit_text[1],size:"huge"});
+				d_text(G.projectiles[data.projectile].hit_text[0],entity,
+					{color:G.projectiles[data.projectile].hit_text[1],size:"huge",offset:-offsets*25-10});
+				offsets+=1;
 			}
 			if(entity && data.projectile && !evade && G.projectiles[data.projectile].kill_text && (entity.dead || entity.hp<=0))
 			{
-				d_text(G.projectiles[data.projectile].kill_text[0],entity,{color:G.projectiles[data.projectile].kill_text[1],size:"huge"});
+				d_text(G.projectiles[data.projectile].kill_text[0],entity,
+					{color:G.projectiles[data.projectile].kill_text[1],size:"huge",offset:-offsets*25-10});
+				offsets+=1;
+			}
+			if(data.crit)
+			{
+				var disp="2X";
+				if(data.crit>2.90) disp="3X";
+				else if(data.crit>2.74) disp="2.75X";
+				else if(data.crit>2.44) disp="2.5X";
+				else if(data.crit>2.20) disp="2.25X";
+				d_text(disp,entity,{color:"crit",size:"huge",from:data.hid,offset:-offsets*25-10});
+				offsets+=1;
 			}
 			if(entity && owner && data.damage!==undefined && !evade) // added && owner [15/01/18]
 			{
@@ -2941,17 +3095,14 @@ function init_socket(args)
 		});
 	});
 	socket.on('death',function(data){
-		if(data.place) reject_deferred(data.place,{reason:"not_found"});
+		// unused now
+		if(data.place) reject_deferred(data.place,{place:data.place,reason:data.reason||"not_found"});
 		call_code_function("trigger_event","death",data);
 		data.death=true;
 		on_disappear(data);
 	});
 	socket.on("disappear",function(data){
-		if(data.place) reject_deferred(data.place,{reason:"not_found"});
-		on_disappear(data);
-	});
-	socket.on("notthere",function(data){
-		if(data.place) reject_deferred(data.place,{reason:"not_found"});
+		if(data.place) reject_deferred(data.place,{place:data.place,reason:data.reason||"not_found"});
 		on_disappear(data);
 	});
 	socket.on('entities',function(data){
@@ -3085,7 +3236,7 @@ function init_socket(args)
 }
 
 function npc_right_click(event){
-	var npc=G.npcs[this.npc_id];
+	var npc=G.npcs[this.npc];
 	sfx("npc",this.x,this.y);
 	if(this.type=="character") npc=G.npcs[this.npc];
 	last_npc_right_click=new Date();
@@ -3134,6 +3285,21 @@ function npc_right_click(event){
 	{
 		render_exchange_shrine(1);
 	}
+	if(this.role=="events")
+	{
+		if(character.home!=server_region+server_identifier)
+		{	
+			render_interaction({auto:true,skin:"lionsuit",message:"This is not your home server. You are a resident of "+character.home+". Would you like to set this server as your home?",button:"Yes!",onclick:function(){ socket.emit('set_home'); push_deferred('set_home'); }});
+		}
+		else
+		{
+			render_interaction({auto:true,skin:"lionsuit",message:"This is your home server. Make sure to follow daily and nightly server events! Just click the time icon in the bottom left corner for the schedule!"})
+		}
+	}
+	if(this.role=="favors")
+	{
+		render_interaction({auto:true,skin:"favore",message:"Would you like to bless the entire server for 3 days?",button:"Yes! [1,200 Shells]",onclick:function(){ socket.emit('bless_server'); }});
+	}
 	if(this.role=="mcollector")
 	{
 		render_recipes("mcollector");
@@ -3156,6 +3322,10 @@ function npc_right_click(event){
 	{
 		render_interaction({auto:true,dialog:"locksmith",skin:"asoldier"});
 	}
+	if(this.role=="scrollsmith")
+	{
+		render_interaction({auto:true,dialog:"scrollsmith",skin:"bsoldier"});
+	}
 	if(this.role=="compound")
 	{
 		render_compound_shrine(1);
@@ -3164,7 +3334,6 @@ function npc_right_click(event){
 	{
 		render_transports_npc();
 		if(0) show_transports();
-		// socket.emit("transport",{to:"test"});
 	}
 	if(this.role=="lottery")
 	{
@@ -3234,6 +3403,10 @@ function npc_right_click(event){
 	{
 		render_token_exchange("pvptoken");
 	}
+	if(this.role=="friendtokens")
+	{
+		render_token_exchange("friendtoken");
+	}
 	if(this.role=="funtokens")
 	{
 		render_token_exchange("funtoken");
@@ -3250,11 +3423,15 @@ function npc_right_click(event){
 	{
 		render_token_exchange("monstertoken");
 		if(!character.s.monsterhunt)
-			$("#merchant-item").html(render_interaction({auto:true,skin:"daisy",message:"Would you like to go on a hunt? However, I have to warn you. It's not for the faint-hearted!"+(gameplay=="hardcore"&&" [100 TOKENS!]"||""),button:"I CAN HANDLE IT!",onclick:function(){socket.emit('monsterhunt')}},"return_html"));
+			$("#merchant-item").html(render_interaction({auto:true,skin:"daisy",message:"Would you like to go on a hunt? However, I have to warn you. It's not for the faint-hearted!"+(gameplay=="hardcore"&&" [100 TOKENS!]"||""),button:"I CAN HANDLE IT!",onclick:function(){socket.emit('monsterhunt'); push_deferred("monsterhunt")}},"return_html"));
 		else if(character.s.monsterhunt.c)
 			$("#merchant-item").html(render_interaction({auto:true,skin:"daisy",message:"Go now, go! Come back after you completed your hunt ..."},"return_html"));
 		else
-			socket.emit('monsterhunt'),$("#merchant-item").html(render_interaction({auto:true,skin:"daisy",message:"Well done, well done! A token for your service!"},"return_html"));
+		{
+			socket.emit('monsterhunt');
+			push_deferred("monsterhunt")
+			$("#merchant-item").html(render_interaction({auto:true,skin:"daisy",message:"Well done, well done! A token for your service!"},"return_html"));
+		}
 	}
 	if(this.role=="announcer")
 	{
@@ -3370,9 +3547,9 @@ function player_right_click(event) // always !me + set on player_rclick_logic
 		}
 	}
 	else if(this.npc);
-	else if(character.slots.mainhand && character.slots.mainhand.name=="cupid")
+	else if(character.slots.mainhand && character.slots.mainhand.name=="cupid") // just attack now
 	{
-		player_heal.call(this);
+		player_attack.call(this);
 	}
 	else if(character.ctype=="priest")
 	{
@@ -3422,6 +3599,7 @@ function map_click(event)
 		if(call_code_function("on_map_click",character.real_x+dx,character.real_y+dy)) return;
 		if((blink_pressed || mssince(last_blink_pressed)<360) && character.ctype=="mage")
 		{
+			push_deferred("blink");
 			socket.emit("skill",{name:"blink",x:character.real_x+dx,y:character.real_y+dy,direction:character.moving&&character.direction});
 			return;
 		}
@@ -3475,6 +3653,12 @@ function update_sprite(sprite)
 	for(name in (sprite.animations||{})) update_sprite(sprite.animations[name]);
 	for(name in (sprite.emblems||{})) update_sprite(sprite.emblems[name]);
 	if(sprite.stype=="static") return;
+
+	if(sprite.type=="monster" && sprite.charge_skin)
+	{
+		if(sprite.target && sprite.skin!=sprite.charge_skin) sprite.skin=sprite.charge_skin;
+		if(!sprite.target && sprite.skin!=sprite.normal_skin) sprite.skin=sprite.normal_skin;
+	}
 
 	if(sprite.type=="character" || sprite.type=="monster" || sprite.type=="npc")
 	{
@@ -3846,7 +4030,7 @@ function update_sprite(sprite)
 	if(sprite.type=="character" || sprite.slots || sprite.cx)
 	{
 		if(!sprite.cx) sprite.cx={};
-		cosmetics_logic(sprite);
+		if(sprite.stype=="full") cosmetics_logic(sprite);
 	}
 
 	if(sprite.last_ms && sprite.s)
@@ -3902,6 +4086,12 @@ function add_monster(data)
 	if(def.slots) sprite.slots=def.slots;
 	sprite.level=1;
 	if(sprite.s.young) sprite.real_alpha=0.4;
+	if(def.charge_skin)
+	{
+		sprite.normal_skin=sprite.skin;
+		sprite.charge_skin=def.charge_skin;
+		if(!textures[sprite.charge_skin]) generate_textures(sprite.charge_skin,"full");
+	}
 	sprite.last_ms=new Date();
 	sprite.anchor.set(0.5,1);
 	// sprite.speed=data.speed; [16/04/18]
@@ -4368,6 +4558,7 @@ function effects_logic(sprite)
 		sprite.real_alpha=min(1,sprite.real_alpha+0.05);
 	}
 
+	if(sprite.c && sprite.c.pickpocket && !sprite.fx.attack) sprite.fx.attack=[new Date(),0];
 	if(sprite.c && sprite.c.fishing && !sprite.fx.attack) sprite.fx.attack=[new Date(),0];
 	if(sprite.c && sprite.c.mining && !sprite.fx.attack) sprite.fx.attack=[new Date(),0];
 }
@@ -4572,6 +4763,9 @@ function cosmetics_logic(sprite)
 				sprite.addChild(c);
 				sprite.cxc[cid]=c;
 			}
+			else if(T[cid]=="gravestone"){
+				return;
+			}
 			else /*if(!T[cid])*/
 			{
 				console.log("Invalid cosmetics: "+cid);
@@ -4746,11 +4940,12 @@ function cosmetics_logic(sprite)
 		}
 		else if(cid.startsWith("wea"))
 		{
-			var wname=cid.substr(6,99),wcx=G.items[wname].cx||{},def=G.items[wname],scale=1,extension=false,blade=false,staff=false,rod=false,pickaxe=false,bow=false,mirror=false,rotation=0;
+			var wname=cid.substr(6,99),wcx=G.items[wname].cx||{},def=G.items[wname],scale=1,extension=false,blade=false,staff=false,rod=false,pickaxe=false,bow=false,mirror=false,rotation=0,crossbow=false;
 			if(in_arr(def.wtype,["wblade","staff"])) staff=true;
 			else if(in_arr(def.wtype,["rod"])) rod=true;
 			else if(in_arr(def.wtype,["pickaxe"])) pickaxe=true;
 			else if(in_arr(def.wtype,["bow"])) bow=true;
+			else if(in_arr(def.wtype,["crossbow"])) crossbow=true;
 			else blade=true;
 			if(wcx.extension) extension=true;
 			if(wcx.scale) scale=G.items[wname].cx.scale;
@@ -4781,7 +4976,7 @@ function cosmetics_logic(sprite)
 				yy*=1*mainh;
 				if(extension) yy+=round(1/scale);
 				else yy-=2;
-				if(blade)
+				if(blade || crossbow)
 				{
 					if(extension) rotation=0.5*Math.PI;
 					else xx+=2;
@@ -4801,7 +4996,7 @@ function cosmetics_logic(sprite)
 				yy*=-1*mainh; // reverse the move
 				if(extension) yy+=round(1/scale);
 				else yy-=2;
-				if(blade)
+				if(blade || crossbow)
 				{
 					if(extension) rotation=-0.5*Math.PI;
 					else xx+=-2;
@@ -4836,7 +5031,7 @@ function cosmetics_logic(sprite)
 				{
 					var distx=8;
 					if(staff) distx=16,yy+=3;
-					if(rod || pickaxe)
+					if(rod || pickaxe || crossbow)
 					{
 						if(sprite.j==1 || sprite.j==2);
 						else yy+=-8,mirror=true;
@@ -4888,19 +5083,68 @@ function cosmetics_logic(sprite)
 	});
 }
 
+function add_npc(npc,position,npc_id) // not used anymore [07/09/22]
+{
+	var sprite;
+	if(npc.type=="static") sprite=new_sprite(npc.skin,"static");
+	else if(npc.type=="fullstatic") sprite=new_sprite(npc.skin,"full");
+	else sprite=new_sprite(npc.skin,"emote");
+	sprite.npc=npc_id;
+	sprite.parentGroup=sprite.displayGroup=player_layer;
+	sprite.interactive=true;
+	sprite.buttonMode=true;
+	sprite.real_x=sprite.x=round(position[0]);
+	sprite.real_y=sprite.y=round(position[1]);
+	if(npc.type=="fullstatic" && position.length==3) npc.direction=position[2];
+	if(npc.role=="citizen") sprite.citizen=true;
+	sprite.anchor.set(0.5,1); // this might be manually handled, but no need
+	sprite.type="npc";
+	sprite.npc=true;
+	sprite.animations={}; sprite.fx={};
+	sprite.emblems={};
+	adopt_soft_properties(sprite,npc);
+	if(npc.stand)
+	{
+		var stand=new PIXI.Sprite(textures[npc.stand]);
+		stand.y=7;
+		stand.anchor.set(0.5,1);
+		sprite.addChild(stand);
+	}
+	if(sprite.stype=="emote")
+	{
+		var actual=[26,35],anchor=sprite.anchor;
+		if(sprite.role=="newyear_tree") actual=[32,60];
+		sprite.hitArea=new PIXI.Rectangle(-actual[0]*anchor.x-2,-actual[1]*anchor.y-2,actual[0]+4,actual[1]+4);
+		sprite.awidth=actual[0];
+		sprite.aheight=actual[1];
+		if(npc.atype)
+		{
+			sprite.atype=npc.atype;
+			sprite.frame=sprite.stopframe||sprite.frame;
+		}
+	}
+	sprite.on('mousedown',npc_right_click).on('touchstart',npc_right_click).on('rightdown',npc_right_click);
+	//#GTODO: Maybe focus with a story / name 
+	sprite.onrclick=npc_right_click;
+	return sprite;
+}
+
 function add_character(data,me)
 {
 	// console.log("add_character "+data.skin);
 	// data.skin="dknight2";
+	var npc=data.npc && G.npcs[data.npc],stype="full";
+	if(npc && npc.type=="static") stype="static";
+	else if(npc && npc.type!="fullstatic") stype="emote";
 	if(log_flags.entities) console.log("add character "+data.id);
 	var cscale=(me && manual_centering && 2) || 1;
 	if(!XYWH[data.skin]) data.skin="naked";
-	var sprite=new_sprite(data.skin,"full");
+	var sprite=new_sprite(data.skin,stype);
 	if(cscale!=1) sprite.scale=new PIXI.Point(cscale,cscale);
 	sprite.cscale=cscale;
 
 	adopt_soft_properties(sprite,data);
-	cosmetics_logic(sprite);
+	if(stype=="full") cosmetics_logic(sprite);
 
 	sprite.name=sprite.id;
 
@@ -4916,12 +5160,44 @@ function add_character(data,me)
 	sprite.type="character";
 	sprite.me=me;
 	sprite.base={h:8,v:7,vn:2};
-	if(data.npc && G.npcs[data.npc])
+	if(npc)
 	{
-		if(G.npcs[data.npc].role=="citizen" || G.npcs[data.npc].moving) sprite.citizen=true,sprite.npc_onclick=true,sprite.role=G.npcs[data.npc].role;
+		sprite.type="npc";
+		if(data.direction!==undefined) sprite.direction=data.direction;
+		// sprite.npc_onclick=true;
+		sprite.role=G.npcs[data.npc].role;
+		adopt_soft_properties(sprite,npc);
+		if(npc.role=="citizen" || npc.movable) sprite.citizen=true;
+		if(npc.stand)
+		{
+			var stand=new PIXI.Sprite(textures[npc.stand]);
+			stand.y=7;
+			stand.anchor.set(0.5,1);
+			sprite.addChild(stand);
+		}
 	}
 	sprite.awidth=sprite.width/cscale; sprite.aheight=sprite.height/cscale;
-	if(!(me && manual_centering))
+	if(stype=="emote")
+	{
+		var actual=[26,35],anchor=sprite.anchor;
+		if(sprite.role=="newyear_tree") actual=[32,60];
+		sprite.hitArea=new PIXI.Rectangle(-actual[0]*anchor.x-2,-actual[1]*anchor.y-2,actual[0]+4,actual[1]+4);
+		sprite.awidth=actual[0];
+		sprite.aheight=actual[1];
+		if(npc.atype)
+		{
+			sprite.atype=npc.atype;
+			sprite.frame=sprite.stopframe||sprite.frame;
+		}
+	}
+	if(npc)
+	{
+		sprite.interactive=true;
+		sprite.buttonMode=true;
+		sprite.on('mousedown',npc_right_click).on('touchstart',npc_right_click).on('rightdown',npc_right_click);
+		sprite.onrclick=npc_right_click;
+	}
+	else if(!(me && manual_centering))
 	{
 		sprite.interactive=true;
 		sprite.on("mousedown",player_click).on("touchstart",player_click);
@@ -4982,59 +5258,14 @@ function add_chest(data)
 	if(chest.map==current_map) map.addChild(chest);
 }
 
-function get_npc(id)
+function get_npc(n_id)
 {
-	var the_npc=null;
-	map_npcs.forEach(function(npc){
-		if(npc.npc_id==id) the_npc=npc;
-	});
-	return the_npc;
-}
-
-function add_npc(npc,position,name,npc_id)
-{
-	var sprite;
-	if(npc.type=="static") sprite=new_sprite(npc.skin,"static");
-	else if(npc.type=="fullstatic") sprite=new_sprite(npc.skin,"full");
-	else sprite=new_sprite(npc.skin,"emote");
-	sprite.npc_id=npc_id;
-	sprite.parentGroup=sprite.displayGroup=player_layer;
-	sprite.interactive=true;
-	sprite.buttonMode=true;
-	sprite.real_x=sprite.x=round(position[0]);
-	sprite.real_y=sprite.y=round(position[1]);
-	if(npc.type=="fullstatic" && position.length==3) npc.direction=position[2];
-	if(npc.role=="citizen") sprite.citizen=true;
-	sprite.anchor.set(0.5,1); // this might be manually handled, but no need
-	sprite.type="npc";
-	sprite.npc=true;
-	sprite.animations={}; sprite.fx={};
-	sprite.emblems={};
-	adopt_soft_properties(sprite,npc);
-	if(npc.stand)
-	{
-		var stand=new PIXI.Sprite(textures[npc.stand]);
-		stand.y=7;
-		stand.anchor.set(0.5,1);
-		sprite.addChild(stand);
-	}
-	if(sprite.stype=="emote")
-	{
-		var actual=[26,35],anchor=sprite.anchor;
-		if(sprite.role=="newyear_tree") actual=[32,60];
-		sprite.hitArea=new PIXI.Rectangle(-actual[0]*anchor.x-2,-actual[1]*anchor.y-2,actual[0]+4,actual[1]+4);
-		sprite.awidth=actual[0];
-		sprite.aheight=actual[1];
-		if(npc.atype)
-		{
-			sprite.atype=npc.atype;
-			sprite.frame=sprite.stopframe||sprite.frame;
-		}
-	}
-	sprite.on('mousedown',npc_right_click).on('touchstart',npc_right_click).on('rightdown',npc_right_click);
-	//#GTODO: Maybe focus with a story / name 
-	sprite.onrclick=npc_right_click;
-	return sprite;
+	if(!n_id) return null;
+	if(entities[n_id]) return entities[n_id];
+	for(var id in entities)
+		if(entities[id].npc==n_id) 
+			return entities[id];
+	return null;
 }
 
 function add_machine(machine)
@@ -5096,6 +5327,8 @@ function add_door(door)
 	sprite.buttonMode=true;
 	sprite.x=round(door[0]);
 	sprite.y=round(door[1]);
+	sprite.to=door[4];
+	sprite.s=door[5];
 	sprite.anchor.set(0.5,1);
 	//sprite.width=door[2]; sprite.height=door[3];
 	//sprite.hitArea=new PIXI.Rectangle(0,0,round(door[2]),round(door[3]));
@@ -5115,15 +5348,17 @@ function add_door(door)
 					if(c['map']==door[4])
 					{
 						socket.emit('enter',{place:door[4],name:c["in"]});
+						push_deferred("enter");
 						return;
 					}
 				}
 			}
-			setTimeout(function(){ show_confirm("Enter "+G.maps[door[4]].name+"? [Consumes a key!]",["#D06631","Yes"],"No!",function(){ socket.emit('enter',{place:door[4]}); hide_modal(true); }); },10);
+			setTimeout(function(){ show_confirm("Enter "+G.maps[door[4]].name+"? [Consumes a key!]",["#D06631","Yes"],"No!",function(){ socket.emit('enter',{place:door[4]}); push_deferred("enter"); hide_modal(true); }); },10);
 			return;
 		}
 		if(!is_door_close(character.map,door,character.real_x,character.real_y) || !can_use_door(character.map,door,character.real_x,character.real_y)) {add_log("Get closer","gray"); return;}
 		socket.emit("transport",{to:door[4],s:door[5]});
+		push_deferred("transport");
 	}
 	if(is_mobile) sprite.on('mousedown',door_right_click).on('touchstart',door_right_click);
 	sprite.on('rightdown',door_right_click);
@@ -5203,7 +5438,7 @@ function create_map()
 		// #GTODO: Maybe only destroy groups and NPC's that are not re-used
 		// map.destroy({children:true}); // added children:true - exception [20/08/16] #PIXI
 	}
-	map_npcs=[]; map_doors=[]; map_lights=[]; map_tiles=[]; map_entities=[]; map_animations={}; map_machines={}; water_tiles=[]; entities={};
+	map_npcs=[]; map_doors=[]; map_nights=[]; map_lights=[]; map_tiles=[]; map_entities=[]; map_animations={}; map_machines={}; water_tiles=[]; entities={};
 
 	dtile_size=GEO['default']&&GEO.tiles[GEO['default']][3];
 	if(dtile_size && is_array(dtile_size)) dtile_size=dtile_size[0];
@@ -5411,6 +5646,24 @@ function create_map()
 				for(var y=tile[2];y<=nunv(tile[4],tile[2]);y+=h)
 				{
 					var entity=new PIXI.Sprite(tile_textures[current_map][tile[0]][0]);
+					entity.x=x;
+					entity.y=y;
+					entity.real_y=nunv(tile[4],tile[2])+h;
+					entity.parentLayer=lighting;
+					map_lights.push(entity);
+					map.addChild(entity);
+				}
+		}
+
+	if(GEO.nights && mode.ltbl && !no_graphics)
+		for(var p=0;p<GEO.nights.length;p++)
+		{
+			var tile=GEO.nights[p],w=GEO.tiles[tile[0]][3],h=GEO.tiles[tile[0]][4];
+			console.log(GEO.tiles[tile[0]][0]);
+			for(var x=tile[1];x<=nunv(tile[3],tile[1]);x+=w)
+				for(var y=tile[2];y<=nunv(tile[4],tile[2]);y+=h)
+				{
+					var entity=new PIXI.Sprite(tile_textures[current_map][tile[0]][0]);
 					entity.textures=tile_textures[current_map][tile[0]];
 					entity.real_x=entity.x=x;
 					entity.y=y;
@@ -5421,7 +5674,7 @@ function create_map()
 					entity.alpha=0.7;
 					entity.parentGroup=entity.displayGroup=player_layer;
 					entity.y_disp=-(parseFloat(tile[7])||0)+EPS;
-					map_lights.push(entity);
+					map_nights.push(entity);
 					map.addChild(entity);
 					map_animations[entity.id]=entity;
 				}
@@ -5464,16 +5717,19 @@ function create_map()
 		}
 
 	map_info=G.maps[current_map];
-	npcs=map_info.npcs;
-	for(var i=0;i<npcs.length;i++)
+	if(0) // Now all NPC's are live [07/09/22]
 	{
-		var npc=npcs[i],def=G.npcs[npc.id];
-		if(def.type=="full" || def.role=="citizen") continue;
-		if(log_flags.map) console.log("NPC: "+npc.id);
-		var nsprite=add_npc(def,npc.position,npc.name,npc.id);
-		map.addChild(nsprite);
-		map_npcs.push(nsprite);
-		map_entities.push(nsprite);
+		npcs=map_info.npcs;
+		for(var i=0;i<npcs.length;i++)
+		{
+			var npc=npcs[i],def=G.npcs[npc.id];
+			if(def.type=="full" || def.role=="citizen" || !npc.position) continue;
+			if(log_flags.map) console.log("NPC: "+npc.id);
+			var nsprite=add_npc(def,npc.position,npc.id);
+			map.addChild(nsprite);
+			map_npcs.push(nsprite);
+			map_entities.push(nsprite);
+		}
 	}
 
 	doors=map_info.doors||[];
