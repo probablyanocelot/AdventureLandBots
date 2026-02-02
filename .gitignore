@@ -2,10 +2,5 @@
 node_modules/
 package-lock.json
 package.json
-bot.ts
-base/defaults.ts
-strategy_pattern/context.ts
-strategy_pattern/strategies/gui.ts
-./adventure-land.code-workspace
-adventure-land.code-workspace
 .env
+adventure-land.code-workspace
