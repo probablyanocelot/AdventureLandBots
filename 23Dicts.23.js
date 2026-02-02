@@ -414,7 +414,7 @@ let mobsGroup = [
   "mrpumpkin",
   "mrgreen",
   "icegolem",
-  " dragold",
+  "dragold",
   "crabxx",
   "rgoo",
   "bgoo",

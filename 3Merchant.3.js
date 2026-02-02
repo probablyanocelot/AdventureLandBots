@@ -22,6 +22,11 @@ let lastBankUpdate = false;
 let bankUpdateTime = 1000 * 60 * 15; // sec_to_ms * num_seconds * num_minutes
 let goblin_updated = false;
 
+
+setInterval(() => {
+    parent.socket.emit("emotion", { name: "hearts_single" });
+}, 2000)
+
 async function getExchangeable() {
   if (!character.bank) return;
   // TODO: get seashells
