@@ -17,6 +17,13 @@ let currentGroup = getGroup(group);
 let myFarmMob = farmDefault[character.id];
 let myFarmLocation = mobLocationDict[myFarmMob].loc;
 
+function setFarmMob(mob) {
+  if (!mob) return;
+  myFarmMob = mob;
+  let loc = mobLocationDict[mob]?.loc;
+  myFarmLocation = loc ?? mob;
+}
+
 let farmerReserve = 2500000;
 let desired_potion_count = 9999;
 let desired_mp_pot = "mpot1";
@@ -188,7 +195,11 @@ class Farmer {
     character.on(
       "target_hit",
       function (data) {
-        if (get_entity(data.target)?.mtype == this.current_action) {
+        if (
+          get_entity(data.target)?.mtype == this.current_action ||
+          (character.ctype == "priest" &&
+            get_active_characters().hasOwnProperty(data.target))
+        ) {
           this.idleBandAid.idleCounter = 0;
           data.idle_reset = true;
           console.log(data);
@@ -360,12 +371,15 @@ class Farmer {
 
   async serverEventEnd() {
     if (
-      G.events.hasOwnProperty(this.current_action) &&
+      G.events.hasOwnProperty(
+        this.current_action || parent.S[this.current_action],
+      ) &&
       !parent.S[this.current_action]?.live
     ) {
       // ?.live
       this.eventJoined = false;
-      leave();
+      await leave();
+      await use_skill("use_town");
       this.clear_current_action();
     }
   }
@@ -376,35 +390,65 @@ class Farmer {
     for (let event in G.events) {
       // event = String(event)
       if (!parent.S[event]) continue;
+      if (!parent.S[event].live) continue;
 
       // seasonal events are global, not joinable
-      if (!G.events[event].hasOwnProperty("join")) continue;
-
-      // set event as current action if it's live
-      if (parent.S[event]) this.current_action = event; // && parent.S[event].live
-
-      if (parent.S[event] && !this.eventJoined) {
-        join(event);
-        this.eventJoined = true;
+      if (G.events[event].hasOwnProperty("join")) {
+        this.current_action = event; // && parent.S[event].live
+        await join(event);
+        if (G.monsters.hasOwnProperty(event) && !smart.moving)
+          await smart_move(get_nearest_monster({ type: event }));
+        return;
       }
-      // if checks return true, set action to event
-      // if (this.joinEvent(event)) this.current_action = event // && G.monsters[event]
-
-      // if (get_nearest_monster({ type: 'bgoo' })) this.current_action = 'bgoo'
-      // if (get_nearest_monster({ type: 'rgoo' })) this.current_action = 'rgoo'
-
-      // if (!this.joinEvent(event) && this.current_action == event) use_skill('use_town').then(this.moveToThen(myFarmLocation, this.clear_current_action()))
-      // if (this.current_action == event && !parent.S[event]?.live && !smart.moving) {
-      // 	this.eventJoined = false
-      // 	use_skill('use_town').then(() => {
-      // 		this.clear_current_action()
-      // 		smart_move(myFarmLocation)
-      // 	})
-      // use_skill('use_town').then(this.moveToThen(myFarmLocation, this.clear_current_action()))
-
-      // }
+    }
+    for (let event in parent.S) {
+      if (!G.monsters.hasOwnProperty(event)) continue;
+      if (get_nearest_monster({ type: event }) && this.current_action == event)
+        continue;
+      if (
+        parent.S[event].live &&
+        parent.S[event].x &&
+        parent.S[event].y &&
+        parent.S[event].map
+      ) {
+        if (smart.moving) continue;
+        await smart_move({
+          x: parent.S[event].x,
+          y: parent.S[event].y,
+          map: parent.S[event].map,
+        }); // .then(() => {
+        //   if (!this.current_action == event) this.current_action = event;
+        // });
+        if (this.current_action !== event) this.current_action = event;
+        return;
+      }
     }
   }
+
+  // // set event as current action if it's live
+
+  // if (parent.S[event] && !this.eventJoined) {
+  //   join(event);
+  // this.current_action = event; // && parent.S[event].live
+
+  //   this.eventJoined = true;
+  // }
+  // if checks return true, set action to event
+  // if (this.joinEvent(event)) this.current_action = event // && G.monsters[event]
+
+  // if (get_nearest_monster({ type: 'bgoo' })) this.current_action = 'bgoo'
+  // if (get_nearest_monster({ type: 'rgoo' })) this.current_action = 'rgoo'
+
+  // if (!this.joinEvent(event) && this.current_action == event) use_skill('use_town').then(this.moveToThen(myFarmLocation, this.clear_current_action()))
+  // if (this.current_action == event && !parent.S[event]?.live && !smart.moving) {
+  // 	this.eventJoined = false
+  // 	use_skill('use_town').then(() => {
+  // 		this.clear_current_action()
+  // 		smart_move(myFarmLocation)
+  // 	})
+  // use_skill('use_town').then(this.moveToThen(myFarmLocation, this.clear_current_action()))
+
+  // }
 
   moveToThen(loc, then) {
     if (smart.moving) return;
@@ -424,31 +468,45 @@ class Farmer {
     // if (character.ctype == 'paladin') return
     if (
       smart.moving ||
-      this.isActionMonster() ||
-      (this.current_action && this.current_action !== "")
-    )
+      character.moving ||
+      (parent.S.hasOwnProperty(this.current_action) &&
+        parent.S[this.current_action].live)
+    ) {
+      this.idle_counter = 0;
       return;
+    }
 
     // only increment counter when we're doing nothing
-    if (!this.current_action && !character.moving && !this.thinking) {
-      this.idle_counter += 0.2;
-      if (this.idle_counter % 1 == 0) log(`Idle: ${this.idle_counter}`);
-    }
-
-    if (this.idle_counter > 5 && !smart.moving) {
-      log("idle move");
-      this.moveToThen(myFarmLocation, this.set_current_action(myFarmMob));
-    }
+    let hasTarget = character.target || this.target;
+    let actionIsMonster =
+      this.current_action && G.monsters.hasOwnProperty(this.current_action);
+    let actionHasNearbyMonster = actionIsMonster
+      ? get_nearest_monster({ type: this.current_action })
+      : false;
+    if (hasTarget) return;
+    if (actionIsMonster && actionHasNearbyMonster) return;
+    this.idle_counter += 0.2;
+    if (this.idle_counter % 2 == 0) log(`Idle: ${this.idle_counter}`);
+    if (this.idle_counter >= 30) this.clear_current_action();
   }
+
+  // if (this.idle_counter > 10 && !smart.moving) {
+  // log("idle move");
+  // this.moveToThen(myFarmLocation, this.set_current_action(myFarmMob));
+  // }
+  // }
 
   async fixStuck() {
     // stuck in main
     if ((character.x == 0 && character.y == 0) || this.idle_counter >= 30) {
       log("stuck move");
+      this.idle_counter = 0;
+      await use_skill("use_town");
       if (smart.moving) return;
-      this.clear_current_action();
 
       await smart_move(myFarmLocation);
+      this.clear_current_action();
+      this.set_current_action(myFarmMob);
     }
 
     // !TODO: replace farmDefault with 'is in' dict logic. maybe .hasOwnProperty()
@@ -739,6 +797,7 @@ class Farmer {
 
     if (!target && character.hp < -character.max_hp * 0.6) return;
     if (!target) return; // must have target beyond here
+    this.idle_counter = 0;
     if (character.ctype == "warrior" || character.ctype == "rogue") {
       // keep farmer from suiciding by monster cop
       if (!get_player("prayerBeads")) return;
