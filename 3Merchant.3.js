@@ -14,9 +14,10 @@ load_code("98Telegram");
 //load_code(53) // upgrade_all2 WILL ADD MORE
 //performance_trick();
 
-const { webFrame } = require("electron");
+try {
+	const { webFrame } = require("electron");
 webFrame.setZoomFactor(0.75);
-
+} catch(e){console.log(e)}
 let lastScare;
 let lastBankUpdate = false;
 let bankUpdateTime = 1000 * 60 * 15; // sec_to_ms * num_seconds * num_minutes

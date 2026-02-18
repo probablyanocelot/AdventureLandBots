@@ -279,7 +279,11 @@ let sell_dict = {
     "epyjamas",
     "carrotsword",
     "xmassweater",
-  ], // 'xmasshoes', 'xmashat', 'eears', 'eslippers',
+	  'xmasshoes', 
+	  'xmashat',
+	  'xmaspants',
+	  'mittens',
+  ], //  'eears', 'eslippers',
   merchTradeSell: [],
   farmerSell: ["hpamulet", "hpbelt", "stinger", "slimestaff", "mushroomstaff"],
 };

@@ -351,7 +351,7 @@ class Farmer {
     // if (character.ctype == "ranger") return;
     if (!parent.S[event]) return; // no event
     // if (event == 'franky') return;
-    if (parent.S.halloween) return; // nobody farming in season
+    if (parent.S.halloween||parent.S.valentines||parent.S.lunarnewyear) return; // nobody farming in season
     if (parent.S.egghunt) {
       switch (event) {
         case "crabxx":
@@ -386,9 +386,11 @@ class Farmer {
 
   async serverEvents() {
     if (character.ctype == "merchant") return;
+
     // if (character.ctype == "ranger") return;
     for (let event in G.events) {
-      // event = String(event)
+	      if (parent.S.halloween||parent.S.valentines||parent.S.lunarnewyear) continue; // 
+		// event = String(event)
       if (!parent.S[event]) continue;
       if (!parent.S[event].live) continue;
 
