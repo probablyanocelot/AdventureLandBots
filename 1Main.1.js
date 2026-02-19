@@ -6,11 +6,13 @@
 
 let tunnelMine = {map: 'tunnel', x: -279.9999999, y: -10.0000001}
 let wofficeMine = {map:"woffice", x: -153.15, y: -177}
+let crabFish = {map: 'main', x: -1368, y: -216}
+let fish2 = {map: 'main', x:-472,y: 2093.05}
 
 // where to go
 let location_map = {
-	fishing: {map: 'main', x: -1368, y: -216},
-	mining: tunnelMine
+	fishing: fish2,
+	mining: wofficeMine
 }		
 			
 class Character {

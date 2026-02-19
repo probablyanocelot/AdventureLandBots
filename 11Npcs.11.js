@@ -58,7 +58,7 @@ let itemsToBuy = [
   "armorbox",
   "weaponbox",
   "candy0",
-  "ornament",
+  // "ornament",
   "gemfragment",
   // MISC
   "cryptkey",
