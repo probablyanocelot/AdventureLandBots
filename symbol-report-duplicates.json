@@ -1,0 +1,1034 @@
+{
+  "generatedAt": "2026-02-20T20:48:21.875Z",
+  "root": "D:/DEV/adventure-land/AdventureLandBots",
+  "scope": "lib/**/*.js",
+  "fileCount": 69,
+  "symbolCount": 43,
+  "symbols": [
+    {
+      "name": "warn",
+      "definitionCount": 2,
+      "definitions": [
+        {
+          "file": "lib/al_debug_log.js",
+          "line": 17,
+          "col": 1,
+          "type": "arrow"
+        },
+        {
+          "file": "lib/al_debug_log.js",
+          "line": 33,
+          "col": 26,
+          "type": "module_export"
+        }
+      ],
+      "usageCount": 56,
+      "usagesByFile": {
+        "lib/al_debug_log.js": 2,
+        "lib/al_farming_config.js": 2,
+        "lib/al_main.js": 12,
+        "lib/class_bot.js": 3,
+        "lib/class_mage.js": 4,
+        "lib/class_orchestrator.js": 7,
+        "lib/cm_magiport.js": 2,
+        "lib/cm_sustain.js": 3,
+        "lib/cm_unpack.js": 4,
+        "lib/combat_event.js": 2,
+        "lib/event_tasks.js": 4,
+        "lib/group_party.js": 3,
+        "lib/group_priest_swap.js": 4,
+        "lib/telemetry/client.js": 4
+      }
+    },
+    {
+      "name": "logCatch",
+      "definitionCount": 2,
+      "definitions": [
+        {
+          "file": "lib/al_debug_log.js",
+          "line": 25,
+          "col": 1,
+          "type": "arrow"
+        },
+        {
+          "file": "lib/al_debug_log.js",
+          "line": 33,
+          "col": 32,
+          "type": "module_export"
+        }
+      ],
+      "usageCount": 25,
+      "usagesByFile": {
+        "lib/al_config.js": 5,
+        "lib/al_main.js": 2,
+        "lib/class_bot.js": 4,
+        "lib/combat_targeting.js": 2,
+        "lib/group_party.js": 5,
+        "lib/st_smart_move.js": 7
+      }
+    },
+    {
+      "name": "BotCharacter",
+      "definitionCount": 2,
+      "definitions": [
+        {
+          "file": "lib/class_bot.js",
+          "line": 16,
+          "col": 1,
+          "type": "class"
+        },
+        {
+          "file": "lib/class_bot.js",
+          "line": 331,
+          "col": 20,
+          "type": "module_export"
+        }
+      ],
+      "usageCount": 24,
+      "usagesByFile": {
+        "lib/al_main.js": 10,
+        "lib/class_mage.js": 2,
+        "lib/class_merchant.js": 2,
+        "lib/class_paladin.js": 2,
+        "lib/class_priest.js": 2,
+        "lib/class_ranger.js": 2,
+        "lib/class_rogue.js": 2,
+        "lib/class_warrior.js": 2
+      }
+    },
+    {
+      "name": "info",
+      "definitionCount": 2,
+      "definitions": [
+        {
+          "file": "lib/al_debug_log.js",
+          "line": 9,
+          "col": 1,
+          "type": "arrow"
+        },
+        {
+          "file": "lib/al_debug_log.js",
+          "line": 33,
+          "col": 20,
+          "type": "module_export"
+        }
+      ],
+      "usageCount": 21,
+      "usagesByFile": {
+        "lib/class_mage.js": 1,
+        "lib/class_orchestrator.js": 9,
+        "lib/cm_magiport.js": 4,
+        "lib/cm_unpack.js": 3,
+        "lib/event_tasks.js": 2,
+        "lib/group_priest_swap.js": 2
+      }
+    },
+    {
+      "name": "Idle",
+      "definitionCount": 2,
+      "definitions": [
+        {
+          "file": "lib/class_idle.js",
+          "line": 1,
+          "col": 1,
+          "type": "class"
+        },
+        {
+          "file": "lib/class_idle.js",
+          "line": 23,
+          "col": 20,
+          "type": "module_export"
+        }
+      ],
+      "usageCount": 14,
+      "usagesByFile": {
+        "lib/class_mage.js": 2,
+        "lib/class_merchant.js": 2,
+        "lib/class_paladin.js": 2,
+        "lib/class_priest.js": 2,
+        "lib/class_ranger.js": 2,
+        "lib/class_rogue.js": 2,
+        "lib/class_warrior.js": 2
+      }
+    },
+    {
+      "name": "handler",
+      "definitionCount": 5,
+      "definitions": [
+        {
+          "file": "lib/al_farming_config.js",
+          "line": 275,
+          "col": 3,
+          "type": "arrow"
+        },
+        {
+          "file": "lib/event_listeners.js",
+          "line": 64,
+          "col": 5,
+          "type": "arrow"
+        },
+        {
+          "file": "lib/event_listeners.js",
+          "line": 107,
+          "col": 5,
+          "type": "arrow"
+        },
+        {
+          "file": "lib/zCLIENT_BOOTSTRAP.js",
+          "line": 248,
+          "col": 3,
+          "type": "arrow"
+        },
+        {
+          "file": "lib/zPROXIED_REQUIRE.js",
+          "line": 219,
+          "col": 3,
+          "type": "arrow"
+        }
+      ],
+      "usageCount": 12,
+      "usagesByFile": {
+        "lib/al_farming_config.js": 2,
+        "lib/event_listeners.js": 12
+      }
+    },
+    {
+      "name": "loop",
+      "definitionCount": 5,
+      "definitions": [
+        {
+          "file": "lib/al_farming_config.js",
+          "line": 296,
+          "col": 3,
+          "type": "arrow"
+        },
+        {
+          "file": "lib/cm_sustain.js",
+          "line": 109,
+          "col": 3,
+          "type": "arrow"
+        },
+        {
+          "file": "lib/cm_unpack.js",
+          "line": 163,
+          "col": 3,
+          "type": "arrow"
+        },
+        {
+          "file": "lib/group_party.js",
+          "line": 88,
+          "col": 3,
+          "type": "arrow"
+        },
+        {
+          "file": "lib/group_priest_swap.js",
+          "line": 31,
+          "col": 3,
+          "type": "arrow"
+        }
+      ],
+      "usageCount": 10,
+      "usagesByFile": {
+        "lib/al_farming_config.js": 2,
+        "lib/cm_sustain.js": 2,
+        "lib/cm_unpack.js": 2,
+        "lib/group_party.js": 2,
+        "lib/group_priest_swap.js": 2
+      }
+    },
+    {
+      "name": "fullTimer",
+      "definitionCount": 2,
+      "definitions": [
+        {
+          "file": "lib/unused/full.js",
+          "line": 8,
+          "col": 1,
+          "type": "function"
+        },
+        {
+          "file": "lib/unused/timing.js",
+          "line": 8,
+          "col": 1,
+          "type": "function"
+        }
+      ],
+      "usageCount": 6,
+      "usagesByFile": {
+        "lib/unused/full.js": 3,
+        "lib/unused/timing.js": 3
+      }
+    },
+    {
+      "name": "getNearestMonsterOfType",
+      "definitionCount": 2,
+      "definitions": [
+        {
+          "file": "lib/fn_game.js",
+          "line": 2,
+          "col": 1,
+          "type": "function"
+        },
+        {
+          "file": "lib/fn_game.js",
+          "line": 21,
+          "col": 4,
+          "type": "arrow"
+        }
+      ],
+      "usageCount": 6,
+      "usagesByFile": {
+        "lib/combat_standard.js": 4,
+        "lib/combat_targeting.js": 2
+      }
+    },
+    {
+      "name": "getTarget",
+      "definitionCount": 2,
+      "definitions": [
+        {
+          "file": "lib/unused/targeting.js",
+          "line": 1,
+          "col": 1,
+          "type": "function"
+        },
+        {
+          "file": "lib/unused/targeting.js",
+          "line": 7,
+          "col": 20,
+          "type": "module_export"
+        }
+      ],
+      "usageCount": 5,
+      "usagesByFile": {
+        "lib/al_farming_config.js": 1,
+        "lib/combat_standard.js": 3,
+        "lib/unused/targeting.js": 1
+      }
+    },
+    {
+      "name": "clear_last_full_alert",
+      "definitionCount": 2,
+      "definitions": [
+        {
+          "file": "lib/unused/full.js",
+          "line": 37,
+          "col": 1,
+          "type": "function"
+        },
+        {
+          "file": "lib/unused/timing.js",
+          "line": 37,
+          "col": 1,
+          "type": "function"
+        }
+      ],
+      "usageCount": 4,
+      "usagesByFile": {
+        "lib/unused/full.js": 2,
+        "lib/unused/timing.js": 2
+      }
+    },
+    {
+      "name": "fullAlert",
+      "definitionCount": 2,
+      "definitions": [
+        {
+          "file": "lib/unused/full.js",
+          "line": 21,
+          "col": 1,
+          "type": "function"
+        },
+        {
+          "file": "lib/unused/timing.js",
+          "line": 21,
+          "col": 1,
+          "type": "function"
+        }
+      ],
+      "usageCount": 4,
+      "usagesByFile": {
+        "lib/unused/full.js": 2,
+        "lib/unused/timing.js": 2
+      }
+    },
+    {
+      "name": "crumbDump",
+      "definitionCount": 2,
+      "definitions": [
+        {
+          "file": "lib/unused/banking.js",
+          "line": 63,
+          "col": 7,
+          "type": "function"
+        },
+        {
+          "file": "lib/unused/inventory.js",
+          "line": 97,
+          "col": 7,
+          "type": "function"
+        }
+      ],
+      "usageCount": 3,
+      "usagesByFile": {
+        "lib/unused/banking.js": 2,
+        "lib/unused/inventory.js": 1
+      }
+    },
+    {
+      "name": "alertSystem",
+      "definitionCount": 2,
+      "definitions": [
+        {
+          "file": "lib/unused/full.js",
+          "line": 4,
+          "col": 1,
+          "type": "function"
+        },
+        {
+          "file": "lib/unused/timing.js",
+          "line": 4,
+          "col": 1,
+          "type": "function"
+        }
+      ],
+      "usageCount": 2,
+      "usagesByFile": {
+        "lib/unused/full.js": 1,
+        "lib/unused/timing.js": 1
+      }
+    },
+    {
+      "name": "buyFromPonty",
+      "definitionCount": 2,
+      "definitions": [
+        {
+          "file": "lib/npc_ponty_buy.js",
+          "line": 7,
+          "col": 7,
+          "type": "function"
+        },
+        {
+          "file": "lib/npc_ponty_buy.js",
+          "line": 56,
+          "col": 20,
+          "type": "module_export"
+        }
+      ],
+      "usageCount": 2,
+      "usagesByFile": {
+        "lib/class_merchant.js": 2
+      }
+    },
+    {
+      "name": "getLoc",
+      "definitionCount": 2,
+      "definitions": [
+        {
+          "file": "lib/cm_sustain.js",
+          "line": 10,
+          "col": 1,
+          "type": "arrow"
+        },
+        {
+          "file": "lib/cm_unpack.js",
+          "line": 32,
+          "col": 1,
+          "type": "arrow"
+        }
+      ],
+      "usageCount": 2,
+      "usagesByFile": {
+        "lib/cm_sustain.js": 1,
+        "lib/cm_unpack.js": 1
+      }
+    },
+    {
+      "name": "getRemoteTelemetryWsPort",
+      "definitionCount": 2,
+      "definitions": [
+        {
+          "file": "lib/al_config.js",
+          "line": 38,
+          "col": 1,
+          "type": "arrow"
+        },
+        {
+          "file": "lib/al_env_config.js",
+          "line": 22,
+          "col": 1,
+          "type": "arrow"
+        }
+      ],
+      "usageCount": 2,
+      "usagesByFile": {
+        "lib/al_config.js": 1,
+        "lib/al_env_config.js": 1
+      }
+    },
+    {
+      "name": "main",
+      "definitionCount": 2,
+      "definitions": [
+        {
+          "file": "lib/al_main.js",
+          "line": 27,
+          "col": 7,
+          "type": "function"
+        },
+        {
+          "file": "lib/al_main.js",
+          "line": 378,
+          "col": 20,
+          "type": "module_export"
+        }
+      ],
+      "usageCount": 2,
+      "usagesByFile": {
+        "lib/zCLIENT_BOOTSTRAP.js": 1,
+        "lib/zPROXIED_REQUIRE.js": 1
+      }
+    },
+    {
+      "name": "tick",
+      "definitionCount": 4,
+      "definitions": [
+        {
+          "file": "lib/class_bot.js",
+          "line": 302,
+          "col": 5,
+          "type": "arrow"
+        },
+        {
+          "file": "lib/combat_event.js",
+          "line": 168,
+          "col": 3,
+          "type": "arrow"
+        },
+        {
+          "file": "lib/zCLIENT_BOOTSTRAP.js",
+          "line": 160,
+          "col": 5,
+          "type": "arrow"
+        },
+        {
+          "file": "lib/zPROXIED_REQUIRE.js",
+          "line": 160,
+          "col": 5,
+          "type": "arrow"
+        }
+      ],
+      "usageCount": 2,
+      "usagesByFile": {
+        "lib/class_bot.js": 2,
+        "lib/combat_event.js": 2
+      }
+    },
+    {
+      "name": "dumpPvp",
+      "definitionCount": 2,
+      "definitions": [
+        {
+          "file": "lib/unused/pvp.js",
+          "line": 1,
+          "col": 1,
+          "type": "function"
+        },
+        {
+          "file": "lib/unused/pvp.js",
+          "line": 10,
+          "col": 20,
+          "type": "module_export"
+        }
+      ],
+      "usageCount": 1,
+      "usagesByFile": {
+        "lib/unused/banking.js": 1
+      }
+    },
+    {
+      "name": "AsyncFunction",
+      "definitionCount": 2,
+      "definitions": [
+        {
+          "file": "lib/zCLIENT_BOOTSTRAP.js",
+          "line": 5,
+          "col": 3,
+          "type": "arrow"
+        },
+        {
+          "file": "lib/zPROXIED_REQUIRE.js",
+          "line": 5,
+          "col": 3,
+          "type": "arrow"
+        }
+      ],
+      "usageCount": 0,
+      "usagesByFile": {}
+    },
+    {
+      "name": "buyFromGoblin2",
+      "definitionCount": 2,
+      "definitions": [
+        {
+          "file": "lib/npc_goblin_buy.js",
+          "line": 2,
+          "col": 7,
+          "type": "function"
+        },
+        {
+          "file": "lib/npc_goblin_buy.js",
+          "line": 64,
+          "col": 20,
+          "type": "module_export"
+        }
+      ],
+      "usageCount": 0,
+      "usagesByFile": {}
+    },
+    {
+      "name": "buyScrolls",
+      "definitionCount": 2,
+      "definitions": [
+        {
+          "file": "lib/rule_buying.js",
+          "line": 257,
+          "col": 1,
+          "type": "function"
+        },
+        {
+          "file": "lib/rule_buying.js",
+          "line": 278,
+          "col": 48,
+          "type": "module_export"
+        }
+      ],
+      "usageCount": 0,
+      "usagesByFile": {}
+    },
+    {
+      "name": "doExchange",
+      "definitionCount": 2,
+      "definitions": [
+        {
+          "file": "lib/unused/exchanging.js",
+          "line": 1,
+          "col": 1,
+          "type": "function"
+        },
+        {
+          "file": "lib/unused/exchanging.js",
+          "line": 80,
+          "col": 20,
+          "type": "module_export"
+        }
+      ],
+      "usageCount": 0,
+      "usagesByFile": {}
+    },
+    {
+      "name": "drawLine",
+      "definitionCount": 3,
+      "definitions": [
+        {
+          "file": "lib/fn_math.js",
+          "line": 13,
+          "col": 1,
+          "type": "function"
+        },
+        {
+          "file": "lib/unused/geometry.js",
+          "line": 1,
+          "col": 1,
+          "type": "function"
+        },
+        {
+          "file": "lib/unused/geometry.js",
+          "line": 29,
+          "col": 20,
+          "type": "module_export"
+        }
+      ],
+      "usageCount": 0,
+      "usagesByFile": {}
+    },
+    {
+      "name": "fetchLatestGithubSha",
+      "definitionCount": 2,
+      "definitions": [
+        {
+          "file": "lib/zCLIENT_BOOTSTRAP.js",
+          "line": 61,
+          "col": 3,
+          "type": "arrow"
+        },
+        {
+          "file": "lib/zPROXIED_REQUIRE.js",
+          "line": 61,
+          "col": 3,
+          "type": "arrow"
+        }
+      ],
+      "usageCount": 0,
+      "usagesByFile": {}
+    },
+    {
+      "name": "get_module",
+      "definitionCount": 2,
+      "definitions": [
+        {
+          "file": "lib/zCLIENT_BOOTSTRAP.js",
+          "line": 283,
+          "col": 3,
+          "type": "arrow"
+        },
+        {
+          "file": "lib/zPROXIED_REQUIRE.js",
+          "line": 254,
+          "col": 3,
+          "type": "arrow"
+        }
+      ],
+      "usageCount": 0,
+      "usagesByFile": {}
+    },
+    {
+      "name": "getRemoteReloadConfig",
+      "definitionCount": 2,
+      "definitions": [
+        {
+          "file": "lib/zCLIENT_BOOTSTRAP.js",
+          "line": 33,
+          "col": 3,
+          "type": "arrow"
+        },
+        {
+          "file": "lib/zPROXIED_REQUIRE.js",
+          "line": 33,
+          "col": 3,
+          "type": "arrow"
+        }
+      ],
+      "usageCount": 0,
+      "usagesByFile": {}
+    },
+    {
+      "name": "lib_key_from_name",
+      "definitionCount": 2,
+      "definitions": [
+        {
+          "file": "lib/zCLIENT_BOOTSTRAP.js",
+          "line": 243,
+          "col": 3,
+          "type": "arrow"
+        },
+        {
+          "file": "lib/zPROXIED_REQUIRE.js",
+          "line": 214,
+          "col": 3,
+          "type": "arrow"
+        }
+      ],
+      "usageCount": 0,
+      "usagesByFile": {}
+    },
+    {
+      "name": "localRequire",
+      "definitionCount": 2,
+      "definitions": [
+        {
+          "file": "lib/zCLIENT_BOOTSTRAP.js",
+          "line": 269,
+          "col": 5,
+          "type": "arrow"
+        },
+        {
+          "file": "lib/zPROXIED_REQUIRE.js",
+          "line": 240,
+          "col": 5,
+          "type": "arrow"
+        }
+      ],
+      "usageCount": 0,
+      "usagesByFile": {}
+    },
+    {
+      "name": "moveInCircle",
+      "definitionCount": 2,
+      "definitions": [
+        {
+          "file": "lib/unused/move_in_circle.js",
+          "line": 1,
+          "col": 1,
+          "type": "function"
+        },
+        {
+          "file": "lib/unused/move_in_circle.js",
+          "line": 20,
+          "col": 20,
+          "type": "module_export"
+        }
+      ],
+      "usageCount": 0,
+      "usagesByFile": {}
+    },
+    {
+      "name": "normalize_module_name",
+      "definitionCount": 2,
+      "definitions": [
+        {
+          "file": "lib/zCLIENT_BOOTSTRAP.js",
+          "line": 221,
+          "col": 3,
+          "type": "arrow"
+        },
+        {
+          "file": "lib/zPROXIED_REQUIRE.js",
+          "line": 195,
+          "col": 3,
+          "type": "arrow"
+        }
+      ],
+      "usageCount": 0,
+      "usagesByFile": {}
+    },
+    {
+      "name": "proxied_require",
+      "definitionCount": 4,
+      "definitions": [
+        {
+          "file": "lib/zCLIENT_BOOTSTRAP.js",
+          "line": 1,
+          "col": 1,
+          "type": "arrow"
+        },
+        {
+          "file": "lib/zCLIENT_BOOTSTRAP.js",
+          "line": 292,
+          "col": 9,
+          "type": "function"
+        },
+        {
+          "file": "lib/zPROXIED_REQUIRE.js",
+          "line": 1,
+          "col": 1,
+          "type": "arrow"
+        },
+        {
+          "file": "lib/zPROXIED_REQUIRE.js",
+          "line": 263,
+          "col": 9,
+          "type": "function"
+        }
+      ],
+      "usageCount": 0,
+      "usagesByFile": {}
+    },
+    {
+      "name": "readLastFetch",
+      "definitionCount": 2,
+      "definitions": [
+        {
+          "file": "lib/zCLIENT_BOOTSTRAP.js",
+          "line": 114,
+          "col": 5,
+          "type": "arrow"
+        },
+        {
+          "file": "lib/zPROXIED_REQUIRE.js",
+          "line": 114,
+          "col": 5,
+          "type": "arrow"
+        }
+      ],
+      "usageCount": 0,
+      "usagesByFile": {}
+    },
+    {
+      "name": "readStoredSha",
+      "definitionCount": 2,
+      "definitions": [
+        {
+          "file": "lib/zCLIENT_BOOTSTRAP.js",
+          "line": 100,
+          "col": 5,
+          "type": "arrow"
+        },
+        {
+          "file": "lib/zPROXIED_REQUIRE.js",
+          "line": 100,
+          "col": 5,
+          "type": "arrow"
+        }
+      ],
+      "usageCount": 0,
+      "usagesByFile": {}
+    },
+    {
+      "name": "run",
+      "definitionCount": 2,
+      "definitions": [
+        {
+          "file": "lib/zCLIENT_BOOTSTRAP.js",
+          "line": 261,
+          "col": 3,
+          "type": "arrow"
+        },
+        {
+          "file": "lib/zPROXIED_REQUIRE.js",
+          "line": 232,
+          "col": 3,
+          "type": "arrow"
+        }
+      ],
+      "usageCount": 0,
+      "usagesByFile": {}
+    },
+    {
+      "name": "safeNow",
+      "definitionCount": 2,
+      "definitions": [
+        {
+          "file": "lib/zCLIENT_BOOTSTRAP.js",
+          "line": 59,
+          "col": 3,
+          "type": "arrow"
+        },
+        {
+          "file": "lib/zPROXIED_REQUIRE.js",
+          "line": 59,
+          "col": 3,
+          "type": "arrow"
+        }
+      ],
+      "usageCount": 0,
+      "usagesByFile": {}
+    },
+    {
+      "name": "send_equip",
+      "definitionCount": 3,
+      "definitions": [
+        {
+          "file": "lib/unused/messaging.js",
+          "line": 266,
+          "col": 7,
+          "type": "function"
+        },
+        {
+          "file": "lib/unused/party.js",
+          "line": 1,
+          "col": 1,
+          "type": "function"
+        },
+        {
+          "file": "lib/unused/party.js",
+          "line": 7,
+          "col": 20,
+          "type": "module_export"
+        }
+      ],
+      "usageCount": 0,
+      "usagesByFile": {}
+    },
+    {
+      "name": "shaStorageKeys",
+      "definitionCount": 2,
+      "definitions": [
+        {
+          "file": "lib/zCLIENT_BOOTSTRAP.js",
+          "line": 50,
+          "col": 3,
+          "type": "arrow"
+        },
+        {
+          "file": "lib/zPROXIED_REQUIRE.js",
+          "line": 50,
+          "col": 3,
+          "type": "arrow"
+        }
+      ],
+      "usageCount": 0,
+      "usagesByFile": {}
+    },
+    {
+      "name": "startRemoteReloadWatcher",
+      "definitionCount": 2,
+      "definitions": [
+        {
+          "file": "lib/zCLIENT_BOOTSTRAP.js",
+          "line": 83,
+          "col": 3,
+          "type": "arrow"
+        },
+        {
+          "file": "lib/zPROXIED_REQUIRE.js",
+          "line": 83,
+          "col": 3,
+          "type": "arrow"
+        }
+      ],
+      "usageCount": 0,
+      "usagesByFile": {}
+    },
+    {
+      "name": "writeLastError",
+      "definitionCount": 2,
+      "definitions": [
+        {
+          "file": "lib/zCLIENT_BOOTSTRAP.js",
+          "line": 128,
+          "col": 5,
+          "type": "arrow"
+        },
+        {
+          "file": "lib/zPROXIED_REQUIRE.js",
+          "line": 128,
+          "col": 5,
+          "type": "arrow"
+        }
+      ],
+      "usageCount": 0,
+      "usagesByFile": {}
+    },
+    {
+      "name": "writeLastFetch",
+      "definitionCount": 2,
+      "definitions": [
+        {
+          "file": "lib/zCLIENT_BOOTSTRAP.js",
+          "line": 121,
+          "col": 5,
+          "type": "arrow"
+        },
+        {
+          "file": "lib/zPROXIED_REQUIRE.js",
+          "line": 121,
+          "col": 5,
+          "type": "arrow"
+        }
+      ],
+      "usageCount": 0,
+      "usagesByFile": {}
+    },
+    {
+      "name": "writeStoredSha",
+      "definitionCount": 2,
+      "definitions": [
+        {
+          "file": "lib/zCLIENT_BOOTSTRAP.js",
+          "line": 107,
+          "col": 5,
+          "type": "arrow"
+        },
+        {
+          "file": "lib/zPROXIED_REQUIRE.js",
+          "line": 107,
+          "col": 5,
+          "type": "arrow"
+        }
+      ],
+      "usageCount": 0,
+      "usagesByFile": {}
+    }
+  ]
+}

@@ -1,0 +1,4476 @@
+{
+  "generatedAt": "2026-02-20T21:09:41.110Z",
+  "root": "D:/DEV/adventure-land/AdventureLandBots",
+  "scope": "lib/**/*.js",
+  "fileCount": 70,
+  "symbolCount": 252,
+  "symbols": [
+    {
+      "name": "bot",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/al_main.js",
+          "line": 370,
+          "col": 13,
+          "type": "class"
+        }
+      ],
+      "usageCount": 67,
+      "usagesByFile": {
+        "lib/al_main.js": 57,
+        "lib/telemetry/client.js": 2,
+        "lib/telemetry/server.js": 3,
+        "lib/unused/messaging.js": 3,
+        "lib/zCLIENT_BOOTSTRAP.js": 1,
+        "lib/zPROXIED_REQUIRE.js": 1
+      }
+    },
+    {
+      "name": "now",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/fn_time.js",
+          "line": 2,
+          "col": 1,
+          "type": "arrow"
+        }
+      ],
+      "usageCount": 60,
+      "usagesByFile": {
+        "lib/al_farming_config.js": 9,
+        "lib/class_mage.js": 2,
+        "lib/class_orchestrator.js": 3,
+        "lib/cm_magiport.js": 3,
+        "lib/cm_sustain.js": 2,
+        "lib/cm_unpack.js": 12,
+        "lib/combat_standard.js": 6,
+        "lib/event_tasks.js": 4,
+        "lib/fn_time.js": 2,
+        "lib/group_party.js": 2,
+        "lib/group_priest_swap.js": 4,
+        "lib/st_magiport_accept.js": 6,
+        "lib/st_smart_move.js": 3,
+        "lib/telemetry/client.js": 1,
+        "lib/telemetry/server.js": 1
+      }
+    },
+    {
+      "name": "warn",
+      "definitionCount": 2,
+      "definitions": [
+        {
+          "file": "lib/al_debug_log.js",
+          "line": 17,
+          "col": 1,
+          "type": "arrow"
+        },
+        {
+          "file": "lib/al_debug_log.js",
+          "line": 33,
+          "col": 26,
+          "type": "module_export"
+        }
+      ],
+      "usageCount": 56,
+      "usagesByFile": {
+        "lib/al_debug_log.js": 2,
+        "lib/al_farming_config.js": 2,
+        "lib/al_main.js": 12,
+        "lib/class_bot.js": 3,
+        "lib/class_mage.js": 4,
+        "lib/class_orchestrator.js": 7,
+        "lib/cm_magiport.js": 2,
+        "lib/cm_sustain.js": 3,
+        "lib/cm_unpack.js": 4,
+        "lib/combat_event.js": 2,
+        "lib/event_tasks.js": 4,
+        "lib/group_party.js": 3,
+        "lib/group_priest_swap.js": 4,
+        "lib/telemetry/client.js": 4
+      }
+    },
+    {
+      "name": "getConfig",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/al_config.js",
+          "line": 177,
+          "col": 1,
+          "type": "arrow"
+        }
+      ],
+      "usageCount": 31,
+      "usagesByFile": {
+        "lib/al_config.js": 1,
+        "lib/al_farming_config.js": 5,
+        "lib/al_main.js": 2,
+        "lib/class_bot.js": 3,
+        "lib/class_mage.js": 2,
+        "lib/class_orchestrator.js": 6,
+        "lib/cm_magiport.js": 2,
+        "lib/cm_sustain.js": 2,
+        "lib/cm_unpack.js": 2,
+        "lib/combat_event.js": 2,
+        "lib/group_party.js": 2,
+        "lib/group_priest_swap.js": 2
+      }
+    },
+    {
+      "name": "logCatch",
+      "definitionCount": 2,
+      "definitions": [
+        {
+          "file": "lib/al_debug_log.js",
+          "line": 25,
+          "col": 1,
+          "type": "arrow"
+        },
+        {
+          "file": "lib/al_debug_log.js",
+          "line": 33,
+          "col": 32,
+          "type": "module_export"
+        }
+      ],
+      "usageCount": 25,
+      "usagesByFile": {
+        "lib/al_config.js": 3,
+        "lib/al_env_config.js": 2,
+        "lib/al_main.js": 2,
+        "lib/class_bot.js": 4,
+        "lib/combat_targeting.js": 2,
+        "lib/group_party.js": 5,
+        "lib/st_smart_move.js": 7
+      }
+    },
+    {
+      "name": "BotCharacter",
+      "definitionCount": 2,
+      "definitions": [
+        {
+          "file": "lib/class_bot.js",
+          "line": 16,
+          "col": 1,
+          "type": "class"
+        },
+        {
+          "file": "lib/class_bot.js",
+          "line": 331,
+          "col": 20,
+          "type": "module_export"
+        }
+      ],
+      "usageCount": 24,
+      "usagesByFile": {
+        "lib/al_main.js": 10,
+        "lib/class_mage.js": 2,
+        "lib/class_merchant.js": 2,
+        "lib/class_paladin.js": 2,
+        "lib/class_priest.js": 2,
+        "lib/class_ranger.js": 2,
+        "lib/class_rogue.js": 2,
+        "lib/class_warrior.js": 2
+      }
+    },
+    {
+      "name": "info",
+      "definitionCount": 2,
+      "definitions": [
+        {
+          "file": "lib/al_debug_log.js",
+          "line": 9,
+          "col": 1,
+          "type": "arrow"
+        },
+        {
+          "file": "lib/al_debug_log.js",
+          "line": 33,
+          "col": 20,
+          "type": "module_export"
+        }
+      ],
+      "usageCount": 21,
+      "usagesByFile": {
+        "lib/class_mage.js": 1,
+        "lib/class_orchestrator.js": 9,
+        "lib/cm_magiport.js": 4,
+        "lib/cm_unpack.js": 3,
+        "lib/event_tasks.js": 2,
+        "lib/group_priest_swap.js": 2
+      }
+    },
+    {
+      "name": "onCharacter",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/event_listeners.js",
+          "line": 47,
+          "col": 1,
+          "type": "arrow"
+        }
+      ],
+      "usageCount": 21,
+      "usagesByFile": {
+        "lib/al_farming_config.js": 2,
+        "lib/class_bot.js": 2,
+        "lib/class_mage.js": 2,
+        "lib/class_orchestrator.js": 2,
+        "lib/cm_unpack.js": 2,
+        "lib/event_listeners.js": 4,
+        "lib/unused/character_events.js": 2,
+        "lib/unused/character_messaging.js": 2,
+        "lib/unused/messaging.js": 3
+      }
+    },
+    {
+      "name": "isJoinableEvent",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/fn_server_events.js",
+          "line": 1,
+          "col": 1,
+          "type": "arrow"
+        }
+      ],
+      "usageCount": 15,
+      "usagesByFile": {
+        "lib/al_main.js": 2,
+        "lib/class_mage.js": 2,
+        "lib/cm_magiport.js": 2,
+        "lib/combat_event.js": 2,
+        "lib/event_tasks.js": 4,
+        "lib/fn_server_events.js": 3
+      }
+    },
+    {
+      "name": "Idle",
+      "definitionCount": 2,
+      "definitions": [
+        {
+          "file": "lib/class_idle.js",
+          "line": 1,
+          "col": 1,
+          "type": "class"
+        },
+        {
+          "file": "lib/class_idle.js",
+          "line": 23,
+          "col": 20,
+          "type": "module_export"
+        }
+      ],
+      "usageCount": 14,
+      "usagesByFile": {
+        "lib/class_mage.js": 2,
+        "lib/class_merchant.js": 2,
+        "lib/class_paladin.js": 2,
+        "lib/class_priest.js": 2,
+        "lib/class_ranger.js": 2,
+        "lib/class_rogue.js": 2,
+        "lib/class_warrior.js": 2
+      }
+    },
+    {
+      "name": "bank",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/unused/banking.js",
+          "line": 18,
+          "col": 7,
+          "type": "function"
+        }
+      ],
+      "usageCount": 13,
+      "usagesByFile": {
+        "lib/class_merchant.js": 1,
+        "lib/npc_goblin_buy.js": 1,
+        "lib/unused/banking.js": 6,
+        "lib/unused/crafting.js": 2,
+        "lib/unused/exchanging.js": 1,
+        "lib/unused/inventory.js": 1,
+        "lib/unused/messaging.js": 1
+      }
+    },
+    {
+      "name": "handler",
+      "definitionCount": 5,
+      "definitions": [
+        {
+          "file": "lib/al_farming_config.js",
+          "line": 275,
+          "col": 3,
+          "type": "arrow"
+        },
+        {
+          "file": "lib/event_listeners.js",
+          "line": 64,
+          "col": 5,
+          "type": "arrow"
+        },
+        {
+          "file": "lib/event_listeners.js",
+          "line": 107,
+          "col": 5,
+          "type": "arrow"
+        },
+        {
+          "file": "lib/zCLIENT_BOOTSTRAP.js",
+          "line": 248,
+          "col": 3,
+          "type": "arrow"
+        },
+        {
+          "file": "lib/zPROXIED_REQUIRE.js",
+          "line": 219,
+          "col": 3,
+          "type": "arrow"
+        }
+      ],
+      "usageCount": 12,
+      "usagesByFile": {
+        "lib/al_farming_config.js": 2,
+        "lib/event_listeners.js": 12
+      }
+    },
+    {
+      "name": "isGathering",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/st_bool.js",
+          "line": 1,
+          "col": 1,
+          "type": "arrow"
+        }
+      ],
+      "usageCount": 12,
+      "usagesByFile": {
+        "lib/class_merchant.js": 5,
+        "lib/class_orchestrator.js": 2,
+        "lib/st_bool.js": 3,
+        "lib/st_smart_move.js": 2
+      }
+    },
+    {
+      "name": "normalizeNumber",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/combat_standard.js",
+          "line": 4,
+          "col": 1,
+          "type": "arrow"
+        }
+      ],
+      "usageCount": 12,
+      "usagesByFile": {
+        "lib/combat_standard.js": 12
+      }
+    },
+    {
+      "name": "locate_items",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/fn_data.js",
+          "line": 107,
+          "col": 1,
+          "type": "function"
+        }
+      ],
+      "usageCount": 11,
+      "usagesByFile": {
+        "lib/fn_data.js": 1,
+        "lib/unused/inventory.js": 4,
+        "lib/unused/messaging.js": 2,
+        "lib/unused/party.js": 1,
+        "lib/unused/upgrading.js": 3
+      }
+    },
+    {
+      "name": "sleepMs",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/fn_time.js",
+          "line": 1,
+          "col": 1,
+          "type": "arrow"
+        }
+      ],
+      "usageCount": 11,
+      "usagesByFile": {
+        "lib/class_mage.js": 1,
+        "lib/class_orchestrator.js": 4,
+        "lib/cm_magiport.js": 3,
+        "lib/fn_time.js": 1,
+        "lib/group_priest_swap.js": 2
+      }
+    },
+    {
+      "name": "stop",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/event_tasks.js",
+          "line": 108,
+          "col": 3,
+          "type": "arrow"
+        }
+      ],
+      "usageCount": 11,
+      "usagesByFile": {
+        "lib/al_farming_config.js": 1,
+        "lib/class_bot.js": 2,
+        "lib/cm_sustain.js": 1,
+        "lib/cm_unpack.js": 3,
+        "lib/combat_event.js": 1,
+        "lib/event_tasks.js": 1,
+        "lib/group_party.js": 1,
+        "lib/group_priest_swap.js": 1
+      }
+    },
+    {
+      "name": "is_friendly",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/group_party.js",
+          "line": 15,
+          "col": 1,
+          "type": "function"
+        }
+      ],
+      "usageCount": 10,
+      "usagesByFile": {
+        "lib/class_bot.js": 2,
+        "lib/class_mage.js": 2,
+        "lib/class_orchestrator.js": 2,
+        "lib/group_party.js": 2,
+        "lib/unused/character_messaging.js": 1,
+        "lib/unused/messaging.js": 1
+      }
+    },
+    {
+      "name": "loop",
+      "definitionCount": 5,
+      "definitions": [
+        {
+          "file": "lib/al_farming_config.js",
+          "line": 296,
+          "col": 3,
+          "type": "arrow"
+        },
+        {
+          "file": "lib/cm_sustain.js",
+          "line": 108,
+          "col": 3,
+          "type": "arrow"
+        },
+        {
+          "file": "lib/cm_unpack.js",
+          "line": 162,
+          "col": 3,
+          "type": "arrow"
+        },
+        {
+          "file": "lib/group_party.js",
+          "line": 88,
+          "col": 3,
+          "type": "arrow"
+        },
+        {
+          "file": "lib/group_priest_swap.js",
+          "line": 31,
+          "col": 3,
+          "type": "arrow"
+        }
+      ],
+      "usageCount": 10,
+      "usagesByFile": {
+        "lib/al_farming_config.js": 2,
+        "lib/cm_sustain.js": 2,
+        "lib/cm_unpack.js": 2,
+        "lib/group_party.js": 2,
+        "lib/group_priest_swap.js": 2
+      }
+    },
+    {
+      "name": "getTelemetryWsPort",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/al_env_config.js",
+          "line": 52,
+          "col": 1,
+          "type": "arrow"
+        }
+      ],
+      "usageCount": 9,
+      "usagesByFile": {
+        "lib/al_config.js": 4,
+        "lib/al_env_config.js": 1,
+        "lib/telemetry/client.js": 2,
+        "lib/telemetry/server.js": 2
+      }
+    },
+    {
+      "name": "on",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/event_listeners.js",
+          "line": 28,
+          "col": 3,
+          "type": "arrow"
+        }
+      ],
+      "usageCount": 8,
+      "usagesByFile": {
+        "lib/event_listeners.js": 5,
+        "lib/telemetry/server.js": 3
+      }
+    },
+    {
+      "name": "startAutoPartyIfEnabled",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/al_main.js",
+          "line": 120,
+          "col": 3,
+          "type": "arrow"
+        }
+      ],
+      "usageCount": 8,
+      "usagesByFile": {
+        "lib/al_main.js": 8
+      }
+    },
+    {
+      "name": "startOrchestratorIfEligible",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/al_main.js",
+          "line": 140,
+          "col": 3,
+          "type": "arrow"
+        }
+      ],
+      "usageCount": 8,
+      "usagesByFile": {
+        "lib/al_main.js": 8
+      }
+    },
+    {
+      "name": "startPriestSwapIfEnabled",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/al_main.js",
+          "line": 130,
+          "col": 3,
+          "type": "arrow"
+        }
+      ],
+      "usageCount": 8,
+      "usagesByFile": {
+        "lib/al_main.js": 8
+      }
+    },
+    {
+      "name": "startSustainIfEnabled",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/al_main.js",
+          "line": 75,
+          "col": 3,
+          "type": "arrow"
+        }
+      ],
+      "usageCount": 8,
+      "usagesByFile": {
+        "lib/al_main.js": 8
+      }
+    },
+    {
+      "name": "buildLocalWsUrl",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/al_env_config.js",
+          "line": 62,
+          "col": 1,
+          "type": "arrow"
+        }
+      ],
+      "usageCount": 7,
+      "usagesByFile": {
+        "lib/al_config.js": 4,
+        "lib/al_env_config.js": 1,
+        "lib/telemetry/client.js": 2
+      }
+    },
+    {
+      "name": "doUpgrade",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/unused/upgrading.js",
+          "line": 161,
+          "col": 1,
+          "type": "function"
+        }
+      ],
+      "usageCount": 7,
+      "usagesByFile": {
+        "lib/unused/upgrading.js": 7
+      }
+    },
+    {
+      "name": "getState",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/st_magiport_accept.js",
+          "line": 12,
+          "col": 1,
+          "type": "arrow"
+        }
+      ],
+      "usageCount": 7,
+      "usagesByFile": {
+        "lib/st_magiport_accept.js": 7
+      }
+    },
+    {
+      "name": "has_trade_item",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/unused/trading.js",
+          "line": 45,
+          "col": 1,
+          "type": "function"
+        }
+      ],
+      "usageCount": 7,
+      "usagesByFile": {
+        "lib/unused/crafting.js": 5,
+        "lib/unused/trading.js": 2
+      }
+    },
+    {
+      "name": "joinActiveEventIfAvailable",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/al_main.js",
+          "line": 84,
+          "col": 3,
+          "type": "arrow"
+        }
+      ],
+      "usageCount": 7,
+      "usagesByFile": {
+        "lib/al_main.js": 7
+      }
+    },
+    {
+      "name": "startEventCombatIfEnabled",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/al_main.js",
+          "line": 62,
+          "col": 3,
+          "type": "arrow"
+        }
+      ],
+      "usageCount": 7,
+      "usagesByFile": {
+        "lib/al_main.js": 7
+      }
+    },
+    {
+      "name": "startNoEventFarmingIfEnabled",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/al_main.js",
+          "line": 107,
+          "col": 3,
+          "type": "arrow"
+        }
+      ],
+      "usageCount": 7,
+      "usagesByFile": {
+        "lib/al_main.js": 7
+      }
+    },
+    {
+      "name": "startUnpackRequesterIfEnabled",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/al_main.js",
+          "line": 47,
+          "col": 3,
+          "type": "arrow"
+        }
+      ],
+      "usageCount": 7,
+      "usagesByFile": {
+        "lib/al_main.js": 7
+      }
+    },
+    {
+      "name": "fullTimer",
+      "definitionCount": 2,
+      "definitions": [
+        {
+          "file": "lib/unused/full.js",
+          "line": 8,
+          "col": 1,
+          "type": "function"
+        },
+        {
+          "file": "lib/unused/timing.js",
+          "line": 8,
+          "col": 1,
+          "type": "function"
+        }
+      ],
+      "usageCount": 6,
+      "usagesByFile": {
+        "lib/unused/full.js": 3,
+        "lib/unused/timing.js": 3
+      }
+    },
+    {
+      "name": "getNearestMonsterOfType",
+      "definitionCount": 2,
+      "definitions": [
+        {
+          "file": "lib/fn_game.js",
+          "line": 2,
+          "col": 1,
+          "type": "function"
+        },
+        {
+          "file": "lib/fn_game.js",
+          "line": 21,
+          "col": 4,
+          "type": "arrow"
+        }
+      ],
+      "usageCount": 6,
+      "usagesByFile": {
+        "lib/combat_standard.js": 4,
+        "lib/combat_targeting.js": 2
+      }
+    },
+    {
+      "name": "getRosterMeta",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/fn_roster.js",
+          "line": 33,
+          "col": 1,
+          "type": "arrow"
+        }
+      ],
+      "usageCount": 6,
+      "usagesByFile": {
+        "lib/al_farming_config.js": 2,
+        "lib/fn_roster.js": 2,
+        "lib/group_party.js": 2
+      }
+    },
+    {
+      "name": "getRosterNames",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/fn_roster.js",
+          "line": 1,
+          "col": 1,
+          "type": "arrow"
+        }
+      ],
+      "usageCount": 6,
+      "usagesByFile": {
+        "lib/al_farming_config.js": 2,
+        "lib/fn_roster.js": 2,
+        "lib/group_party.js": 2
+      }
+    },
+    {
+      "name": "isUpgradable",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/unused/upgrading.js",
+          "line": 91,
+          "col": 1,
+          "type": "function"
+        }
+      ],
+      "usageCount": 6,
+      "usagesByFile": {
+        "lib/unused/banking.js": 3,
+        "lib/unused/inventory.js": 1,
+        "lib/unused/upgrading.js": 2
+      }
+    },
+    {
+      "name": "request",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/st_smart_move.js",
+          "line": 50,
+          "col": 3,
+          "type": "arrow"
+        }
+      ],
+      "usageCount": 6,
+      "usagesByFile": {
+        "lib/al_farming_config.js": 2,
+        "lib/combat_standard.js": 3,
+        "lib/st_smart_move.js": 1
+      }
+    },
+    {
+      "name": "roundCoord",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/st_smart_move.js",
+          "line": 5,
+          "col": 1,
+          "type": "arrow"
+        }
+      ],
+      "usageCount": 6,
+      "usagesByFile": {
+        "lib/st_smart_move.js": 6
+      }
+    },
+    {
+      "name": "doBank",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/unused/banking.js",
+          "line": 28,
+          "col": 7,
+          "type": "function"
+        }
+      ],
+      "usageCount": 5,
+      "usagesByFile": {
+        "lib/unused/banking.js": 4,
+        "lib/unused/inventory.js": 1
+      }
+    },
+    {
+      "name": "done",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/event_listeners.js",
+          "line": 98,
+          "col": 5,
+          "type": "arrow"
+        }
+      ],
+      "usageCount": 5,
+      "usagesByFile": {
+        "lib/event_listeners.js": 5
+      }
+    },
+    {
+      "name": "engageMonster",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/combat_targeting.js",
+          "line": 4,
+          "col": 1,
+          "type": "arrow"
+        }
+      ],
+      "usageCount": 5,
+      "usagesByFile": {
+        "lib/combat_standard.js": 4,
+        "lib/combat_targeting.js": 1
+      }
+    },
+    {
+      "name": "getCraftItem",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/unused/crafting.js",
+          "line": 33,
+          "col": 1,
+          "type": "function"
+        }
+      ],
+      "usageCount": 5,
+      "usagesByFile": {
+        "lib/unused/crafting.js": 4,
+        "lib/unused/trading.js": 1
+      }
+    },
+    {
+      "name": "getLoc",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/fn_loc.js",
+          "line": 1,
+          "col": 1,
+          "type": "arrow"
+        }
+      ],
+      "usageCount": 5,
+      "usagesByFile": {
+        "lib/cm_sustain.js": 2,
+        "lib/cm_unpack.js": 2,
+        "lib/fn_loc.js": 1
+      }
+    },
+    {
+      "name": "getTarget",
+      "definitionCount": 2,
+      "definitions": [
+        {
+          "file": "lib/unused/targeting.js",
+          "line": 1,
+          "col": 1,
+          "type": "function"
+        },
+        {
+          "file": "lib/unused/targeting.js",
+          "line": 7,
+          "col": 20,
+          "type": "module_export"
+        }
+      ],
+      "usageCount": 5,
+      "usagesByFile": {
+        "lib/al_farming_config.js": 1,
+        "lib/combat_standard.js": 3,
+        "lib/unused/targeting.js": 1
+      }
+    },
+    {
+      "name": "isBusyMoving",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/st_bool.js",
+          "line": 10,
+          "col": 1,
+          "type": "arrow"
+        }
+      ],
+      "usageCount": 5,
+      "usagesByFile": {
+        "lib/combat_standard.js": 4,
+        "lib/st_bool.js": 1
+      }
+    },
+    {
+      "name": "isNearby",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/st_bool.js",
+          "line": 18,
+          "col": 1,
+          "type": "arrow"
+        }
+      ],
+      "usageCount": 5,
+      "usagesByFile": {
+        "lib/cm_magiport.js": 2,
+        "lib/cm_unpack.js": 2,
+        "lib/st_bool.js": 1
+      }
+    },
+    {
+      "name": "Mage",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/class_mage.js",
+          "line": 11,
+          "col": 1,
+          "type": "class"
+        }
+      ],
+      "usageCount": 5,
+      "usagesByFile": {
+        "lib/al_main.js": 4,
+        "lib/class_mage.js": 1
+      }
+    },
+    {
+      "name": "Merchant",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/class_merchant.js",
+          "line": 6,
+          "col": 1,
+          "type": "class"
+        }
+      ],
+      "usageCount": 5,
+      "usagesByFile": {
+        "lib/al_main.js": 4,
+        "lib/class_merchant.js": 1
+      }
+    },
+    {
+      "name": "Orchestrator",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/class_orchestrator.js",
+          "line": 57,
+          "col": 1,
+          "type": "class"
+        }
+      ],
+      "usageCount": 5,
+      "usagesByFile": {
+        "lib/al_main.js": 4,
+        "lib/class_orchestrator.js": 1
+      }
+    },
+    {
+      "name": "Paladin",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/class_paladin.js",
+          "line": 4,
+          "col": 1,
+          "type": "class"
+        }
+      ],
+      "usageCount": 5,
+      "usagesByFile": {
+        "lib/al_main.js": 4,
+        "lib/class_paladin.js": 1
+      }
+    },
+    {
+      "name": "Priest",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/class_priest.js",
+          "line": 4,
+          "col": 1,
+          "type": "class"
+        }
+      ],
+      "usageCount": 5,
+      "usagesByFile": {
+        "lib/al_main.js": 4,
+        "lib/class_priest.js": 1
+      }
+    },
+    {
+      "name": "Ranger",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/class_ranger.js",
+          "line": 4,
+          "col": 1,
+          "type": "class"
+        }
+      ],
+      "usageCount": 5,
+      "usagesByFile": {
+        "lib/al_main.js": 4,
+        "lib/class_ranger.js": 1
+      }
+    },
+    {
+      "name": "Rogue",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/class_rogue.js",
+          "line": 4,
+          "col": 1,
+          "type": "class"
+        }
+      ],
+      "usageCount": 5,
+      "usagesByFile": {
+        "lib/al_main.js": 4,
+        "lib/class_rogue.js": 1
+      }
+    },
+    {
+      "name": "Warrior",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/class_warrior.js",
+          "line": 4,
+          "col": 1,
+          "type": "class"
+        }
+      ],
+      "usageCount": 5,
+      "usagesByFile": {
+        "lib/al_main.js": 4,
+        "lib/class_warrior.js": 1
+      }
+    },
+    {
+      "name": "clear_last_full_alert",
+      "definitionCount": 2,
+      "definitions": [
+        {
+          "file": "lib/unused/full.js",
+          "line": 37,
+          "col": 1,
+          "type": "function"
+        },
+        {
+          "file": "lib/unused/timing.js",
+          "line": 37,
+          "col": 1,
+          "type": "function"
+        }
+      ],
+      "usageCount": 4,
+      "usagesByFile": {
+        "lib/unused/full.js": 2,
+        "lib/unused/timing.js": 2
+      }
+    },
+    {
+      "name": "clearExpectedMagiport",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/st_magiport_accept.js",
+          "line": 43,
+          "col": 1,
+          "type": "arrow"
+        }
+      ],
+      "usageCount": 4,
+      "usagesByFile": {
+        "lib/class_bot.js": 2,
+        "lib/st_magiport_accept.js": 2
+      }
+    },
+    {
+      "name": "doCm",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/unused/messaging.js",
+          "line": 8,
+          "col": 1,
+          "type": "function"
+        }
+      ],
+      "usageCount": 4,
+      "usagesByFile": {
+        "lib/unused/messaging.js": 4
+      }
+    },
+    {
+      "name": "ensurePotion",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/cm_sustain.js",
+          "line": 48,
+          "col": 3,
+          "type": "arrow"
+        }
+      ],
+      "usageCount": 4,
+      "usagesByFile": {
+        "lib/cm_sustain.js": 4
+      }
+    },
+    {
+      "name": "equipItem",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/unused/inventory.js",
+          "line": 58,
+          "col": 1,
+          "type": "function"
+        }
+      ],
+      "usageCount": 4,
+      "usagesByFile": {
+        "lib/unused/inventory.js": 1,
+        "lib/unused/messaging.js": 3
+      }
+    },
+    {
+      "name": "fullAlert",
+      "definitionCount": 2,
+      "definitions": [
+        {
+          "file": "lib/unused/full.js",
+          "line": 21,
+          "col": 1,
+          "type": "function"
+        },
+        {
+          "file": "lib/unused/timing.js",
+          "line": 21,
+          "col": 1,
+          "type": "function"
+        }
+      ],
+      "usageCount": 4,
+      "usagesByFile": {
+        "lib/unused/full.js": 2,
+        "lib/unused/timing.js": 2
+      }
+    },
+    {
+      "name": "getPlayerSafe",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/fn_game.js",
+          "line": 30,
+          "col": 1,
+          "type": "arrow"
+        }
+      ],
+      "usageCount": 4,
+      "usagesByFile": {
+        "lib/fn_game.js": 1,
+        "lib/fn_math.js": 2,
+        "lib/st_bool.js": 1
+      }
+    },
+    {
+      "name": "getRemoteTelemetryWsPort",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/al_env_config.js",
+          "line": 22,
+          "col": 1,
+          "type": "arrow"
+        }
+      ],
+      "usageCount": 4,
+      "usagesByFile": {
+        "lib/al_config.js": 2,
+        "lib/al_env_config.js": 2
+      }
+    },
+    {
+      "name": "high_upgrade_all",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/unused/upgrading.js",
+          "line": 320,
+          "col": 1,
+          "type": "function"
+        }
+      ],
+      "usageCount": 4,
+      "usagesByFile": {
+        "lib/unused/upgrading.js": 4
+      }
+    },
+    {
+      "name": "isEventLive",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/event_tasks.js",
+          "line": 11,
+          "col": 1,
+          "type": "arrow"
+        }
+      ],
+      "usageCount": 4,
+      "usagesByFile": {
+        "lib/event_tasks.js": 4
+      }
+    },
+    {
+      "name": "itemsToBuy",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/rule_buying.js",
+          "line": 278,
+          "col": 20,
+          "type": "module_export"
+        }
+      ],
+      "usageCount": 4,
+      "usagesByFile": {
+        "lib/npc_goblin_buy.js": 1,
+        "lib/npc_ponty_buy.js": 2,
+        "lib/rule_buying.js": 1
+      }
+    },
+    {
+      "name": "normalizeFrequency",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/combat_standard.js",
+          "line": 9,
+          "col": 1,
+          "type": "arrow"
+        }
+      ],
+      "usageCount": 4,
+      "usagesByFile": {
+        "lib/combat_standard.js": 4
+      }
+    },
+    {
+      "name": "readLuck",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/fn_roster.js",
+          "line": 21,
+          "col": 1,
+          "type": "arrow"
+        }
+      ],
+      "usageCount": 4,
+      "usagesByFile": {
+        "lib/fn_roster.js": 4
+      }
+    },
+    {
+      "name": "runMageSupport",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/combat_standard.js",
+          "line": 276,
+          "col": 1,
+          "type": "arrow"
+        }
+      ],
+      "usageCount": 4,
+      "usagesByFile": {
+        "lib/al_farming_config.js": 3,
+        "lib/combat_standard.js": 1
+      }
+    },
+    {
+      "name": "runWorldEvent",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/combat_standard.js",
+          "line": 244,
+          "col": 1,
+          "type": "arrow"
+        }
+      ],
+      "usageCount": 4,
+      "usagesByFile": {
+        "lib/al_farming_config.js": 3,
+        "lib/combat_standard.js": 1
+      }
+    },
+    {
+      "name": "safeNumber",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/telemetry/client.js",
+          "line": 9,
+          "col": 1,
+          "type": "arrow"
+        }
+      ],
+      "usageCount": 4,
+      "usagesByFile": {
+        "lib/telemetry/client.js": 4
+      }
+    },
+    {
+      "name": "upgrade_all",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/unused/upgrading.js",
+          "line": 211,
+          "col": 1,
+          "type": "function"
+        }
+      ],
+      "usageCount": 4,
+      "usagesByFile": {
+        "lib/unused/upgrading.js": 4
+      }
+    },
+    {
+      "name": "buy_tool",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/unused/trading.js",
+          "line": 77,
+          "col": 1,
+          "type": "function"
+        }
+      ],
+      "usageCount": 3,
+      "usagesByFile": {
+        "lib/class_merchant.js": 2,
+        "lib/unused/trading.js": 1
+      }
+    },
+    {
+      "name": "canUpgrade",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/unused/upgrading.js",
+          "line": 156,
+          "col": 1,
+          "type": "function"
+        }
+      ],
+      "usageCount": 3,
+      "usagesByFile": {
+        "lib/unused/upgrading.js": 3
+      }
+    },
+    {
+      "name": "compareByMeta",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/fn_roster.js",
+          "line": 105,
+          "col": 1,
+          "type": "arrow"
+        }
+      ],
+      "usageCount": 3,
+      "usagesByFile": {
+        "lib/al_farming_config.js": 2,
+        "lib/fn_roster.js": 1
+      }
+    },
+    {
+      "name": "createMoveManager",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/st_smart_move.js",
+          "line": 37,
+          "col": 1,
+          "type": "arrow"
+        }
+      ],
+      "usageCount": 3,
+      "usagesByFile": {
+        "lib/al_farming_config.js": 2,
+        "lib/st_smart_move.js": 1
+      }
+    },
+    {
+      "name": "crumbDump",
+      "definitionCount": 2,
+      "definitions": [
+        {
+          "file": "lib/unused/banking.js",
+          "line": 63,
+          "col": 7,
+          "type": "function"
+        },
+        {
+          "file": "lib/unused/inventory.js",
+          "line": 97,
+          "col": 7,
+          "type": "function"
+        }
+      ],
+      "usageCount": 3,
+      "usagesByFile": {
+        "lib/unused/banking.js": 2,
+        "lib/unused/inventory.js": 1
+      }
+    },
+    {
+      "name": "dumpIfNot",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/unused/banking.js",
+          "line": 47,
+          "col": 7,
+          "type": "function"
+        }
+      ],
+      "usageCount": 3,
+      "usagesByFile": {
+        "lib/unused/banking.js": 3
+      }
+    },
+    {
+      "name": "filterObjectsByProperty",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/fn_data.js",
+          "line": 89,
+          "col": 1,
+          "type": "function"
+        }
+      ],
+      "usageCount": 3,
+      "usagesByFile": {
+        "lib/class_bot.js": 2,
+        "lib/fn_data.js": 1
+      }
+    },
+    {
+      "name": "getActiveJoinableEvents",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/fn_server_events.js",
+          "line": 9,
+          "col": 1,
+          "type": "arrow"
+        }
+      ],
+      "usageCount": 3,
+      "usagesByFile": {
+        "lib/al_farming_config.js": 2,
+        "lib/fn_server_events.js": 1
+      }
+    },
+    {
+      "name": "getActiveWorldEvents",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/fn_server_events.js",
+          "line": 18,
+          "col": 1,
+          "type": "arrow"
+        }
+      ],
+      "usageCount": 3,
+      "usagesByFile": {
+        "lib/al_farming_config.js": 2,
+        "lib/fn_server_events.js": 1
+      }
+    },
+    {
+      "name": "getRuntimeContext",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/al_config.js",
+          "line": 247,
+          "col": 1,
+          "type": "arrow"
+        }
+      ],
+      "usageCount": 3,
+      "usagesByFile": {
+        "lib/al_config.js": 1,
+        "lib/al_main.js": 2
+      }
+    },
+    {
+      "name": "installAutoParty",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/group_party.js",
+          "line": 60,
+          "col": 1,
+          "type": "arrow"
+        }
+      ],
+      "usageCount": 3,
+      "usagesByFile": {
+        "lib/al_main.js": 2,
+        "lib/group_party.js": 1
+      }
+    },
+    {
+      "name": "installEventCombat",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/combat_event.js",
+          "line": 161,
+          "col": 1,
+          "type": "arrow"
+        }
+      ],
+      "usageCount": 3,
+      "usagesByFile": {
+        "lib/al_main.js": 2,
+        "lib/combat_event.js": 1
+      }
+    },
+    {
+      "name": "installMagiportAutoAccept",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/st_magiport_accept.js",
+          "line": 98,
+          "col": 1,
+          "type": "arrow"
+        }
+      ],
+      "usageCount": 3,
+      "usagesByFile": {
+        "lib/class_bot.js": 2,
+        "lib/st_magiport_accept.js": 1
+      }
+    },
+    {
+      "name": "installNoEventFarming",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/al_farming_config.js",
+          "line": 262,
+          "col": 1,
+          "type": "arrow"
+        }
+      ],
+      "usageCount": 3,
+      "usagesByFile": {
+        "lib/al_farming_config.js": 1,
+        "lib/al_main.js": 2
+      }
+    },
+    {
+      "name": "installPriestSwap",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/group_priest_swap.js",
+          "line": 22,
+          "col": 1,
+          "type": "arrow"
+        }
+      ],
+      "usageCount": 3,
+      "usagesByFile": {
+        "lib/al_main.js": 2,
+        "lib/group_priest_swap.js": 1
+      }
+    },
+    {
+      "name": "installSustain",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/cm_sustain.js",
+          "line": 11,
+          "col": 1,
+          "type": "arrow"
+        }
+      ],
+      "usageCount": 3,
+      "usagesByFile": {
+        "lib/al_main.js": 2,
+        "lib/cm_sustain.js": 1
+      }
+    },
+    {
+      "name": "installTelemetry",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/telemetry/client.js",
+          "line": 99,
+          "col": 1,
+          "type": "arrow"
+        }
+      ],
+      "usageCount": 3,
+      "usagesByFile": {
+        "lib/class_bot.js": 2,
+        "lib/telemetry/client.js": 1
+      }
+    },
+    {
+      "name": "installUnpackRequester",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/cm_unpack.js",
+          "line": 62,
+          "col": 1,
+          "type": "arrow"
+        }
+      ],
+      "usageCount": 3,
+      "usagesByFile": {
+        "lib/al_main.js": 2,
+        "lib/cm_unpack.js": 1
+      }
+    },
+    {
+      "name": "is_off_timeout",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/fn_data.js",
+          "line": 102,
+          "col": 1,
+          "type": "function"
+        }
+      ],
+      "usageCount": 3,
+      "usagesByFile": {
+        "lib/fn_data.js": 1,
+        "lib/unused/upgrading.js": 2
+      }
+    },
+    {
+      "name": "isTrustedPartyName",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/group_party.js",
+          "line": 26,
+          "col": 1,
+          "type": "arrow"
+        }
+      ],
+      "usageCount": 3,
+      "usagesByFile": {
+        "lib/group_party.js": 3
+      }
+    },
+    {
+      "name": "magiportTargets",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/cm_magiport.js",
+          "line": 114,
+          "col": 7,
+          "type": "function"
+        }
+      ],
+      "usageCount": 3,
+      "usagesByFile": {
+        "lib/class_mage.js": 2,
+        "lib/cm_magiport.js": 1
+      }
+    },
+    {
+      "name": "onGame",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/event_listeners.js",
+          "line": 48,
+          "col": 1,
+          "type": "arrow"
+        }
+      ],
+      "usageCount": 3,
+      "usagesByFile": {
+        "lib/event_listeners.js": 1,
+        "lib/event_tasks.js": 2
+      }
+    },
+    {
+      "name": "pickHighestLevelByType",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/al_config.js",
+          "line": 21,
+          "col": 1,
+          "type": "arrow"
+        }
+      ],
+      "usageCount": 3,
+      "usagesByFile": {
+        "lib/al_config.js": 3
+      }
+    },
+    {
+      "name": "pickWorldEvent",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/fn_server_events.js",
+          "line": 36,
+          "col": 1,
+          "type": "arrow"
+        }
+      ],
+      "usageCount": 3,
+      "usagesByFile": {
+        "lib/al_farming_config.js": 2,
+        "lib/fn_server_events.js": 1
+      }
+    },
+    {
+      "name": "prefix",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/al_debug_log.js",
+          "line": 1,
+          "col": 1,
+          "type": "arrow"
+        }
+      ],
+      "usageCount": 3,
+      "usagesByFile": {
+        "lib/al_debug_log.js": 2,
+        "lib/class_orchestrator.js": 1
+      }
+    },
+    {
+      "name": "rangerPVP",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/unused/messaging.js",
+          "line": 247,
+          "col": 1,
+          "type": "function"
+        }
+      ],
+      "usageCount": 3,
+      "usagesByFile": {
+        "lib/unused/messaging.js": 3
+      }
+    },
+    {
+      "name": "runCrab",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/combat_standard.js",
+          "line": 139,
+          "col": 1,
+          "type": "arrow"
+        }
+      ],
+      "usageCount": 3,
+      "usagesByFile": {
+        "lib/al_farming_config.js": 2,
+        "lib/combat_standard.js": 1
+      }
+    },
+    {
+      "name": "runMonsterhunt",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/combat_standard.js",
+          "line": 166,
+          "col": 1,
+          "type": "arrow"
+        }
+      ],
+      "usageCount": 3,
+      "usagesByFile": {
+        "lib/al_farming_config.js": 2,
+        "lib/combat_standard.js": 1
+      }
+    },
+    {
+      "name": "selectPair",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/al_farming_config.js",
+          "line": 63,
+          "col": 1,
+          "type": "arrow"
+        }
+      ],
+      "usageCount": 3,
+      "usagesByFile": {
+        "lib/al_farming_config.js": 3
+      }
+    },
+    {
+      "name": "selectThree",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/al_farming_config.js",
+          "line": 105,
+          "col": 1,
+          "type": "arrow"
+        }
+      ],
+      "usageCount": 3,
+      "usagesByFile": {
+        "lib/al_farming_config.js": 3
+      }
+    },
+    {
+      "name": "setExpectedMagiport",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/st_magiport_accept.js",
+          "line": 35,
+          "col": 1,
+          "type": "arrow"
+        }
+      ],
+      "usageCount": 3,
+      "usagesByFile": {
+        "lib/class_bot.js": 2,
+        "lib/st_magiport_accept.js": 1
+      }
+    },
+    {
+      "name": "shinyBlackList",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/rule_buying.js",
+          "line": 278,
+          "col": 32,
+          "type": "module_export"
+        }
+      ],
+      "usageCount": 3,
+      "usagesByFile": {
+        "lib/npc_ponty_buy.js": 2,
+        "lib/rule_buying.js": 1
+      }
+    },
+    {
+      "name": "waitForCm",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/event_listeners.js",
+          "line": 77,
+          "col": 1,
+          "type": "arrow"
+        }
+      ],
+      "usageCount": 3,
+      "usagesByFile": {
+        "lib/cm_magiport.js": 2,
+        "lib/event_listeners.js": 1
+      }
+    },
+    {
+      "name": "alertSystem",
+      "definitionCount": 2,
+      "definitions": [
+        {
+          "file": "lib/unused/full.js",
+          "line": 4,
+          "col": 1,
+          "type": "function"
+        },
+        {
+          "file": "lib/unused/timing.js",
+          "line": 4,
+          "col": 1,
+          "type": "function"
+        }
+      ],
+      "usageCount": 2,
+      "usagesByFile": {
+        "lib/unused/full.js": 1,
+        "lib/unused/timing.js": 1
+      }
+    },
+    {
+      "name": "avg",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/cm_sustain.js",
+          "line": 8,
+          "col": 1,
+          "type": "arrow"
+        }
+      ],
+      "usageCount": 2,
+      "usagesByFile": {
+        "lib/cm_sustain.js": 2
+      }
+    },
+    {
+      "name": "broadcastHuntDanger",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/combat_standard.js",
+          "line": 112,
+          "col": 1,
+          "type": "arrow"
+        }
+      ],
+      "usageCount": 2,
+      "usagesByFile": {
+        "lib/combat_standard.js": 2
+      }
+    },
+    {
+      "name": "buildAvailableByClass",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/al_farming_config.js",
+          "line": 178,
+          "col": 1,
+          "type": "arrow"
+        }
+      ],
+      "usageCount": 2,
+      "usagesByFile": {
+        "lib/al_farming_config.js": 2
+      }
+    },
+    {
+      "name": "buildSnapshot",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/telemetry/server.js",
+          "line": 13,
+          "col": 1,
+          "type": "arrow"
+        }
+      ],
+      "usageCount": 2,
+      "usagesByFile": {
+        "lib/telemetry/server.js": 2
+      }
+    },
+    {
+      "name": "buy_compound_scroll",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/unused/upgrading.js",
+          "line": 101,
+          "col": 1,
+          "type": "function"
+        }
+      ],
+      "usageCount": 2,
+      "usagesByFile": {
+        "lib/unused/upgrading.js": 2
+      }
+    },
+    {
+      "name": "buyFromPonty",
+      "definitionCount": 2,
+      "definitions": [
+        {
+          "file": "lib/npc_ponty_buy.js",
+          "line": 7,
+          "col": 7,
+          "type": "function"
+        },
+        {
+          "file": "lib/npc_ponty_buy.js",
+          "line": 56,
+          "col": 20,
+          "type": "module_export"
+        }
+      ],
+      "usageCount": 2,
+      "usagesByFile": {
+        "lib/class_merchant.js": 2
+      }
+    },
+    {
+      "name": "connect",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/telemetry/client.js",
+          "line": 48,
+          "col": 1,
+          "type": "arrow"
+        }
+      ],
+      "usageCount": 2,
+      "usagesByFile": {
+        "lib/telemetry/client.js": 2
+      }
+    },
+    {
+      "name": "createEmitterHub",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/event_listeners.js",
+          "line": 3,
+          "col": 1,
+          "type": "arrow"
+        }
+      ],
+      "usageCount": 2,
+      "usagesByFile": {
+        "lib/event_listeners.js": 2
+      }
+    },
+    {
+      "name": "deepMerge",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/al_config.js",
+          "line": 158,
+          "col": 1,
+          "type": "arrow"
+        }
+      ],
+      "usageCount": 2,
+      "usagesByFile": {
+        "lib/al_config.js": 2
+      }
+    },
+    {
+      "name": "deliver",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/class_orchestrator.js",
+          "line": 299,
+          "col": 5,
+          "type": "arrow"
+        }
+      ],
+      "usageCount": 2,
+      "usagesByFile": {
+        "lib/class_orchestrator.js": 2
+      }
+    },
+    {
+      "name": "distanceToPlayer",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/fn_math.js",
+          "line": 3,
+          "col": 1,
+          "type": "arrow"
+        }
+      ],
+      "usageCount": 2,
+      "usagesByFile": {
+        "lib/fn_math.js": 1,
+        "lib/st_bool.js": 1
+      }
+    },
+    {
+      "name": "emitStart",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/event_tasks.js",
+          "line": 36,
+          "col": 3,
+          "type": "arrow"
+        }
+      ],
+      "usageCount": 2,
+      "usagesByFile": {
+        "lib/event_tasks.js": 2
+      }
+    },
+    {
+      "name": "estimateCombatOutcome",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/combat_standard.js",
+          "line": 48,
+          "col": 1,
+          "type": "arrow"
+        }
+      ],
+      "usageCount": 2,
+      "usagesByFile": {
+        "lib/combat_standard.js": 2
+      }
+    },
+    {
+      "name": "finish",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/event_listeners.js",
+          "line": 53,
+          "col": 5,
+          "type": "arrow"
+        }
+      ],
+      "usageCount": 2,
+      "usagesByFile": {
+        "lib/event_listeners.js": 2
+      }
+    },
+    {
+      "name": "full_sell",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/unused/inventory.js",
+          "line": 85,
+          "col": 1,
+          "type": "function"
+        }
+      ],
+      "usageCount": 2,
+      "usagesByFile": {
+        "lib/unused/inventory.js": 1,
+        "lib/unused/selling.js": 1
+      }
+    },
+    {
+      "name": "getEnv",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/al_env_config.js",
+          "line": 16,
+          "col": 1,
+          "type": "arrow"
+        }
+      ],
+      "usageCount": 2,
+      "usagesByFile": {
+        "lib/al_env_config.js": 2
+      }
+    },
+    {
+      "name": "getItemAndSlot",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/unused/inventory.js",
+          "line": 46,
+          "col": 1,
+          "type": "function"
+        }
+      ],
+      "usageCount": 2,
+      "usagesByFile": {
+        "lib/unused/inventory.js": 2
+      }
+    },
+    {
+      "name": "getItemSlots",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/class_orchestrator.js",
+          "line": 33,
+          "col": 1,
+          "type": "arrow"
+        }
+      ],
+      "usageCount": 2,
+      "usagesByFile": {
+        "lib/class_orchestrator.js": 2
+      }
+    },
+    {
+      "name": "getMonsterhuntTarget",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/al_farming_config.js",
+          "line": 15,
+          "col": 1,
+          "type": "arrow"
+        }
+      ],
+      "usageCount": 2,
+      "usagesByFile": {
+        "lib/al_farming_config.js": 2
+      }
+    },
+    {
+      "name": "getMonsterStats",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/al_farming_config.js",
+          "line": 45,
+          "col": 1,
+          "type": "arrow"
+        }
+      ],
+      "usageCount": 2,
+      "usagesByFile": {
+        "lib/al_farming_config.js": 2
+      }
+    },
+    {
+      "name": "getPartyMembers",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/class_orchestrator.js",
+          "line": 14,
+          "col": 1,
+          "type": "arrow"
+        }
+      ],
+      "usageCount": 2,
+      "usagesByFile": {
+        "lib/class_orchestrator.js": 2
+      }
+    },
+    {
+      "name": "group_cm",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/unused/messaging.js",
+          "line": 15,
+          "col": 1,
+          "type": "function"
+        }
+      ],
+      "usageCount": 2,
+      "usagesByFile": {
+        "lib/unused/messaging.js": 2
+      }
+    },
+    {
+      "name": "install",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/event_tasks.js",
+          "line": 59,
+          "col": 3,
+          "type": "arrow"
+        }
+      ],
+      "usageCount": 2,
+      "usagesByFile": {
+        "lib/class_orchestrator.js": 1,
+        "lib/event_tasks.js": 1
+      }
+    },
+    {
+      "name": "isCrabxxTargetingOutside",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/combat_event.js",
+          "line": 56,
+          "col": 3,
+          "type": "arrow"
+        }
+      ],
+      "usageCount": 2,
+      "usagesByFile": {
+        "lib/combat_event.js": 2
+      }
+    },
+    {
+      "name": "isDangerousOutcome",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/combat_standard.js",
+          "line": 90,
+          "col": 1,
+          "type": "arrow"
+        }
+      ],
+      "usageCount": 2,
+      "usagesByFile": {
+        "lib/combat_standard.js": 2
+      }
+    },
+    {
+      "name": "isValidCrabxx",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/combat_event.js",
+          "line": 53,
+          "col": 3,
+          "type": "arrow"
+        }
+      ],
+      "usageCount": 2,
+      "usagesByFile": {
+        "lib/combat_event.js": 2
+      }
+    },
+    {
+      "name": "main",
+      "definitionCount": 2,
+      "definitions": [
+        {
+          "file": "lib/al_main.js",
+          "line": 27,
+          "col": 7,
+          "type": "function"
+        },
+        {
+          "file": "lib/al_main.js",
+          "line": 378,
+          "col": 20,
+          "type": "module_export"
+        }
+      ],
+      "usageCount": 2,
+      "usagesByFile": {
+        "lib/zCLIENT_BOOTSTRAP.js": 1,
+        "lib/zPROXIED_REQUIRE.js": 1
+      }
+    },
+    {
+      "name": "makeTaskId",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/class_orchestrator.js",
+          "line": 11,
+          "col": 1,
+          "type": "arrow"
+        }
+      ],
+      "usageCount": 2,
+      "usagesByFile": {
+        "lib/class_orchestrator.js": 2
+      }
+    },
+    {
+      "name": "normalizeCtype",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/fn_roster.js",
+          "line": 31,
+          "col": 1,
+          "type": "arrow"
+        }
+      ],
+      "usageCount": 2,
+      "usagesByFile": {
+        "lib/fn_roster.js": 2
+      }
+    },
+    {
+      "name": "pickNames",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/al_farming_config.js",
+          "line": 61,
+          "col": 1,
+          "type": "arrow"
+        }
+      ],
+      "usageCount": 2,
+      "usagesByFile": {
+        "lib/al_farming_config.js": 2
+      }
+    },
+    {
+      "name": "regen",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/unused/sustain.js",
+          "line": 1,
+          "col": 1,
+          "type": "function"
+        }
+      ],
+      "usageCount": 2,
+      "usagesByFile": {
+        "lib/unused/sustain.js": 2
+      }
+    },
+    {
+      "name": "requestMerchantPots",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/cm_sustain.js",
+          "line": 23,
+          "col": 3,
+          "type": "arrow"
+        }
+      ],
+      "usageCount": 2,
+      "usagesByFile": {
+        "lib/cm_sustain.js": 2
+      }
+    },
+    {
+      "name": "sell_extras",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/unused/selling.js",
+          "line": 105,
+          "col": 1,
+          "type": "function"
+        }
+      ],
+      "usageCount": 2,
+      "usagesByFile": {
+        "lib/unused/selling.js": 2
+      }
+    },
+    {
+      "name": "sendLoop",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/cm_unpack.js",
+          "line": 112,
+          "col": 3,
+          "type": "arrow"
+        }
+      ],
+      "usageCount": 2,
+      "usagesByFile": {
+        "lib/cm_unpack.js": 2
+      }
+    },
+    {
+      "name": "setTrustedMages",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/st_magiport_accept.js",
+          "line": 29,
+          "col": 1,
+          "type": "arrow"
+        }
+      ],
+      "usageCount": 2,
+      "usagesByFile": {
+        "lib/st_magiport_accept.js": 2
+      }
+    },
+    {
+      "name": "store_trade_item",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/unused/trading.js",
+          "line": 61,
+          "col": 1,
+          "type": "function"
+        }
+      ],
+      "usageCount": 2,
+      "usagesByFile": {
+        "lib/unused/crafting.js": 1,
+        "lib/unused/trading.js": 1
+      }
+    },
+    {
+      "name": "tick",
+      "definitionCount": 4,
+      "definitions": [
+        {
+          "file": "lib/class_bot.js",
+          "line": 302,
+          "col": 5,
+          "type": "arrow"
+        },
+        {
+          "file": "lib/combat_event.js",
+          "line": 168,
+          "col": 3,
+          "type": "arrow"
+        },
+        {
+          "file": "lib/zCLIENT_BOOTSTRAP.js",
+          "line": 160,
+          "col": 5,
+          "type": "arrow"
+        },
+        {
+          "file": "lib/zPROXIED_REQUIRE.js",
+          "line": 160,
+          "col": 5,
+          "type": "arrow"
+        }
+      ],
+      "usageCount": 2,
+      "usagesByFile": {
+        "lib/class_bot.js": 2,
+        "lib/combat_event.js": 2
+      }
+    },
+    {
+      "name": "trySustain",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/cm_sustain.js",
+          "line": 66,
+          "col": 3,
+          "type": "arrow"
+        }
+      ],
+      "usageCount": 2,
+      "usagesByFile": {
+        "lib/cm_sustain.js": 2
+      }
+    },
+    {
+      "name": "upgrade_replacement",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/unused/upgrading.js",
+          "line": 174,
+          "col": 1,
+          "type": "function"
+        }
+      ],
+      "usageCount": 2,
+      "usagesByFile": {
+        "lib/unused/upgrading.js": 2
+      }
+    },
+    {
+      "name": "waitForCharacterEvent",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/event_listeners.js",
+          "line": 50,
+          "col": 1,
+          "type": "arrow"
+        }
+      ],
+      "usageCount": 2,
+      "usagesByFile": {
+        "lib/event_listeners.js": 2
+      }
+    },
+    {
+      "name": "bankUpdate",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/unused/banking.js",
+          "line": 4,
+          "col": 7,
+          "type": "function"
+        }
+      ],
+      "usageCount": 1,
+      "usagesByFile": {
+        "lib/unused/banking.js": 1
+      }
+    },
+    {
+      "name": "broadcast",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/telemetry/server.js",
+          "line": 18,
+          "col": 1,
+          "type": "arrow"
+        }
+      ],
+      "usageCount": 1,
+      "usagesByFile": {
+        "lib/telemetry/server.js": 1
+      }
+    },
+    {
+      "name": "buildPayload",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/telemetry/client.js",
+          "line": 26,
+          "col": 1,
+          "type": "arrow"
+        }
+      ],
+      "usageCount": 1,
+      "usagesByFile": {
+        "lib/telemetry/client.js": 1
+      }
+    },
+    {
+      "name": "chooseLeader",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/al_farming_config.js",
+          "line": 172,
+          "col": 1,
+          "type": "arrow"
+        }
+      ],
+      "usageCount": 1,
+      "usagesByFile": {
+        "lib/al_farming_config.js": 1
+      }
+    },
+    {
+      "name": "clearIfIdle",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/st_smart_move.js",
+          "line": 42,
+          "col": 3,
+          "type": "arrow"
+        }
+      ],
+      "usageCount": 1,
+      "usagesByFile": {
+        "lib/st_smart_move.js": 1
+      }
+    },
+    {
+      "name": "countItems",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/fn_data.js",
+          "line": 61,
+          "col": 1,
+          "type": "function"
+        }
+      ],
+      "usageCount": 1,
+      "usagesByFile": {
+        "lib/fn_data.js": 1
+      }
+    },
+    {
+      "name": "craft_basket",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/unused/crafting.js",
+          "line": 76,
+          "col": 1,
+          "type": "function"
+        }
+      ],
+      "usageCount": 1,
+      "usagesByFile": {
+        "lib/unused/crafting.js": 1
+      }
+    },
+    {
+      "name": "craft_master",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/unused/crafting.js",
+          "line": 120,
+          "col": 1,
+          "type": "function"
+        }
+      ],
+      "usageCount": 1,
+      "usagesByFile": {
+        "lib/unused/crafting.js": 1
+      }
+    },
+    {
+      "name": "current_location",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/unused/messaging.js",
+          "line": 341,
+          "col": 1,
+          "type": "function"
+        }
+      ],
+      "usageCount": 1,
+      "usagesByFile": {
+        "lib/unused/messaging.js": 1
+      }
+    },
+    {
+      "name": "doCompound",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/unused/upgrading.js",
+          "line": 108,
+          "col": 1,
+          "type": "function"
+        }
+      ],
+      "usageCount": 1,
+      "usagesByFile": {
+        "lib/unused/upgrading.js": 1
+      }
+    },
+    {
+      "name": "dumpPvp",
+      "definitionCount": 2,
+      "definitions": [
+        {
+          "file": "lib/unused/pvp.js",
+          "line": 1,
+          "col": 1,
+          "type": "function"
+        },
+        {
+          "file": "lib/unused/pvp.js",
+          "line": 10,
+          "col": 20,
+          "type": "module_export"
+        }
+      ],
+      "usageCount": 1,
+      "usagesByFile": {
+        "lib/unused/banking.js": 1
+      }
+    },
+    {
+      "name": "DynamicIndex",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/fn_data.js",
+          "line": 19,
+          "col": 1,
+          "type": "class"
+        }
+      ],
+      "usageCount": 1,
+      "usagesByFile": {
+        "lib/fn_data.js": 1
+      }
+    },
+    {
+      "name": "emitEnd",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/event_tasks.js",
+          "line": 49,
+          "col": 3,
+          "type": "arrow"
+        }
+      ],
+      "usageCount": 1,
+      "usagesByFile": {
+        "lib/event_tasks.js": 1
+      }
+    },
+    {
+      "name": "ensure",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/event_listeners.js",
+          "line": 7,
+          "col": 3,
+          "type": "arrow"
+        }
+      ],
+      "usageCount": 1,
+      "usagesByFile": {
+        "lib/event_listeners.js": 1
+      }
+    },
+    {
+      "name": "get_item",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/unused/messaging.js",
+          "line": 30,
+          "col": 1,
+          "type": "function"
+        }
+      ],
+      "usageCount": 1,
+      "usagesByFile": {
+        "lib/unused/messaging.js": 1
+      }
+    },
+    {
+      "name": "getActiveNames",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/group_party.js",
+          "line": 5,
+          "col": 1,
+          "type": "arrow"
+        }
+      ],
+      "usageCount": 1,
+      "usagesByFile": {
+        "lib/group_party.js": 1
+      }
+    },
+    {
+      "name": "getActiveTradeSlots",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/unused/trading.js",
+          "line": 18,
+          "col": 1,
+          "type": "function"
+        }
+      ],
+      "usageCount": 1,
+      "usagesByFile": {
+        "lib/unused/trading.js": 1
+      }
+    },
+    {
+      "name": "getCharacterMeta",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/al_farming_config.js",
+          "line": 13,
+          "col": 1,
+          "type": "arrow"
+        }
+      ],
+      "usageCount": 1,
+      "usagesByFile": {
+        "lib/al_farming_config.js": 1
+      }
+    },
+    {
+      "name": "getCharactersSafe",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/al_config.js",
+          "line": 10,
+          "col": 1,
+          "type": "arrow"
+        }
+      ],
+      "usageCount": 1,
+      "usagesByFile": {
+        "lib/al_config.js": 1
+      }
+    },
+    {
+      "name": "getCrabRaveTarget",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/combat_event.js",
+          "line": 49,
+          "col": 1,
+          "type": "arrow"
+        }
+      ],
+      "usageCount": 1,
+      "usagesByFile": {
+        "lib/combat_event.js": 1
+      }
+    },
+    {
+      "name": "getDefinitionStats",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/combat_standard.js",
+          "line": 14,
+          "col": 1,
+          "type": "arrow"
+        }
+      ],
+      "usageCount": 1,
+      "usagesByFile": {
+        "lib/combat_standard.js": 1
+      }
+    },
+    {
+      "name": "getFreeSlots",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/cm_unpack.js",
+          "line": 14,
+          "col": 1,
+          "type": "arrow"
+        }
+      ],
+      "usageCount": 1,
+      "usagesByFile": {
+        "lib/cm_unpack.js": 1
+      }
+    },
+    {
+      "name": "getItemQty",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/class_orchestrator.js",
+          "line": 49,
+          "col": 1,
+          "type": "arrow"
+        }
+      ],
+      "usageCount": 1,
+      "usagesByFile": {
+        "lib/class_orchestrator.js": 1
+      }
+    },
+    {
+      "name": "getKeyByValue",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/fn_data.js",
+          "line": 53,
+          "col": 1,
+          "type": "function"
+        }
+      ],
+      "usageCount": 1,
+      "usagesByFile": {
+        "lib/fn_data.js": 1
+      }
+    },
+    {
+      "name": "getLiveStats",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/combat_standard.js",
+          "line": 30,
+          "col": 1,
+          "type": "arrow"
+        }
+      ],
+      "usageCount": 1,
+      "usagesByFile": {
+        "lib/combat_standard.js": 1
+      }
+    },
+    {
+      "name": "getMonsterTargetName",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/combat_event.js",
+          "line": 23,
+          "col": 1,
+          "type": "arrow"
+        }
+      ],
+      "usageCount": 1,
+      "usagesByFile": {
+        "lib/combat_event.js": 1
+      }
+    },
+    {
+      "name": "getPartyNames",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/combat_event.js",
+          "line": 5,
+          "col": 1,
+          "type": "arrow"
+        }
+      ],
+      "usageCount": 1,
+      "usagesByFile": {
+        "lib/combat_event.js": 1
+      }
+    },
+    {
+      "name": "getRosterSnapshot",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/fn_roster.js",
+          "line": 91,
+          "col": 1,
+          "type": "arrow"
+        }
+      ],
+      "usageCount": 1,
+      "usagesByFile": {
+        "lib/fn_roster.js": 1
+      }
+    },
+    {
+      "name": "getSendableItemSlots",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/cm_unpack.js",
+          "line": 44,
+          "col": 1,
+          "type": "arrow"
+        }
+      ],
+      "usageCount": 1,
+      "usagesByFile": {
+        "lib/cm_unpack.js": 1
+      }
+    },
+    {
+      "name": "getUserConfig",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/al_config.js",
+          "line": 144,
+          "col": 1,
+          "type": "arrow"
+        }
+      ],
+      "usageCount": 1,
+      "usagesByFile": {
+        "lib/al_config.js": 1
+      }
+    },
+    {
+      "name": "handleFailTravel",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/unused/traveling.js",
+          "line": 22,
+          "col": 7,
+          "type": "function"
+        }
+      ],
+      "usageCount": 1,
+      "usagesByFile": {
+        "lib/unused/traveling.js": 1
+      }
+    },
+    {
+      "name": "handleMerchantEvents",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/unused/character_events.js",
+          "line": 13,
+          "col": 7,
+          "type": "function"
+        }
+      ],
+      "usageCount": 1,
+      "usagesByFile": {
+        "lib/unused/character_events.js": 1
+      }
+    },
+    {
+      "name": "hasComponents",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/unused/crafting.js",
+          "line": 45,
+          "col": 1,
+          "type": "function"
+        }
+      ],
+      "usageCount": 1,
+      "usagesByFile": {
+        "lib/unused/crafting.js": 1
+      }
+    },
+    {
+      "name": "isCloseToDest",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/st_smart_move.js",
+          "line": 19,
+          "col": 1,
+          "type": "arrow"
+        }
+      ],
+      "usageCount": 1,
+      "usagesByFile": {
+        "lib/st_smart_move.js": 1
+      }
+    },
+    {
+      "name": "isCompoundable",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/unused/upgrading.js",
+          "line": 96,
+          "col": 1,
+          "type": "function"
+        }
+      ],
+      "usageCount": 1,
+      "usagesByFile": {
+        "lib/unused/upgrading.js": 1
+      }
+    },
+    {
+      "name": "isCrabxx",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/combat_event.js",
+          "line": 42,
+          "col": 1,
+          "type": "arrow"
+        }
+      ],
+      "usageCount": 1,
+      "usagesByFile": {
+        "lib/combat_event.js": 1
+      }
+    },
+    {
+      "name": "isExpecting",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/st_magiport_accept.js",
+          "line": 57,
+          "col": 1,
+          "type": "arrow"
+        }
+      ],
+      "usageCount": 1,
+      "usagesByFile": {
+        "lib/st_magiport_accept.js": 1
+      }
+    },
+    {
+      "name": "isInJoinableEvent",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/combat_event.js",
+          "line": 92,
+          "col": 1,
+          "type": "arrow"
+        }
+      ],
+      "usageCount": 1,
+      "usagesByFile": {
+        "lib/combat_event.js": 1
+      }
+    },
+    {
+      "name": "isOutsideParty",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/combat_event.js",
+          "line": 51,
+          "col": 3,
+          "type": "arrow"
+        }
+      ],
+      "usageCount": 1,
+      "usagesByFile": {
+        "lib/combat_event.js": 1
+      }
+    },
+    {
+      "name": "isPotionItem",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/cm_unpack.js",
+          "line": 33,
+          "col": 1,
+          "type": "arrow"
+        }
+      ],
+      "usageCount": 1,
+      "usagesByFile": {
+        "lib/cm_unpack.js": 1
+      }
+    },
+    {
+      "name": "isTrustedMage",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/st_magiport_accept.js",
+          "line": 51,
+          "col": 1,
+          "type": "arrow"
+        }
+      ],
+      "usageCount": 1,
+      "usagesByFile": {
+        "lib/st_magiport_accept.js": 1
+      }
+    },
+    {
+      "name": "loadEnv",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/al_env_config.js",
+          "line": 3,
+          "col": 1,
+          "type": "arrow"
+        }
+      ],
+      "usageCount": 1,
+      "usagesByFile": {
+        "lib/al_env_config.js": 1
+      }
+    },
+    {
+      "name": "makeGroups",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/unused/grouping.js",
+          "line": 10,
+          "col": 1,
+          "type": "function"
+        }
+      ],
+      "usageCount": 1,
+      "usagesByFile": {
+        "lib/unused/grouping.js": 1
+      }
+    },
+    {
+      "name": "makeRequestId",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/cm_unpack.js",
+          "line": 11,
+          "col": 1,
+          "type": "arrow"
+        }
+      ],
+      "usageCount": 1,
+      "usagesByFile": {
+        "lib/cm_unpack.js": 1
+      }
+    },
+    {
+      "name": "maybeAccept",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/st_magiport_accept.js",
+          "line": 65,
+          "col": 1,
+          "type": "arrow"
+        }
+      ],
+      "usageCount": 1,
+      "usagesByFile": {
+        "lib/st_magiport_accept.js": 1
+      }
+    },
+    {
+      "name": "mpUseAvg",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/unused/sustain.js",
+          "line": 26,
+          "col": 1,
+          "type": "function"
+        }
+      ],
+      "usageCount": 1,
+      "usagesByFile": {
+        "lib/unused/sustain.js": 1
+      }
+    },
+    {
+      "name": "needsMonsterhuntTurnIn",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/al_farming_config.js",
+          "line": 32,
+          "col": 1,
+          "type": "arrow"
+        }
+      ],
+      "usageCount": 1,
+      "usagesByFile": {
+        "lib/al_farming_config.js": 1
+      }
+    },
+    {
+      "name": "normalizeDest",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/st_smart_move.js",
+          "line": 8,
+          "col": 1,
+          "type": "arrow"
+        }
+      ],
+      "usageCount": 1,
+      "usagesByFile": {
+        "lib/st_smart_move.js": 1
+      }
+    },
+    {
+      "name": "pickLeader",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/group_party.js",
+          "line": 46,
+          "col": 1,
+          "type": "arrow"
+        }
+      ],
+      "usageCount": 1,
+      "usagesByFile": {
+        "lib/group_party.js": 1
+      }
+    },
+    {
+      "name": "pickSubOut",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/group_priest_swap.js",
+          "line": 5,
+          "col": 1,
+          "type": "arrow"
+        }
+      ],
+      "usageCount": 1,
+      "usagesByFile": {
+        "lib/group_priest_swap.js": 1
+      }
+    },
+    {
+      "name": "pickTarget",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/combat_event.js",
+          "line": 100,
+          "col": 1,
+          "type": "arrow"
+        }
+      ],
+      "usageCount": 1,
+      "usagesByFile": {
+        "lib/combat_event.js": 1
+      }
+    },
+    {
+      "name": "prepareTarget",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/cm_magiport.js",
+          "line": 28,
+          "col": 1,
+          "type": "arrow"
+        }
+      ],
+      "usageCount": 1,
+      "usagesByFile": {
+        "lib/cm_magiport.js": 1
+      }
+    },
+    {
+      "name": "pull_or_store",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/unused/trading.js",
+          "line": 30,
+          "col": 1,
+          "type": "function"
+        }
+      ],
+      "usageCount": 1,
+      "usagesByFile": {
+        "lib/unused/trading.js": 1
+      }
+    },
+    {
+      "name": "replaceCraftable",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/unused/crafting.js",
+          "line": 56,
+          "col": 7,
+          "type": "function"
+        }
+      ],
+      "usageCount": 1,
+      "usagesByFile": {
+        "lib/unused/crafting.js": 1
+      }
+    },
+    {
+      "name": "sanitizeItem",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/telemetry/client.js",
+          "line": 14,
+          "col": 1,
+          "type": "arrow"
+        }
+      ],
+      "usageCount": 1,
+      "usagesByFile": {
+        "lib/telemetry/client.js": 1
+      }
+    },
+    {
+      "name": "selectBurst",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/al_farming_config.js",
+          "line": 157,
+          "col": 1,
+          "type": "arrow"
+        }
+      ],
+      "usageCount": 1,
+      "usagesByFile": {
+        "lib/al_farming_config.js": 1
+      }
+    },
+    {
+      "name": "selectWorldFarmers",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/al_farming_config.js",
+          "line": 257,
+          "col": 1,
+          "type": "arrow"
+        }
+      ],
+      "usageCount": 1,
+      "usagesByFile": {
+        "lib/al_farming_config.js": 1
+      }
+    },
+    {
+      "name": "sellToMerch",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/unused/trading.js",
+          "line": 93,
+          "col": 1,
+          "type": "function"
+        }
+      ],
+      "usageCount": 1,
+      "usagesByFile": {
+        "lib/unused/trading.js": 1
+      }
+    },
+    {
+      "name": "shouldSkipForNearby",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/cm_magiport.js",
+          "line": 19,
+          "col": 1,
+          "type": "arrow"
+        }
+      ],
+      "usageCount": 1,
+      "usagesByFile": {
+        "lib/cm_magiport.js": 1
+      }
+    },
+    {
+      "name": "simple_craft",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/unused/crafting.js",
+          "line": 88,
+          "col": 1,
+          "type": "function"
+        }
+      ],
+      "usageCount": 1,
+      "usagesByFile": {
+        "lib/unused/crafting.js": 1
+      }
+    },
+    {
+      "name": "startPublishing",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/telemetry/client.js",
+          "line": 82,
+          "col": 1,
+          "type": "arrow"
+        }
+      ],
+      "usageCount": 1,
+      "usagesByFile": {
+        "lib/telemetry/client.js": 1
+      }
+    },
+    {
+      "name": "StaticIndex",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/fn_data.js",
+          "line": 5,
+          "col": 1,
+          "type": "class"
+        }
+      ],
+      "usageCount": 1,
+      "usagesByFile": {
+        "lib/fn_data.js": 1
+      }
+    },
+    {
+      "name": "StaticIndexByProperty",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/fn_data.js",
+          "line": 73,
+          "col": 1,
+          "type": "class"
+        }
+      ],
+      "usageCount": 1,
+      "usagesByFile": {
+        "lib/fn_data.js": 1
+      }
+    },
+    {
+      "name": "travelTo",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/unused/traveling.js",
+          "line": 3,
+          "col": 7,
+          "type": "function"
+        }
+      ],
+      "usageCount": 1,
+      "usagesByFile": {
+        "lib/unused/traveling.js": 1
+      }
+    },
+    {
+      "name": "tryAttack",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/combat_event.js",
+          "line": 124,
+          "col": 1,
+          "type": "arrow"
+        }
+      ],
+      "usageCount": 1,
+      "usagesByFile": {
+        "lib/combat_event.js": 1
+      }
+    },
+    {
+      "name": "tryPotions",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/combat_event.js",
+          "line": 153,
+          "col": 1,
+          "type": "arrow"
+        }
+      ],
+      "usageCount": 1,
+      "usagesByFile": {
+        "lib/combat_event.js": 1
+      }
+    },
+    {
+      "name": "waitForMagiportReady",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/cm_magiport.js",
+          "line": 53,
+          "col": 1,
+          "type": "arrow"
+        }
+      ],
+      "usageCount": 1,
+      "usagesByFile": {
+        "lib/cm_magiport.js": 1
+      }
+    },
+    {
+      "name": "almost_all",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/unused/messaging.js",
+          "line": 331,
+          "col": 1,
+          "type": "function"
+        }
+      ],
+      "usageCount": 0,
+      "usagesByFile": {}
+    },
+    {
+      "name": "AsyncFunction",
+      "definitionCount": 2,
+      "definitions": [
+        {
+          "file": "lib/zCLIENT_BOOTSTRAP.js",
+          "line": 5,
+          "col": 3,
+          "type": "arrow"
+        },
+        {
+          "file": "lib/zPROXIED_REQUIRE.js",
+          "line": 5,
+          "col": 3,
+          "type": "arrow"
+        }
+      ],
+      "usageCount": 0,
+      "usagesByFile": {}
+    },
+    {
+      "name": "buyFromGoblin2",
+      "definitionCount": 2,
+      "definitions": [
+        {
+          "file": "lib/npc_goblin_buy.js",
+          "line": 2,
+          "col": 7,
+          "type": "function"
+        },
+        {
+          "file": "lib/npc_goblin_buy.js",
+          "line": 64,
+          "col": 20,
+          "type": "module_export"
+        }
+      ],
+      "usageCount": 0,
+      "usagesByFile": {}
+    },
+    {
+      "name": "buyScrolls",
+      "definitionCount": 2,
+      "definitions": [
+        {
+          "file": "lib/rule_buying.js",
+          "line": 257,
+          "col": 1,
+          "type": "function"
+        },
+        {
+          "file": "lib/rule_buying.js",
+          "line": 278,
+          "col": 48,
+          "type": "module_export"
+        }
+      ],
+      "usageCount": 0,
+      "usagesByFile": {}
+    },
+    {
+      "name": "do_trade_manipulation",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/unused/trading.js",
+          "line": 3,
+          "col": 4,
+          "type": "function"
+        }
+      ],
+      "usageCount": 0,
+      "usagesByFile": {}
+    },
+    {
+      "name": "doExchange",
+      "definitionCount": 2,
+      "definitions": [
+        {
+          "file": "lib/unused/exchanging.js",
+          "line": 1,
+          "col": 1,
+          "type": "function"
+        },
+        {
+          "file": "lib/unused/exchanging.js",
+          "line": 80,
+          "col": 20,
+          "type": "module_export"
+        }
+      ],
+      "usageCount": 0,
+      "usagesByFile": {}
+    },
+    {
+      "name": "doUnpack",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/unused/messaging.js",
+          "line": 355,
+          "col": 7,
+          "type": "function"
+        }
+      ],
+      "usageCount": 0,
+      "usagesByFile": {}
+    },
+    {
+      "name": "drawLine",
+      "definitionCount": 3,
+      "definitions": [
+        {
+          "file": "lib/fn_math.js",
+          "line": 13,
+          "col": 1,
+          "type": "function"
+        },
+        {
+          "file": "lib/unused/geometry.js",
+          "line": 1,
+          "col": 1,
+          "type": "function"
+        },
+        {
+          "file": "lib/unused/geometry.js",
+          "line": 29,
+          "col": 20,
+          "type": "module_export"
+        }
+      ],
+      "usageCount": 0,
+      "usagesByFile": {}
+    },
+    {
+      "name": "eventHandler",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/unused/character_events.js",
+          "line": 3,
+          "col": 7,
+          "type": "function"
+        }
+      ],
+      "usageCount": 0,
+      "usagesByFile": {}
+    },
+    {
+      "name": "fetchLatestGithubSha",
+      "definitionCount": 2,
+      "definitions": [
+        {
+          "file": "lib/zCLIENT_BOOTSTRAP.js",
+          "line": 61,
+          "col": 3,
+          "type": "arrow"
+        },
+        {
+          "file": "lib/zPROXIED_REQUIRE.js",
+          "line": 61,
+          "col": 3,
+          "type": "arrow"
+        }
+      ],
+      "usageCount": 0,
+      "usagesByFile": {}
+    },
+    {
+      "name": "full_pack",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/unused/messaging.js",
+          "line": 337,
+          "col": 1,
+          "type": "arrow"
+        }
+      ],
+      "usageCount": 0,
+      "usagesByFile": {}
+    },
+    {
+      "name": "get_module",
+      "definitionCount": 2,
+      "definitions": [
+        {
+          "file": "lib/zCLIENT_BOOTSTRAP.js",
+          "line": 283,
+          "col": 3,
+          "type": "arrow"
+        },
+        {
+          "file": "lib/zPROXIED_REQUIRE.js",
+          "line": 254,
+          "col": 3,
+          "type": "arrow"
+        }
+      ],
+      "usageCount": 0,
+      "usagesByFile": {}
+    },
+    {
+      "name": "getRemoteReloadConfig",
+      "definitionCount": 2,
+      "definitions": [
+        {
+          "file": "lib/zCLIENT_BOOTSTRAP.js",
+          "line": 33,
+          "col": 3,
+          "type": "arrow"
+        },
+        {
+          "file": "lib/zPROXIED_REQUIRE.js",
+          "line": 33,
+          "col": 3,
+          "type": "arrow"
+        }
+      ],
+      "usageCount": 0,
+      "usagesByFile": {}
+    },
+    {
+      "name": "lib_key_from_name",
+      "definitionCount": 2,
+      "definitions": [
+        {
+          "file": "lib/zCLIENT_BOOTSTRAP.js",
+          "line": 243,
+          "col": 3,
+          "type": "arrow"
+        },
+        {
+          "file": "lib/zPROXIED_REQUIRE.js",
+          "line": 214,
+          "col": 3,
+          "type": "arrow"
+        }
+      ],
+      "usageCount": 0,
+      "usagesByFile": {}
+    },
+    {
+      "name": "localRequire",
+      "definitionCount": 2,
+      "definitions": [
+        {
+          "file": "lib/zCLIENT_BOOTSTRAP.js",
+          "line": 269,
+          "col": 5,
+          "type": "arrow"
+        },
+        {
+          "file": "lib/zPROXIED_REQUIRE.js",
+          "line": 240,
+          "col": 5,
+          "type": "arrow"
+        }
+      ],
+      "usageCount": 0,
+      "usagesByFile": {}
+    },
+    {
+      "name": "maybeReloadIfChanged",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/zCLIENT_BOOTSTRAP.js",
+          "line": 136,
+          "col": 5,
+          "type": "arrow"
+        }
+      ],
+      "usageCount": 0,
+      "usagesByFile": {}
+    },
+    {
+      "name": "moveInCircle",
+      "definitionCount": 2,
+      "definitions": [
+        {
+          "file": "lib/unused/move_in_circle.js",
+          "line": 1,
+          "col": 1,
+          "type": "function"
+        },
+        {
+          "file": "lib/unused/move_in_circle.js",
+          "line": 20,
+          "col": 20,
+          "type": "module_export"
+        }
+      ],
+      "usageCount": 0,
+      "usagesByFile": {}
+    },
+    {
+      "name": "normalize_module_name",
+      "definitionCount": 2,
+      "definitions": [
+        {
+          "file": "lib/zCLIENT_BOOTSTRAP.js",
+          "line": 221,
+          "col": 3,
+          "type": "arrow"
+        },
+        {
+          "file": "lib/zPROXIED_REQUIRE.js",
+          "line": 195,
+          "col": 3,
+          "type": "arrow"
+        }
+      ],
+      "usageCount": 0,
+      "usagesByFile": {}
+    },
+    {
+      "name": "proxied_require",
+      "definitionCount": 4,
+      "definitions": [
+        {
+          "file": "lib/zCLIENT_BOOTSTRAP.js",
+          "line": 1,
+          "col": 1,
+          "type": "arrow"
+        },
+        {
+          "file": "lib/zCLIENT_BOOTSTRAP.js",
+          "line": 292,
+          "col": 9,
+          "type": "function"
+        },
+        {
+          "file": "lib/zPROXIED_REQUIRE.js",
+          "line": 1,
+          "col": 1,
+          "type": "arrow"
+        },
+        {
+          "file": "lib/zPROXIED_REQUIRE.js",
+          "line": 263,
+          "col": 9,
+          "type": "function"
+        }
+      ],
+      "usageCount": 0,
+      "usagesByFile": {}
+    },
+    {
+      "name": "pull_trade_item",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/unused/trading.js",
+          "line": 10,
+          "col": 4,
+          "type": "function"
+        }
+      ],
+      "usageCount": 0,
+      "usagesByFile": {}
+    },
+    {
+      "name": "readLastFetch",
+      "definitionCount": 2,
+      "definitions": [
+        {
+          "file": "lib/zCLIENT_BOOTSTRAP.js",
+          "line": 114,
+          "col": 5,
+          "type": "arrow"
+        },
+        {
+          "file": "lib/zPROXIED_REQUIRE.js",
+          "line": 114,
+          "col": 5,
+          "type": "arrow"
+        }
+      ],
+      "usageCount": 0,
+      "usagesByFile": {}
+    },
+    {
+      "name": "readStoredSha",
+      "definitionCount": 2,
+      "definitions": [
+        {
+          "file": "lib/zCLIENT_BOOTSTRAP.js",
+          "line": 100,
+          "col": 5,
+          "type": "arrow"
+        },
+        {
+          "file": "lib/zPROXIED_REQUIRE.js",
+          "line": 100,
+          "col": 5,
+          "type": "arrow"
+        }
+      ],
+      "usageCount": 0,
+      "usagesByFile": {}
+    },
+    {
+      "name": "reloadIfChanged",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/zPROXIED_REQUIRE.js",
+          "line": 136,
+          "col": 5,
+          "type": "arrow"
+        }
+      ],
+      "usageCount": 0,
+      "usagesByFile": {}
+    },
+    {
+      "name": "request_merchant",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/unused/messaging.js",
+          "line": 322,
+          "col": 1,
+          "type": "function"
+        }
+      ],
+      "usageCount": 0,
+      "usagesByFile": {}
+    },
+    {
+      "name": "resolveRelativePath",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/zCLIENT_BOOTSTRAP.js",
+          "line": 195,
+          "col": 3,
+          "type": "arrow"
+        }
+      ],
+      "usageCount": 0,
+      "usagesByFile": {}
+    },
+    {
+      "name": "run",
+      "definitionCount": 2,
+      "definitions": [
+        {
+          "file": "lib/zCLIENT_BOOTSTRAP.js",
+          "line": 261,
+          "col": 3,
+          "type": "arrow"
+        },
+        {
+          "file": "lib/zPROXIED_REQUIRE.js",
+          "line": 232,
+          "col": 3,
+          "type": "arrow"
+        }
+      ],
+      "usageCount": 0,
+      "usagesByFile": {}
+    },
+    {
+      "name": "safeNow",
+      "definitionCount": 2,
+      "definitions": [
+        {
+          "file": "lib/zCLIENT_BOOTSTRAP.js",
+          "line": 59,
+          "col": 3,
+          "type": "arrow"
+        },
+        {
+          "file": "lib/zPROXIED_REQUIRE.js",
+          "line": 59,
+          "col": 3,
+          "type": "arrow"
+        }
+      ],
+      "usageCount": 0,
+      "usagesByFile": {}
+    },
+    {
+      "name": "send_equip",
+      "definitionCount": 3,
+      "definitions": [
+        {
+          "file": "lib/unused/messaging.js",
+          "line": 266,
+          "col": 7,
+          "type": "function"
+        },
+        {
+          "file": "lib/unused/party.js",
+          "line": 1,
+          "col": 1,
+          "type": "function"
+        },
+        {
+          "file": "lib/unused/party.js",
+          "line": 7,
+          "col": 20,
+          "type": "module_export"
+        }
+      ],
+      "usageCount": 0,
+      "usagesByFile": {}
+    },
+    {
+      "name": "send_telegram",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/ext/telegram.js",
+          "line": 1,
+          "col": 1,
+          "type": "function"
+        }
+      ],
+      "usageCount": 0,
+      "usagesByFile": {}
+    },
+    {
+      "name": "send_to_merchant",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/unused/messaging.js",
+          "line": 326,
+          "col": 1,
+          "type": "function"
+        }
+      ],
+      "usageCount": 0,
+      "usagesByFile": {}
+    },
+    {
+      "name": "sendToMerchant",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/unused/messaging.js",
+          "line": 305,
+          "col": 1,
+          "type": "function"
+        }
+      ],
+      "usageCount": 0,
+      "usagesByFile": {}
+    },
+    {
+      "name": "sendToTelegram",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/ext/telegram.js",
+          "line": 29,
+          "col": 1,
+          "type": "function"
+        }
+      ],
+      "usageCount": 0,
+      "usagesByFile": {}
+    },
+    {
+      "name": "set_farm",
+      "definitionCount": 1,
+      "definitions": [
+        {
+          "file": "lib/unused/messaging.js",
+          "line": 34,
+          "col": 1,
+          "type": "function"
+        }
+      ],
+      "usageCount": 0,
+      "usagesByFile": {}
+    },
+    {
+      "name": "shaStorageKeys",
+      "definitionCount": 2,
+      "definitions": [
+        {
+          "file": "lib/zCLIENT_BOOTSTRAP.js",
+          "line": 50,
+          "col": 3,
+          "type": "arrow"
+        },
+        {
+          "file": "lib/zPROXIED_REQUIRE.js",
+          "line": 50,
+          "col": 3,
+          "type": "arrow"
+        }
+      ],
+      "usageCount": 0,
+      "usagesByFile": {}
+    },
+    {
+      "name": "startRemoteReloadWatcher",
+      "definitionCount": 2,
+      "definitions": [
+        {
+          "file": "lib/zCLIENT_BOOTSTRAP.js",
+          "line": 83,
+          "col": 3,
+          "type": "arrow"
+        },
+        {
+          "file": "lib/zPROXIED_REQUIRE.js",
+          "line": 83,
+          "col": 3,
+          "type": "arrow"
+        }
+      ],
+      "usageCount": 0,
+      "usagesByFile": {}
+    },
+    {
+      "name": "writeLastError",
+      "definitionCount": 2,
+      "definitions": [
+        {
+          "file": "lib/zCLIENT_BOOTSTRAP.js",
+          "line": 128,
+          "col": 5,
+          "type": "arrow"
+        },
+        {
+          "file": "lib/zPROXIED_REQUIRE.js",
+          "line": 128,
+          "col": 5,
+          "type": "arrow"
+        }
+      ],
+      "usageCount": 0,
+      "usagesByFile": {}
+    },
+    {
+      "name": "writeLastFetch",
+      "definitionCount": 2,
+      "definitions": [
+        {
+          "file": "lib/zCLIENT_BOOTSTRAP.js",
+          "line": 121,
+          "col": 5,
+          "type": "arrow"
+        },
+        {
+          "file": "lib/zPROXIED_REQUIRE.js",
+          "line": 121,
+          "col": 5,
+          "type": "arrow"
+        }
+      ],
+      "usageCount": 0,
+      "usagesByFile": {}
+    },
+    {
+      "name": "writeStoredSha",
+      "definitionCount": 2,
+      "definitions": [
+        {
+          "file": "lib/zCLIENT_BOOTSTRAP.js",
+          "line": 107,
+          "col": 5,
+          "type": "arrow"
+        },
+        {
+          "file": "lib/zPROXIED_REQUIRE.js",
+          "line": 107,
+          "col": 5,
+          "type": "arrow"
+        }
+      ],
+      "usageCount": 0,
+      "usagesByFile": {}
+    }
+  ]
+}
