@@ -307,7 +307,7 @@ const proxied_require = (() => {
 // Local override for telemetry websocket port when loading remote code.
 // Set to a number (e.g., 8787) to enable ws://localhost:<port>.
 // Leave null to keep telemetry disabled by default.
-const TELEMETRY_WS_PORT = 8787;
+const TELEMETRY_WS_PORT = null;
 
 // Load module + expose globally
 (async () => {
@@ -329,16 +329,22 @@ const TELEMETRY_WS_PORT = 8787;
     console.log("Failed to set AL_BOTS_CONFIG:", e);
   }
 
-  const libs = await proxied_require("main.js");
-  const { main } = libs.main;
+  const libs = await proxied_require("al_main.js");
+  const entry = libs.al_main || libs.main;
+  if (!entry || typeof entry.main !== "function") {
+    throw new Error(
+      `Entry module not found or invalid. Expected libs.al_main/main with exported main(). Keys: ${Object.keys(libs || {}).join(", ")}`,
+    );
+  }
+  const { main } = entry;
 
   // Expose exports for easy inspection from the console/snippets.
   // This keeps getters intact (e.g., AL_BOTS.bot).
   try {
-    window.AL_BOTS = libs.main;
+    window.AL_BOTS = entry;
     Object.defineProperty(window, "bot", {
       configurable: true,
-      get: () => libs.main.bot,
+      get: () => entry.bot,
     });
   } catch (e) {
     console.log("Failed to expose AL_BOTS globals:", e);
