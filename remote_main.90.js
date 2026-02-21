@@ -309,8 +309,37 @@ const proxied_require = (() => {
 // Leave null to keep telemetry disabled by default.
 const TELEMETRY_WS_PORT = null;
 
+// Boot diagnostics for remote-loaded startup.
+try {
+  if (typeof window !== "undefined") {
+    window.AL_BOTS_BOOT = {
+      startedAt: new Date().toISOString(),
+      stage: "bootstrap_loaded",
+      ok: false,
+      error: null,
+    };
+  }
+} catch {
+  // ignore
+}
+
 // Load module + expose globally
 (async () => {
+  const setBootStage = (stage, extras = {}) => {
+    try {
+      if (typeof window === "undefined") return;
+      window.AL_BOTS_BOOT = {
+        ...(window.AL_BOTS_BOOT || {}),
+        stage,
+        ...extras,
+      };
+    } catch {
+      // ignore
+    }
+  };
+
+  setBootStage("bootstrap_start");
+
   try {
     if (typeof window !== "undefined" && !window.AL_BOTS_CONFIG) {
       const telemetryWsUrl =
@@ -329,7 +358,10 @@ const TELEMETRY_WS_PORT = null;
     console.log("Failed to set AL_BOTS_CONFIG:", e);
   }
 
+  setBootStage("fetch_al_main");
   const libs = await proxied_require("al_main.js");
+  setBootStage("al_main_loaded", { libKeys: Object.keys(libs || {}) });
+
   const entry = libs.al_main || libs.main;
   if (!entry || typeof entry.main !== "function") {
     throw new Error(
@@ -350,8 +382,13 @@ const TELEMETRY_WS_PORT = null;
     console.log("Failed to expose AL_BOTS globals:", e);
   }
 
+  setBootStage("before_main");
   window.main = main; // <-- REQUIRED
   await main();
+  setBootStage("after_main", {
+    ok: true,
+    botCtor: window?.AL_BOTS?.bot?.constructor?.name || null,
+  });
 
   // Start watching remote for changes and reload the iframe/page when detected.
   // This runs after main() starts so your bot can begin immediately.
@@ -362,4 +399,44 @@ const TELEMETRY_WS_PORT = null;
   } catch (e) {
     console.log("Remote reload watcher failed to start:", e);
   }
-})();
+})().catch((e) => {
+  const message = e?.stack || e?.message || String(e);
+  try {
+    if (typeof window !== "undefined") {
+      window.AL_BOTS_BOOT = {
+        ...(window.AL_BOTS_BOOT || {}),
+        ok: false,
+        stage: "failed",
+        error: message,
+        failedAt: new Date().toISOString(),
+      };
+    }
+  } catch {
+    // ignore
+  }
+
+  try {
+    console.log("[AL_BOTS_BOOT] startup failed:", e);
+  } catch {
+    // ignore
+  }
+
+  try {
+    if (typeof game_log === "function") {
+      game_log(
+        "AL_BOTS bootstrap failed — check console + window.AL_BOTS_BOOT",
+        "#FF6B6B",
+      );
+    }
+  } catch {
+    // ignore
+  }
+
+  try {
+    if (typeof set_message === "function") {
+      set_message("AL_BOTS FAILED (see window.AL_BOTS_BOOT)", "#FF6B6B");
+    }
+  } catch {
+    // ignore
+  }
+});
