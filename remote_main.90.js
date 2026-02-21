@@ -309,6 +309,14 @@ const proxied_require = (() => {
 // Leave null to keep telemetry disabled by default.
 const TELEMETRY_WS_PORT = null;
 
+try {
+  if (typeof window !== "undefined") {
+    window.TELEMETRY_WS_PORT = TELEMETRY_WS_PORT;
+  }
+} catch {
+  // ignore
+}
+
 // Boot diagnostics for remote-loaded startup.
 try {
   if (typeof window !== "undefined") {
@@ -341,17 +349,36 @@ try {
   setBootStage("bootstrap_start");
 
   try {
-    if (typeof window !== "undefined" && !window.AL_BOTS_CONFIG) {
+    if (typeof window !== "undefined") {
       const telemetryWsUrl =
         typeof TELEMETRY_WS_PORT === "number" &&
         Number.isFinite(TELEMETRY_WS_PORT)
           ? `ws://localhost:${TELEMETRY_WS_PORT}`
           : null;
+
+      const existing =
+        window.AL_BOTS_CONFIG && typeof window.AL_BOTS_CONFIG === "object"
+          ? window.AL_BOTS_CONFIG
+          : {};
+      const existingTelemetry =
+        existing.telemetry && typeof existing.telemetry === "object"
+          ? existing.telemetry
+          : {};
+
+      // Only inject defaults; never override an explicit user value.
+      const mergedTelemetry = {
+        ...existingTelemetry,
+      };
+      if (mergedTelemetry.enabled === undefined) {
+        mergedTelemetry.enabled = Boolean(telemetryWsUrl);
+      }
+      if (mergedTelemetry.wsUrl === undefined) {
+        mergedTelemetry.wsUrl = telemetryWsUrl;
+      }
+
       window.AL_BOTS_CONFIG = {
-        telemetry: {
-          enabled: Boolean(telemetryWsUrl),
-          wsUrl: telemetryWsUrl,
-        },
+        ...existing,
+        telemetry: mergedTelemetry,
       };
     }
   } catch (e) {
