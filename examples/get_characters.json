@@ -1,0 +1,218 @@
+[
+  {
+    "x": -99.45304504132761,
+    "y": 6.7096097041766996,
+    "id": "5834542520205312",
+    "name": "prayerBeads",
+    "level": 84,
+    "type": "priest",
+    "online": 282143.637,
+    "server": "USII",
+    "secret": "Fce7e0fuuI1OAtNM1SkhhtlZ",
+    "skin": "mbody5g",
+    "cx": {
+      "hair": "hairdo120",
+      "head": "makeup117"
+    },
+    "in": "main",
+    "map": "main",
+    "home": "USI"
+  },
+  {
+    "x": -1367.9999999,
+    "y": -216,
+    "id": "5917625474875392",
+    "name": "VendorGuy",
+    "level": 75,
+    "type": "merchant",
+    "online": 42144.295,
+    "server": "USII",
+    "secret": "Gge1scvXhhFAQDsJyOMTIEPZ",
+    "skin": "marmor12b",
+    "cx": {
+      "hair": "hairdo518",
+      "head": "mmakeup00"
+    },
+    "in": "main",
+    "map": "main",
+    "home": "USII"
+  },
+  {
+    "x": 126,
+    "y": -398,
+    "id": "5619522392555520",
+    "name": "Boink",
+    "level": 83,
+    "type": "warrior",
+    "online": 18128.395999999997,
+    "server": "USII",
+    "secret": "kq4Lk9FXAyMPpOZZ9BJ29eu2",
+    "skin": "sarmor2d",
+    "cx": {
+      "upper": "sarmor2d"
+    },
+    "in": "main",
+    "map": "main",
+    "home": "USII"
+  },
+  {
+    "x": -1209.2000389794066,
+    "y": -249.30114094832737,
+    "id": "5803834275790848",
+    "name": "camelCase",
+    "level": 88,
+    "type": "ranger",
+    "online": 17833.735,
+    "server": "USII",
+    "secret": "ys1cvT1qQqHwBPWuhOrOWn5X",
+    "skin": "mbody2b",
+    "cx": {
+      "hair": "hairdo101",
+      "head": "fmakeup03",
+      "makeup": "facemakeup02"
+    },
+    "in": "main",
+    "map": "main",
+    "home": "USPVP"
+  },
+  {
+    "x": -238.16500000000002,
+    "y": -274.21000000000004,
+    "id": "5389386977378304",
+    "name": "Teef",
+    "level": 79,
+    "type": "rogue",
+    "online": 0,
+    "rip": true,
+    "skin": "sbody1c",
+    "cx": {
+      "hair": "hairdo522",
+      "head": "makeup117",
+      "chin": "beard112"
+    },
+    "in": "level4",
+    "map": "level4",
+    "home": "USI"
+  },
+  {
+    "x": -138.2512660988656,
+    "y": 173.9999999,
+    "id": "5474702274854912",
+    "name": "Hoodlamb",
+    "level": 59,
+    "type": "mage",
+    "online": 0,
+    "skin": "mbody5f",
+    "cx": {
+      "head": "fmakeup03"
+    },
+    "in": "level2s",
+    "map": "level2s",
+    "home": "USI"
+  },
+  {
+    "x": -85.51283679192773,
+    "y": -114.32220890397492,
+    "id": "5248672641581056",
+    "name": "SaladMan",
+    "level": 64,
+    "type": "paladin",
+    "online": 0,
+    "skin": "marmor4b",
+    "cx": {
+      "hair": "hairdo405",
+      "head": "fmakeup01"
+    },
+    "in": "main",
+    "map": "main",
+    "home": "USI"
+  },
+  {
+    "x": -99.00430360974092,
+    "y": 1892.1728334181553,
+    "id": "4632544013713408",
+    "name": "couplaGrapes",
+    "level": 81,
+    "type": "ranger",
+    "online": 0,
+    "skin": "mbody2b",
+    "cx": {
+      "hair": "hairdo206",
+      "head": "fmakeup03",
+      "makeup": "facemakeup02"
+    },
+    "in": "main",
+    "map": "main",
+    "home": "USI"
+  },
+  {
+    "x": -0.11109511310676723,
+    "y": -91.8291493271474,
+    "id": "6380659709050880",
+    "name": "skoozle",
+    "level": 1,
+    "type": "rogue",
+    "online": 0,
+    "skin": "sarmor1h",
+    "cx": {
+      "head": "fmakeup03",
+      "hair": "hairdo210"
+    },
+    "in": "bank",
+    "map": "bank",
+    "home": "USII"
+  },
+  {
+    "x": 410.15944986445686,
+    "y": -694.162918828168,
+    "id": "6749904389275648",
+    "name": "doot",
+    "level": 1,
+    "type": "paladin",
+    "online": 0,
+    "rip": true,
+    "skin": "marmor4b",
+    "cx": {
+      "head": "fmakeup03",
+      "hair": "hairdo405"
+    },
+    "in": "spookytown",
+    "map": "spookytown",
+    "home": "USII"
+  },
+  {
+    "x": -1202.5,
+    "y": -66,
+    "id": "6083030353707008",
+    "name": "ReachOut",
+    "level": 39,
+    "type": "ranger",
+    "online": 0,
+    "skin": "mbody2b",
+    "cx": {
+      "head": "fmakeup01",
+      "hair": "hairdo206",
+      "makeup": "facemakeup02"
+    },
+    "in": "main",
+    "map": "main",
+    "home": "USII"
+  },
+  {
+    "x": -1367.9999999,
+    "y": -216,
+    "id": "4868224623837184",
+    "name": "TesterGuy",
+    "level": 18,
+    "type": "merchant",
+    "online": 0,
+    "skin": "marmor12b",
+    "cx": {
+      "head": "fmakeup01",
+      "hair": "hairdo520"
+    },
+    "in": "main",
+    "map": "main",
+    "home": "USII"
+  }
+]
