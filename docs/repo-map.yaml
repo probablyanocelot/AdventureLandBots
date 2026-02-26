@@ -1,0 +1,49 @@
+version: 1
+project: AdventureLandBots
+entrypoints:
+  - file: lib/zCLIENT_BOOTSTRAP.js
+    role: in-game bootstrap
+    calls:
+      - lib/al_main.js#main
+  - file: lib/al_main.js
+    role: bot runtime entry
+    calls:
+      - lib/runtime/character_runtime.js#bootCharacterRuntime
+layers:
+  runtime:
+    path: lib/runtime
+    owns:
+      - boot flow
+      - lifecycle/disposal
+      - module policy
+  characters:
+    path: lib/characters
+    owns:
+      - class shells
+      - composition wiring
+  modules:
+    path: lib/modules
+    contract: install(ctx) -> disposable
+  domains:
+    path: lib/domains
+    owns:
+      - cm
+      - combat
+      - events
+      - movement
+      - inventory
+      - party
+      - state
+      - gathering
+  infra:
+    path: lib/infra
+    owns:
+      - game global adapters
+important_files:
+  - lib/runtime/character_runtime.js
+  - lib/runtime/module_registry.js
+  - lib/modules/*.module.js
+  - lib/characters/base_character.js
+  - lib/domains/cm/sustain.js
+deprecated:
+  doc: docs/deprecated-paths.md
