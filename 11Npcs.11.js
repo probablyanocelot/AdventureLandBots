@@ -248,11 +248,11 @@ const shinyBlackList = [
   // "eears",
   // "epyjamas",
   // "eslippers",
-  // "xmasshoes",
-  // "xmashat",
-  // "xmaspants",
-  // "xmasrobe",
-  // "xmassweater",
+  "xmasshoes",
+  "xmashat",
+  "xmaspants",
+  "xmasrobe",
+  "xmassweater",
 ];
 
 function buyFromPonty() {

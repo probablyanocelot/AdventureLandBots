@@ -15,18 +15,19 @@ load_code("98Telegram");
 //performance_trick();
 
 try {
-	const { webFrame } = require("electron");
-webFrame.setZoomFactor(0.75);
-} catch(e){console.log(e)}
+  const { webFrame } = require("electron");
+  webFrame.setZoomFactor(0.75);
+} catch (e) {
+  console.log(e);
+}
 let lastScare;
 let lastBankUpdate = false;
 let bankUpdateTime = 1000 * 60 * 15; // sec_to_ms * num_seconds * num_minutes
 let goblin_updated = false;
 
-
 setInterval(() => {
-    parent.socket.emit("emotion", { name: "hearts_single" });
-}, 2000)
+  parent.socket.emit("emotion", { name: "hearts_single" });
+}, 2000);
 
 async function getExchangeable() {
   if (!character.bank) return;
@@ -935,18 +936,23 @@ function upgrade_replacement() {
       if (item.ps || item.acc || item.ach) continue;
       if (item.p && grade >= 1) continue;
       if (grade == 0) {
+        if (!item.p && sell_dict.merchSell.includes(itemName)) {
+          sell(itemIndex);
+          continue;
+        }
         doUpgrade("scroll0", itemIndex);
       }
       if (grade == 1 && item.level < 7) {
         doUpgrade("scroll1", itemIndex);
       }
-      if (grade == 1 && item.level >= 7) {
+      if (grade == 1 && item.level < 8) {
         doUpgrade("scroll2", itemIndex);
       }
-      if (grade == 2 && item.level < 8) {
+      if (grade == 2 && item.level < 3) {
         doUpgrade("scroll2", itemIndex);
       }
       if (grade == 2 && item.level >= 8) continue;
+      continue;
     }
   }
   setTimeout(upgrade_replacement, TIMEOUT);

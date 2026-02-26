@@ -275,7 +275,9 @@ let sell_dict = {
     "mushroomstaff",
     "iceskates",
     "sword",
+    "dagger",
 
+    "ornamentstaff",
     "epyjamas",
     "carrotsword",
     "xmassweater",
