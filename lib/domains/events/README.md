@@ -13,6 +13,8 @@ Import from `./index.js`.
 - `joinFirstActiveEvent`
 - `onCharacter`, `onGame`, `waitForCharacterEvent`, `waitForCm`, `waitForCmBatch`, `installGlobalRuntimeListeners`, `stopGlobalRuntimeListeners`
 
+Catalog helpers are defined in `server_event_catalog.js` and consumed by emitter/join/combat flows.
+
 ## Dependency edges
 
 - Used by most domains for async/game event coordination.

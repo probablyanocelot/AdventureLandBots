@@ -16,10 +16,12 @@ Core bot runtime and domain logic.
 - `characters/` — class shells + composition helpers.
 - `modules/` — runtime installables (`install(ctx) -> disposable`).
 - `domains/` — source-of-truth behavior by domain.
+- `domains/shared/` — cross-domain helper utilities (time, roster, location, game/data/math helpers).
+- `domains/orchestrator/` — orchestrator coordination runtime.
 - `infra/` — adapters for engine globals.
 - `telemetry/` — websocket telemetry services.
 - `bootstrap/` — client bootstrap pipeline modules (`proxied_require`, telemetry bootstrap, swap-routing bootstrap).
-- root `fn_*.js`, `al_*.js`, `npc_*.js` — shared helpers/config and narrow utilities.
+- root entrypoints (`client_bootstrap.js`, `al_main.js`) — launch/runtime roots only.
 
 ## Minimal-context read map
 
@@ -42,6 +44,8 @@ Read in this order and stop as soon as you have enough context:
 - Movement routing → `domains/movement/README.md`, `domains/movement/index.js`, `move_manager.js`
 - State flags/guards → `domains/state/README.md`, `domains/state/index.js`, `flags.js`
 - CM services/upkeep → `domains/cm/README.md`, `domains/cm/index.js`, target CM file
+- Cross-domain helpers → `domains/shared/README.md`, `domains/shared/index.js`, target helper file
+- Orchestrator coordination → `domains/orchestrator/README.md`, `domains/orchestrator/orchestrator.js`
 - Client bootstrap/proxied loading → `bootstrap/index.js`, then one of `bootstrap/proxied_require.js|bootstrap/telemetry_bootstrap.js|bootstrap/swap_routing_bootstrap.js`
 
 Avoid loading unrelated large files (`gui/*`, `unused/*`) unless the task explicitly depends on them.

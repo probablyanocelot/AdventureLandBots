@@ -14,6 +14,8 @@ Import from `./index.js`.
 - `installUnpackRequester`
 - `installUpkeep`
 
+Magiport expectation/auto-accept state is owned by `magiport_accept.js`.
+
 ## Dependency edges
 
 - Depends on event listeners, party/swap behavior, and game globals via shared helpers.

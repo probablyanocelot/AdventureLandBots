@@ -2,7 +2,7 @@
 
 ## Ownership
 
-Merchant gather behavior and gather FSM state transitions.
+Merchant gather behavior, gather FSM state transitions, and NPC market-buy helpers.
 
 ## Public API
 
@@ -10,6 +10,9 @@ Import from `./index.js`.
 
 - `createMerchantBehavior`
 - `MerchantGatherFsm`
+- `buyFromPonty` (`ponty_buy.js`)
+- `buyFromGoblin2` (`goblin_buy.js`, currently staged for future refactor/integration)
+- Buying lists/rules (`buying_rules.js`)
 
 ## Dependency edges
 
