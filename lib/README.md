@@ -4,7 +4,6 @@ Core bot runtime and domain logic.
 
 ## Entrypoints
 
-- `zCLIENT_BOOTSTRAP.js` — in-game bootstrap loader.
 - `bootstrap/index.js` — client bootstrap entry (proxied loader + telemetry/swap bootstrap wiring).
 - `client_bootstrap.js` — thin launcher delegating to `bootstrap/index.js`.
 - `al_main.js` — top-level runtime entry (`main`).
@@ -27,11 +26,10 @@ Core bot runtime and domain logic.
 
 Read in this order and stop as soon as you have enough context:
 
-1. `RESTRUCTURE_PLAN_HANDOFF.md`
-2. `domains/<domain>/README.md`
-3. `domains/<domain>/index.js`
-4. only the concrete module you need to edit
-5. only direct callers/callees needed for integration checks
+1. `domains/<domain>/README.md`
+2. `domains/<domain>/index.js`
+3. only the concrete module you need to edit
+4. only direct callers/callees needed for integration checks
 
 ### If changing X, read Y only
 
@@ -55,9 +53,5 @@ Avoid loading unrelated large files (`gui/*`, `unused/*`) unless the task explic
 - Keep runtime and class files orchestration-thin.
 - Move behavior/state ownership into `domains/*`.
 - Keep external side effects behind `infra/*` where practical.
-
-## Compatibility
-
-Legacy root shim files were removed. Import domain/character/runtime modules directly.
 
 Prefer domain entrypoints (`domains/*/index.js`) for new imports.
