@@ -16,7 +16,7 @@ Import from `./index.js`.
 
 ## Dependency edges
 
-- Depends on `party`, `events`, `fn_time`, `al_config`, and roster helpers.
+- Depends on `party`, `events`, `shared/time`, `config/index.js`, and roster helpers.
 - Primary consumer is `al_farming_config.js` orchestration loop.
 
 ## Anti-patterns
