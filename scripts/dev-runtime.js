@@ -1,6 +1,12 @@
 const { spawn } = require("child_process");
 
-const npmBin = process.platform === "win32" ? "npm.cmd" : "npm";
+const npmExecPath = process.env.npm_execpath;
+const npmCommand = npmExecPath ? process.execPath : "npm";
+const npmArgPrefix = npmExecPath ? [npmExecPath] : [];
+const npmSpawnOptions = {
+  stdio: "inherit",
+  shell: process.platform === "win32" && !npmExecPath,
+};
 
 const hasArg = (flag) => process.argv.includes(flag);
 
@@ -22,12 +28,12 @@ const CHILD_CONFIGS = [
   },
 ];
 
+const spawnNpm = (args) =>
+  spawn(npmCommand, [...npmArgPrefix, ...args], npmSpawnOptions);
+
 const runNpm = (args, id) =>
   new Promise((resolve, reject) => {
-    const child = spawn(npmBin, args, {
-      stdio: "inherit",
-      shell: false,
-    });
+    const child = spawnNpm(args);
 
     child.on("error", (err) => {
       reject(new Error(`[${id}] failed to start: ${err.message}`));
@@ -77,16 +83,15 @@ const main = async () => {
 
   if (dryRun) {
     for (const cfg of enabledChildren) {
-      console.log(`[dev:runtime] [dry-run] ${npmBin} ${cfg.args.join(" ")}`);
+      console.log(
+        `[dev:runtime] [dry-run] ${npmCommand} ${[...npmArgPrefix, ...cfg.args].join(" ")}`,
+      );
     }
     return;
   }
 
   const children = enabledChildren.map((cfg) => {
-    const child = spawn(npmBin, cfg.args, {
-      stdio: "inherit",
-      shell: false,
-    });
+    const child = spawnNpm(cfg.args);
     child.__id = cfg.id;
     return child;
   });
