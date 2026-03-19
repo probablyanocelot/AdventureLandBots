@@ -70,11 +70,11 @@ module.exports = [
             {
               group: [
                 "../../domains/**",
-                "!../../domains/party/index.js",
+                "!../../domains/party/swap.js",
                 "../../al_farming_config.js",
               ],
               message:
-                "Party bridge may only import ../../domains/party/index.js",
+                "Party bridge may only import ../../domains/party/swap.js",
             },
           ],
         },

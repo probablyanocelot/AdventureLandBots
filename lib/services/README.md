@@ -11,7 +11,7 @@ Service layer for runtime behavior modules.
 ## Current migration status
 
 - `orchestrator` service wrapper created.
-- `party` service wrappers created (`auto-party`, `priest swap`).
+- `party` is partially service-native (`auto-party` native, `priest swap` still bridged).
 - `cm` service wrappers created (`upkeep`, `unpack requester`).
 - `combat` service is service-native (`event combat`, no domain bridge).
 - `farming` service wrapper created (`no-event farming`).
