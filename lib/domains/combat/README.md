@@ -17,7 +17,7 @@ Import from `./index.js`.
 
 - `hunt_runner.js`: hunt/crab behavior, pull logic, danger estimation, and coordinated engage rules.
 - `world_event_runner.js`: event-target movement/engage flow with movement throttling.
-- `support_runner.js`: mage/priest support actions (`energize`, `heal`, `groupheal`).
+- `support_runner.js`: mage/priest support actions (`energize`, `heal`, `partyheal`).
 - `position_store.js`: shared party position persistence + teammate-destination lookup.
 - `combat_shared.js`: debug/throttle and small shared movement/normalization helpers.
 - `targeting.js`: monster selection + engagement primitives (do not duplicate ranking logic elsewhere).
