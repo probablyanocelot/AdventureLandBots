@@ -24,11 +24,21 @@ This refactor centralizes that pattern to reduce repetition and keep modules thi
     `lib/services/orchestrator/orchestrator_service.js`.
   - Added `runJoinEventModuleService()` in
     `lib/services/events/events_service.js`.
+  - Added consistent module-facing aliases (`*ModuleService`) in service wrappers:
+    - `createEventCombatModuleService`
+    - `createNoEventFarmingModuleService`
+    - `createPartyModuleService`
+    - `createPriestSwapModuleService`
+    - `createTelemetryModuleService`
+    - `createUpkeepModuleService`
+    - `createUnpackRequesterModuleService`
+    - `createOrchestratorModuleService`
   - Updated module delegates:
     - `lib/modules/orchestrator.module.js` now calls
-      `createInitializedOrchestratorService()`.
+      `createOrchestratorModuleService()`.
     - `lib/modules/join_event.module.js` now calls
       `runJoinEventModuleService()`.
+    - Remaining modules now call corresponding `*ModuleService` aliases.
 
 These are additive service API changes; existing service APIs remain intact.
 

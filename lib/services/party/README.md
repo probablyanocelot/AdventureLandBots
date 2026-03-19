@@ -6,6 +6,8 @@ Exported from `lib/services/party/index.js`:
 
 - `createPartyService({ cfg })`
 - `createPriestSwapService({ cfg })`
+- `createPartyModuleService({ cfg })`
+- `createPriestSwapModuleService({ cfg })`
 - `is_friendly(name)`
 - `getActiveNames()`
 - `ensureCharacterRunningBySwap(name, opts)`
@@ -14,6 +16,10 @@ Exported from `lib/services/party/index.js`:
 - `partyInvite(name)`
 - `partyAccept()`
 - `partyLeave()`
+
+`createPartyModuleService` and `createPriestSwapModuleService` are module-facing
+aliases used by `lib/modules/party.module.js` and
+`lib/modules/priest_swap.module.js`.
 
 Both factory functions return validated disposable resources exposing:
 

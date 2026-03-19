@@ -47,3 +47,5 @@ Service layer for runtime behavior modules.
   - call service entrypoints from `lib/services/*`, and
   - return service-owned disposables/resources.
 - Keep feature behavior in services; avoid adding new feature logic directly in modules.
+- Prefer explicit module-facing helper names in services (`*ModuleService`) for
+  APIs consumed directly by `lib/modules/*`.
