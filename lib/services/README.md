@@ -13,9 +13,9 @@ Service layer for runtime behavior modules.
 - `orchestrator` service wrapper created.
 - `party` service wrappers created (`auto-party`, `priest swap`).
 - `cm` service wrappers created (`upkeep`, `unpack requester`).
-- `combat` service wrapper created (`event combat`).
+- `combat` service is service-native (`event combat`, no domain bridge).
 - `farming` service wrapper created (`no-event farming`).
-- `events` service wrapper created (`join event`).
+- `events` service is service-native (`join event`, no domain bridge).
 - Additional services can be migrated incrementally.
 
 ## Service docs

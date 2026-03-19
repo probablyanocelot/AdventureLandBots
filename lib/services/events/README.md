@@ -5,20 +5,20 @@
 Exported from `lib/services/events/index.js`:
 
 - `joinFirstActiveEventService()`
+- `isJoinableEventService(name)`
+- `getActiveJoinableEventsService()`
 
-Returns a validated join result object with at least:
+`joinFirstActiveEventService()` returns a validated join result object with at least:
 
 - `ok` (boolean)
 - optional `joined` / `name` metadata
 
 ## Allowed legacy import path
 
-This bridge service is allowed to import exactly:
+None.
 
-- `../../domains/events/index.js`
-
-No other `domains/*` path is allowed in this service folder.
+`events_service.js` uses service-owned files (`join_flow.js`, `active_event_catalog.js`) and `infra/game_api.js` only.
 
 ## Migration note
 
-`joinFirstActiveEvent` should migrate into service-native events modules so domain bridge usage can be removed.
+`joinFirstActiveEvent` has been migrated into service-native modules.

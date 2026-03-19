@@ -14,12 +14,10 @@ Returns a validated disposable resource exposing:
 
 ## Allowed legacy import path
 
-This bridge service is allowed to import exactly:
+None.
 
-- `../../domains/combat/index.js`
-
-No other `domains/*` path is allowed in this service folder.
+`combat_service.js` uses service-owned modules (`event_combat_runtime.js`, `skills.js`) and service/public dependencies only.
 
 ## Migration note
 
-`installEventCombat` should migrate from legacy combat domain into `lib/services/combat/*` so this wrapper can become the primary implementation.
+`installEventCombat` is now service-native under `lib/services/combat/*`.
