@@ -1,4 +1,6 @@
 const { spawn } = require("child_process");
+const net = require("net");
+const { getTelemetryWsPort } = require("../lib/al_env_config.js");
 
 const npmExecPath = process.env.npm_execpath;
 const npmCommand = npmExecPath ? process.execPath : "npm";
@@ -31,6 +33,54 @@ const CHILD_CONFIGS = [
 const spawnNpm = (args) =>
   spawn(npmCommand, [...npmArgPrefix, ...args], npmSpawnOptions);
 
+const probePortOnHost = (port, host) =>
+  new Promise((resolve) => {
+    const p = Number(port);
+    if (!Number.isFinite(p) || p <= 0) {
+      resolve(false);
+      return;
+    }
+
+    const socket = new net.Socket();
+    let done = false;
+    const finish = (inUse) => {
+      if (done) return;
+      done = true;
+      try {
+        socket.destroy();
+      } catch {
+        // ignore
+      }
+      resolve(inUse);
+    };
+
+    socket.setTimeout(400);
+    socket.once("connect", () => finish(true));
+    socket.once("timeout", () => finish(false));
+    socket.once("error", (err) => {
+      if (err && (err.code === "ECONNREFUSED" || err.code === "EHOSTUNREACH")) {
+        finish(false);
+        return;
+      }
+      finish(false);
+    });
+
+    try {
+      socket.connect(p, host);
+    } catch {
+      finish(false);
+    }
+  });
+
+const isPortInUse = async (port) => {
+  for (const host of ["127.0.0.1", "::1", "localhost"]) {
+    // eslint-disable-next-line no-await-in-loop
+    const used = await probePortOnHost(port, host);
+    if (used) return true;
+  }
+  return false;
+};
+
 const runNpm = (args, id) =>
   new Promise((resolve, reject) => {
     const child = spawnNpm(args);
@@ -53,7 +103,23 @@ const runNpm = (args, id) =>
   });
 
 const main = async () => {
-  const enabledChildren = CHILD_CONFIGS.filter((cfg) => cfg.enabled);
+  let enabledChildren = CHILD_CONFIGS.filter((cfg) => cfg.enabled);
+
+  const telemetryPort = getTelemetryWsPort();
+  if (
+    telemetryPort &&
+    enabledChildren.some((cfg) => cfg.id === "telemetry:server")
+  ) {
+    const telemetryPortBusy = await isPortInUse(telemetryPort);
+    if (telemetryPortBusy) {
+      enabledChildren = enabledChildren.filter(
+        (cfg) => cfg.id !== "telemetry:server",
+      );
+      console.warn(
+        `[dev:runtime] Skipping telemetry:server because ws://localhost:${telemetryPort} is already in use (likely an existing telemetry server instance).`,
+      );
+    }
+  }
 
   if (!enabledChildren.length && !runDeployFirst) {
     throw new Error(
