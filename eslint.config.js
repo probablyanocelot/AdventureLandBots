@@ -2,7 +2,7 @@ const globals = require("globals");
 
 module.exports = [
   {
-    ignores: ["game_codes/**", "examples/**"],
+    ignores: ["game_codes/**", "examples/**", "lib/dist/**"],
   },
   {
     languageOptions: {
@@ -40,7 +40,41 @@ module.exports = [
     },
   },
   {
+    files: ["lib/modules/**/*.js"],
+    rules: {
+      "no-restricted-imports": [
+        "error",
+        {
+          patterns: [
+            {
+              group: [
+                "../domains/**",
+                "../runtime/**",
+                "../characters/**",
+                "../infra/**",
+                "../telemetry/**",
+              ],
+              message:
+                "Modules must delegate behavior to services and avoid importing runtime/domain implementations directly.",
+            },
+            {
+              group: ["../services/*/**", "!../services/*/index.js"],
+              message:
+                "Modules must consume services via public service entrypoints only.",
+            },
+          ],
+        },
+      ],
+    },
+  },
+  {
     files: ["lib/services/farming/no_event_farming_runtime_impl.js"],
+    rules: {
+      "no-restricted-imports": "off",
+    },
+  },
+  {
+    files: ["lib/services/gathering/**/*.js"],
     rules: {
       "no-restricted-imports": "off",
     },

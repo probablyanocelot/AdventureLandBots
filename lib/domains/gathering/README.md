@@ -2,24 +2,20 @@
 
 ## Ownership
 
-Merchant gather behavior, gather FSM state transitions, and NPC market-buy helpers.
+Domain gathers shared rules/helpers. Merchant runtime behavior ownership moved to `lib/services/gathering/*`.
 
 ## Public API
 
-Import from `./index.js`.
+Domain exports shared helper/rules modules (for service composition):
 
-- `createMerchantBehavior`
-- `MerchantGatherFsm`
-- `buyFromPonty` (`ponty_buy.js`)
 - `buyFromGoblin2` (`goblin_buy.js`, currently staged for future refactor/integration)
 - Buying lists/rules (`buying_rules.js`)
 
 ## Dependency edges
 
-- Depends on inventory state and movement APIs.
-- Consumed by merchant runtime/modules.
+- Consumed by `lib/services/gathering/*`.
 
 ## Anti-patterns
 
 - Don’t embed merchant gather state in unrelated modules.
-- Don’t duplicate FSM transition logic outside `merchant_gather_fsm.js`.
+- Don’t move merchant runtime loops back into domains; keep runtime ownership in services.
