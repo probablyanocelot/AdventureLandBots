@@ -14,8 +14,9 @@ Service layer for runtime behavior modules.
 - `party` service is service-native (`auto-party`, `priest swap`, no domain bridge).
 - `cm` service is service-native (`upkeep`, `unpack requester`, no domain bridge).
 - `combat` service is service-native (`event combat`, no domain bridge).
-- `farming` service is in phase-2 extraction (service-local runtime bridge remains; helper logic moved to `lib/services/farming/runtime_helpers.js`).
+- `farming` service runtime is fully service-owned via `lib/services/farming/no_event_farming_runtime_impl.js` (root runtime impl removed).
 - `events` service is service-native (`join event`, no domain bridge).
+- `telemetry` service is service-native (`telemetry.module.js` -> `services/telemetry`).
 - Additional services can be migrated incrementally.
 
 ## Service docs
@@ -26,8 +27,9 @@ Service layer for runtime behavior modules.
 - `combat` → `lib/services/combat/README.md`
 - `farming` → `lib/services/farming/README.md`
 - `events` → `lib/services/events/README.md`
+- `telemetry` → `lib/services/telemetry/README.md`
 
 ## Bridge policy
 
-- Only designated bridge files may import legacy `domains/*` (or `al_farming_config.js` during farming phase-1 extraction).
+- Only designated bridge files may import legacy `domains/*`.
 - All other service files should remain domain-agnostic and use contracts/public service entrypoints.
