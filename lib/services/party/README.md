@@ -4,8 +4,6 @@
 
 Exported from `lib/services/party/index.js`:
 
-- `createPartyService({ cfg })`
-- `createPriestSwapService({ cfg })`
 - `createPartyModuleService({ cfg })`
 - `createPriestSwapModuleService({ cfg })`
 - `is_friendly(name)`
