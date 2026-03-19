@@ -25,7 +25,7 @@ module.exports = [
         {
           patterns: [
             {
-              group: ["**/domains/**", "**/al_farming_config.js"],
+              group: ["**/domains/**"],
               message:
                 "Only designated bridge service wrappers may import legacy domain/farming implementations.",
             },
@@ -40,20 +40,9 @@ module.exports = [
     },
   },
   {
-    files: ["lib/services/farming/no_event_farming_runtime.js"],
+    files: ["lib/services/farming/no_event_farming_runtime_impl.js"],
     rules: {
-      "no-restricted-imports": [
-        "error",
-        {
-          patterns: [
-            {
-              group: ["../../domains/**"],
-              message:
-                "Farming runtime bridge must not import domains directly (use ../../al_farming_config.js during phase-1 extraction).",
-            },
-          ],
-        },
-      ],
+      "no-restricted-imports": "off",
     },
   },
   {

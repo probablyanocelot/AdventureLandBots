@@ -17,9 +17,9 @@ Import from `./index.js`.
 ## Dependency edges
 
 - Depends on `party`, `events`, `shared/time`, `config/index.js`, and roster helpers.
-- Primary consumer is `al_farming_config.js` orchestration loop.
+- Primary runtime consumer is `lib/services/farming/no_event_farming_runtime_impl.js` orchestration loop.
 
 ## Anti-patterns
 
 - Don’t add orchestration loops into these modules; keep them helper-oriented.
-- Don’t import `al_farming_config.js` back into farming submodules (avoid cycles).
+- Don’t import runtime orchestration modules back into farming domain submodules (avoid cycles).

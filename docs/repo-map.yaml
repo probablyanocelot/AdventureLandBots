@@ -24,6 +24,11 @@ layers:
   modules:
     path: lib/modules
     contract: install(ctx) -> disposable
+  services:
+    path: lib/services
+    owns:
+      - service-level feature runtime composition
+      - service entrypoints and contracts
   domains:
     path: lib/domains
     owns:
