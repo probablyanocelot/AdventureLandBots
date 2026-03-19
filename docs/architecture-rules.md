@@ -13,6 +13,8 @@
 - Prefer domain imports over root legacy paths.
 - Avoid adding new root-level compatibility shims.
 - Keep cross-domain imports minimal and explicit.
+- `lib/modules/*` must delegate feature behavior to `lib/services/*` and consume services through `lib/services/<service>/index.js`.
+- `lib/modules/*` should not import `lib/domains/*` or direct runtime implementations.
 
 ## Module contract
 
