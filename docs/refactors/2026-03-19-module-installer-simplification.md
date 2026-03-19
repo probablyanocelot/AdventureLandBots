@@ -20,8 +20,8 @@ This refactor centralizes that pattern to reduce repetition and keep modules thi
   - `upkeep.module.js`
 
 - Second wave (service ownership tightening):
-  - Added `createInitializedOrchestratorService()` in
-    `lib/services/orchestrator/orchestrator_service.js`.
+  - Added eager init support in the orchestrator service (later folded into
+    `createOrchestratorModuleService()` during API tightening).
   - Added `runJoinEventModuleService()` in
     `lib/services/events/events_service.js`.
   - Added consistent module-facing aliases (`*ModuleService`) in service wrappers:
@@ -40,7 +40,19 @@ This refactor centralizes that pattern to reduce repetition and keep modules thi
       `runJoinEventModuleService()`.
     - Remaining modules now call corresponding `*ModuleService` aliases.
 
-These are additive service API changes; existing service APIs remain intact.
+These are additive service API changes scoped to module-facing usage.
+
+## Third wave (dev-branch API tightening)
+
+- Removed unused non-module service exports in:
+  - `lib/services/combat/*`
+  - `lib/services/farming/*`
+  - `lib/services/party/*`
+  - `lib/services/cm/*`
+  - `lib/services/orchestrator/*`
+- Standardized module-facing helpers as the primary exported APIs.
+- Updated `lib/characters/base_character.js` to use
+  `createTelemetryModuleService()`.
 
 ## Removed legacy/duplication surface
 

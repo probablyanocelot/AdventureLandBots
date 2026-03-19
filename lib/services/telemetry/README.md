@@ -4,11 +4,10 @@
 
 Exported from `lib/services/telemetry/index.js`:
 
-- `createTelemetryService({ cfg })`
 - `createTelemetryModuleService({ cfg })`
 
-`createTelemetryModuleService` is the module-facing alias used by
-`lib/modules/telemetry.module.js`.
+`createTelemetryModuleService` is used by `lib/modules/telemetry.module.js`
+and `lib/characters/base_character.js`.
 
 Returns the telemetry disposable from `lib/telemetry/client.js` when enabled.
 

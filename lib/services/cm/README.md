@@ -4,8 +4,6 @@
 
 Exported from `lib/services/cm/index.js`:
 
-- `createUpkeepService({ cfg })`
-- `createUnpackRequesterService({ cfg })`
 - `createUpkeepModuleService({ cfg })`
 - `createUnpackRequesterModuleService({ cfg })`
 - `installBaseCmCommands({ owner })`

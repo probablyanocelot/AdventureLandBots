@@ -4,12 +4,9 @@
 
 Exported from `lib/services/orchestrator/index.js`:
 
-- `createOrchestratorService()`
-- `createInitializedOrchestratorService()`
 - `createOrchestratorModuleService()`
-- `OrchestratorService` (class)
 
-`createOrchestratorService()` returns a validated service instance with lifecycle methods:
+`createOrchestratorModuleService()` returns a validated service instance with lifecycle methods:
 
 - `init()`
 - `stopRoutine()`
@@ -17,10 +14,7 @@ Exported from `lib/services/orchestrator/index.js`:
 - `Symbol.dispose`
 - `Symbol.asyncDispose`
 
-`createInitializedOrchestratorService()` returns the same validated service,
-after eagerly invoking `init()`.
-
-`createOrchestratorModuleService()` is the module-facing alias used by
+`createOrchestratorModuleService()` is used by
 `lib/modules/orchestrator.module.js`.
 
 ## Allowed legacy import path
