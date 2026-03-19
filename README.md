@@ -16,6 +16,8 @@ In-game startup chain:
 - `lib/characters/` — character classes + composition helpers.
 - `lib/modules/` — installable runtime modules (`install(ctx) -> disposable`).
 - `lib/domains/` — domain-owned logic (CM, combat, events, movement, inventory, party, state, gathering).
+- `lib/contracts/` — service interfaces and runtime contract validators.
+- `lib/services/` — service-layer implementations (currently orchestrator migration wrapper).
 - `lib/infra/` — adapters over game globals (`send_cm`, `join`, `smart_move`, ...).
 - `lib/telemetry/` — telemetry client/server.
 - `game_codes/` — game-specific scripts and runner compatibility.
@@ -27,6 +29,8 @@ In-game startup chain:
 - Character classes should stay thin and compose domain/services.
 - Modules must expose `install(ctx)` and return a disposable resource when active.
 - New code should avoid adding root-level shim files.
+- Service-to-service imports should use `lib/services/<service>/index.js` only.
+- Cross-service integration should prefer `lib/contracts/*` over internal imports.
 
 ## Key docs
 
