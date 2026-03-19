@@ -1,0 +1,30 @@
+{
+  "folders": [
+    {
+      "name": "party-service",
+      "path": "lib/services/party"
+    },
+    {
+      "name": "contracts",
+      "path": "lib/contracts"
+    },
+    {
+      "name": "party-module-adapter",
+      "path": "lib/modules"
+    }
+  ],
+  "settings": {
+    "files.exclude": {
+      "**/.git": true,
+      "**/node_modules": true,
+      "**/dist": true
+    },
+    "search.exclude": {
+      "**/node_modules": true,
+      "**/dist": true,
+      "lib/domains/**": true,
+      "lib/gui/**": true,
+      "lib/unused/**": true
+    }
+  }
+}

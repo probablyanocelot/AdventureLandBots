@@ -1,0 +1,30 @@
+{
+  "folders": [
+    {
+      "name": "cm-service",
+      "path": "lib/services/cm"
+    },
+    {
+      "name": "contracts",
+      "path": "lib/contracts"
+    },
+    {
+      "name": "cm-module-adapters",
+      "path": "lib/modules"
+    }
+  ],
+  "settings": {
+    "files.exclude": {
+      "**/.git": true,
+      "**/node_modules": true,
+      "**/dist": true
+    },
+    "search.exclude": {
+      "**/node_modules": true,
+      "**/dist": true,
+      "lib/domains/**": true,
+      "lib/gui/**": true,
+      "lib/unused/**": true
+    }
+  }
+}

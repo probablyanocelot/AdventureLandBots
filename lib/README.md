@@ -15,6 +15,8 @@ Core bot runtime and domain logic.
 - `characters/` — class shells + composition helpers.
 - `modules/` — runtime installables (`install(ctx) -> disposable`).
 - `domains/` — source-of-truth behavior by domain.
+- `contracts/` — service API contracts and validation helpers.
+- `services/` — migration target layer for domain services.
 - `domains/shared/` — cross-domain helper utilities (time, roster, location, game/data/math helpers).
 - `domains/orchestrator/` — orchestrator coordination runtime.
 - `infra/` — adapters for engine globals.
@@ -26,10 +28,11 @@ Core bot runtime and domain logic.
 
 Read in this order and stop as soon as you have enough context:
 
-1. `domains/<domain>/README.md`
-2. `domains/<domain>/index.js`
-3. only the concrete module you need to edit
-4. only direct callers/callees needed for integration checks
+1. `services/<service>/index.js` and `contracts/<service>_api.js` (if service exists)
+2. `domains/<domain>/README.md`
+3. `domains/<domain>/index.js`
+4. only the concrete module you need to edit
+5. only direct callers/callees needed for integration checks
 
 ### If changing X, read Y only
 
@@ -44,6 +47,12 @@ Read in this order and stop as soon as you have enough context:
 - CM services/upkeep → `domains/cm/README.md`, `domains/cm/index.js`, target CM file
 - Cross-domain helpers → `domains/shared/README.md`, `domains/shared/index.js`, target helper file
 - Orchestrator coordination → `domains/orchestrator/README.md`, `domains/orchestrator/orchestrator.js`
+- Orchestrator service migration → `services/orchestrator/index.js`, `services/orchestrator/orchestrator_service.js`, `contracts/orchestrator_api.js`
+- Party service migration → `services/party/index.js`, `services/party/party_service.js`, `contracts/party_api.js`
+- CM service migration → `services/cm/index.js`, `services/cm/cm_service.js`, `contracts/cm_api.js`
+- Combat service migration → `services/combat/index.js`, `services/combat/combat_service.js`, `contracts/combat_api.js`
+- Farming service migration → `services/farming/index.js`, `services/farming/farming_service.js`, `contracts/farming_api.js`
+- Events service migration → `services/events/index.js`, `services/events/events_service.js`, `contracts/events_api.js`
 - Client bootstrap/proxied loading → `bootstrap/index.js`, then one of `bootstrap/proxied_require.js|bootstrap/telemetry_bootstrap.js|bootstrap/swap_routing_bootstrap.js`
 
 Avoid loading unrelated large files (`gui/*`, `unused/*`) unless the task explicitly depends on them.
