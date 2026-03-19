@@ -13,6 +13,17 @@ Always confirm the service's "Allowed legacy import path" in its local README be
 
 Avoid reading or editing unrelated domains/services unless the user explicitly requests it.
 
+## Workspace quick map
+
+Prefer opening the narrow workspace that matches the service under construction:
+
+- `service-orchestrator.code-workspace` → orchestrator
+- `service-party.code-workspace` → party
+- `service-cm.code-workspace` → cm
+- `service-combat.code-workspace` → combat
+- `service-farming.code-workspace` → farming
+- `service-events.code-workspace` → events
+
 ## Layer boundaries
 
 - `lib/contracts/**` defines interfaces, validation helpers, and message shapes only.

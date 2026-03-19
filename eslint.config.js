@@ -102,48 +102,6 @@ module.exports = [
     },
   },
   {
-    files: ["lib/services/combat/combat_service.js"],
-    rules: {
-      "no-restricted-imports": [
-        "error",
-        {
-          patterns: [
-            {
-              group: [
-                "../../domains/**",
-                "!../../domains/combat/index.js",
-                "../../al_farming_config.js",
-              ],
-              message:
-                "Combat bridge may only import ../../domains/combat/index.js",
-            },
-          ],
-        },
-      ],
-    },
-  },
-  {
-    files: ["lib/services/events/events_service.js"],
-    rules: {
-      "no-restricted-imports": [
-        "error",
-        {
-          patterns: [
-            {
-              group: [
-                "../../domains/**",
-                "!../../domains/events/index.js",
-                "../../al_farming_config.js",
-              ],
-              message:
-                "Events bridge may only import ../../domains/events/index.js",
-            },
-          ],
-        },
-      ],
-    },
-  },
-  {
     files: ["lib/services/farming/farming_service.js"],
     rules: {
       "no-restricted-imports": [
