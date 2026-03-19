@@ -19,6 +19,10 @@ Service layer for runtime behavior modules.
 - `events` service is service-native (`join event`, no domain bridge).
 - `telemetry` service is service-native (`telemetry.module.js` -> `services/telemetry`).
 - `inventory` service owns runtime chest-loot helpers used by characters/runtime.
+- `helper-movement` service owns generic movement/request-throttling helpers.
+- `helper-targeting` service owns generic target selection + engagement helpers.
+- `helper-combat` service owns shared combat utility helpers.
+- `helper-data-structures` service owns generic data-structure manipulation helpers.
 - Additional services can be migrated incrementally.
 
 ## Service docs
@@ -32,6 +36,10 @@ Service layer for runtime behavior modules.
 - `events` → `lib/services/events/README.md`
 - `telemetry` → `lib/services/telemetry/README.md`
 - `inventory` → `lib/services/inventory/README.md`
+- `helper-movement` → `lib/services/helper-movement/README.md`
+- `helper-targeting` → `lib/services/helper-targeting/README.md`
+- `helper-combat` → `lib/services/helper-combat/README.md`
+- `helper-data-structures` → `lib/services/helper-data-structures/README.md`
 
 ## Bridge policy
 
@@ -49,3 +57,9 @@ Service layer for runtime behavior modules.
 - Keep feature behavior in services; avoid adding new feature logic directly in modules.
 - Prefer explicit module-facing helper names in services (`*ModuleService`) for
   APIs consumed directly by `lib/modules/*`.
+
+## Helper-category policy
+
+- Any non-feature-specific helper logic must live under `lib/services/helper-*`.
+- Domain helper files should be thin delegates only when still referenced.
+- New runtime/service code should import helper-category services directly.
