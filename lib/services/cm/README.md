@@ -6,6 +6,8 @@ Exported from `lib/services/cm/index.js`:
 
 - `createUpkeepService({ cfg })`
 - `createUnpackRequesterService({ cfg })`
+- `installBaseCmCommands({ owner })`
+- `installMagiportAutoAccept(cfg)`
 
 Each factory returns a validated disposable resource exposing:
 
@@ -15,9 +17,12 @@ Each factory returns a validated disposable resource exposing:
 
 ## Allowed legacy import path
 
-None.
+Designated bridge files only:
 
-This service is service-native and must not import `domains/*`.
+- `lib/services/cm/base_character_cm_runtime.js`
+- `lib/services/cm/magiport_accept_runtime.js`
+
+All other CM service files should remain domain-agnostic.
 
 ## Migration note
 

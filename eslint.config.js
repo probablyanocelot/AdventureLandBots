@@ -74,6 +74,21 @@ module.exports = [
     },
   },
   {
+    files: [
+      "lib/services/cm/base_character_cm_runtime.js",
+      "lib/services/cm/magiport_accept_runtime.js",
+    ],
+    rules: {
+      "no-restricted-imports": "off",
+    },
+  },
+  {
+    files: ["lib/services/events/broadcast_runtime.js"],
+    rules: {
+      "no-restricted-imports": "off",
+    },
+  },
+  {
     files: ["lib/services/gathering/**/*.js"],
     rules: {
       "no-restricted-imports": "off",

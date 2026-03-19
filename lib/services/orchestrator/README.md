@@ -5,6 +5,7 @@
 Exported from `lib/services/orchestrator/index.js`:
 
 - `createOrchestratorService()`
+- `createInitializedOrchestratorService()`
 - `OrchestratorService` (class)
 
 `createOrchestratorService()` returns a validated service instance with lifecycle methods:
@@ -14,6 +15,9 @@ Exported from `lib/services/orchestrator/index.js`:
 - `dispose()`
 - `Symbol.dispose`
 - `Symbol.asyncDispose`
+
+`createInitializedOrchestratorService()` returns the same validated service,
+after eagerly invoking `init()`.
 
 ## Allowed legacy import path
 

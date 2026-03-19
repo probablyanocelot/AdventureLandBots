@@ -6,6 +6,14 @@ Exported from `lib/services/party/index.js`:
 
 - `createPartyService({ cfg })`
 - `createPriestSwapService({ cfg })`
+- `is_friendly(name)`
+- `getActiveNames()`
+- `ensureCharacterRunningBySwap(name, opts)`
+- `setCharacterAction({ owner, action })`
+- `clearCharacterAction({ owner })`
+- `partyInvite(name)`
+- `partyAccept()`
+- `partyLeave()`
 
 Both factory functions return validated disposable resources exposing:
 
