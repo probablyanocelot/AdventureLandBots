@@ -6,8 +6,14 @@ Exported from `lib/services/cm/index.js`:
 
 - `createUpkeepService({ cfg })`
 - `createUnpackRequesterService({ cfg })`
+- `createUpkeepModuleService({ cfg })`
+- `createUnpackRequesterModuleService({ cfg })`
 - `installBaseCmCommands({ owner })`
 - `installMagiportAutoAccept(cfg)`
+
+`createUpkeepModuleService` and `createUnpackRequesterModuleService` are
+module-facing aliases used by `lib/modules/upkeep.module.js` and
+`lib/modules/unpack_requester.module.js`.
 
 Each factory returns a validated disposable resource exposing:
 

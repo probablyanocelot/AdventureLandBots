@@ -5,8 +5,12 @@
 Exported from `lib/services/combat/index.js`:
 
 - `createEventCombatService({ cfg })`
+- `createEventCombatModuleService({ cfg })`
 - `runMageSupport({ assigned })`
 - `runPriestSupport({ cfg })`
+
+`createEventCombatModuleService` is the module-facing alias used by
+`lib/modules/event_combat.module.js`.
 
 Returns a validated disposable resource exposing:
 

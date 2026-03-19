@@ -5,6 +5,10 @@
 Exported from `lib/services/farming/index.js`:
 
 - `createNoEventFarmingService({ cfg })`
+- `createNoEventFarmingModuleService({ cfg })`
+
+`createNoEventFarmingModuleService` is the module-facing alias used by
+`lib/modules/no_event_farming.module.js`.
 
 Returns a validated disposable resource exposing:
 
