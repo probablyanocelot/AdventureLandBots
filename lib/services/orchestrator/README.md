@@ -17,12 +17,10 @@ Exported from `lib/services/orchestrator/index.js`:
 
 ## Allowed legacy import path
 
-This bridge service is allowed to import exactly:
+None.
 
-- `../../domains/orchestrator/index.js`
-
-No other `domains/*` path is allowed in this service folder.
+This service is now service-native and must not import `domains/*`.
 
 ## Migration note
 
-Target end-state is replacing this bridge with direct orchestrator implementation in `lib/services/orchestrator/*` and removing the legacy domain dependency.
+Legacy orchestrator bridge import has been removed. Callers should continue to use `lib/services/orchestrator/index.js`.

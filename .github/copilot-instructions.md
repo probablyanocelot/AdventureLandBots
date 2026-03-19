@@ -13,6 +13,14 @@ Always confirm the service's "Allowed legacy import path" in its local README be
 
 Avoid reading or editing unrelated domains/services unless the user explicitly requests it.
 
+## Architecture theme requirement (mandatory)
+
+- Every new feature and every substantial feature refactor must be implemented as a service under `lib/services/<feature>/`.
+- Feature behavior must not be introduced directly in `lib/modules/**`, `lib/domains/**`, or root runtime files; those layers should only wire, install, or delegate.
+- If a change starts in a non-service file and adds feature logic, extract that logic into a service in the same change.
+- Each service must expose a public `index.js` entrypoint and keep service internals private.
+- New cross-service behavior should be modeled through contracts and service entrypoints, not private file imports.
+
 ## Workspace quick map
 
 Prefer opening the narrow workspace that matches the service under construction:
@@ -31,6 +39,8 @@ Prefer opening the narrow workspace that matches the service under construction:
 - `lib/modules/**` are runtime installers/adapters (`install(ctx)` + disposable resource).
 - `lib/domains/**` remains legacy behavior ownership during migration.
 
+For new work, treat `lib/domains/**` as migration-only legacy surface; place net-new feature logic in `lib/services/**`.
+
 ## Import rules
 
 - Service-to-service imports must target public entrypoints (`lib/services/<name>/index.js`) only.
@@ -44,6 +54,7 @@ Prefer opening the narrow workspace that matches the service under construction:
 - Preserve stop/dispose behavior on every migration step.
 - Add feature flags for strategy changes that affect many characters.
 - Keep gameplay-critical thresholds config-driven.
+- During migration, prefer moving entire feature slices into services instead of adding new domain-level code paths.
 
 ## PR hygiene
 

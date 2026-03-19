@@ -15,12 +15,10 @@ Each factory returns a validated disposable resource exposing:
 
 ## Allowed legacy import path
 
-This bridge service is allowed to import exactly:
+None.
 
-- `../../domains/cm/index.js`
-
-No other `domains/*` path is allowed in this service folder.
+This service is service-native and must not import `domains/*`.
 
 ## Migration note
 
-`installUpkeep` and `installUnpackRequester` should be moved into service-native modules under `lib/services/cm/*` before removing the bridge dependency.
+`installUpkeep` and `installUnpackRequester` are implemented in `lib/services/cm/*_runtime.js` and exported through `lib/services/cm/index.js`.
