@@ -23,6 +23,8 @@ Service layer for runtime behavior modules.
 - `helper-targeting` service owns generic target selection + engagement helpers.
 - `helper-combat` service owns shared combat utility helpers.
 - `helper-data-structures` service owns generic data-structure manipulation helpers.
+- `helper-time` service owns generic time utilities.
+- `helper-roster` service owns generic roster metadata helpers.
 - Additional services can be migrated incrementally.
 
 ## Service docs
@@ -40,6 +42,8 @@ Service layer for runtime behavior modules.
 - `helper-targeting` → `lib/services/helper-targeting/README.md`
 - `helper-combat` → `lib/services/helper-combat/README.md`
 - `helper-data-structures` → `lib/services/helper-data-structures/README.md`
+- `helper-time` → `lib/services/helper-time/README.md`
+- `helper-roster` → `lib/services/helper-roster/README.md`
 
 ## Bridge policy
 

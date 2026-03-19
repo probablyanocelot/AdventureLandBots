@@ -8,6 +8,8 @@ Non-feature-specific helper functionality has been split into dedicated helper-c
 - `lib/services/helper-targeting/`
 - `lib/services/helper-combat/`
 - `lib/services/helper-data-structures/`
+- `lib/services/helper-time/`
+- `lib/services/helper-roster/`
 
 ## Public Contracts
 
@@ -17,6 +19,8 @@ Use service entrypoints:
 - `await require("../services/helper-targeting/index.js")`
 - `await require("../services/helper-combat/index.js")`
 - `await require("../services/helper-data-structures/index.js")`
+- `await require("../services/helper-time/index.js")`
+- `await require("../services/helper-roster/index.js")`
 
 ## Removed Ownership (Legacy Paths)
 
@@ -31,8 +35,12 @@ These paths are no longer feature owners and are now compatibility delegates:
 
 - `lib/services/farming/no_event_farming_runtime_impl.js`
   - movement helper import moved to `helper-movement`
+  - time helper import moved to `helper-time`
+  - roster helper import moved to `helper-roster`
 - `lib/characters/base_character.js`
   - data-structure helper import moved to `helper-data-structures`
+- `lib/services/helper-targeting/targeting.js`
+  - removed dependency on `domains/shared/index.js` for base target query
 
 ## Notes
 
