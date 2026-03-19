@@ -28,4 +28,8 @@ Phase-1 completed: `farming_service.js` now depends on service-local runtime bri
 
 Phase-2 in progress: shared farming runtime helpers now live in `lib/services/farming/runtime_helpers.js` and are consumed by the legacy runtime.
 
-Next phase is extracting `installNoEventFarming` into service-native modules and deleting both the runtime bridge and legacy aggregator dependency.
+Phase-3 in progress: CM message handling block was extracted into `lib/services/farming/no_event_farming_cm_handler.js`; `lib/al_farming_config.js` now delegates CM handling to this service-native module.
+
+Phase-4 in progress: non-world-event leader assignment/build logic was extracted into `lib/services/farming/no_event_farming_assignment_builder.js`; `lib/al_farming_config.js` now delegates assignment construction to this service-native module.
+
+Next phase is extracting remaining leader runtime control flow (world-event broadcast/run path and hunt chain lifecycle blocks) into service-native modules and deleting both the runtime bridge and legacy aggregator dependency.
