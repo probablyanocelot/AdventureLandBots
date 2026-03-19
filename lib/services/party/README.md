@@ -15,14 +15,10 @@ Both factory functions return validated disposable resources exposing:
 
 ## Allowed legacy import path
 
-This bridge service is allowed to import exactly:
+None.
 
-- `../../domains/party/swap.js` (priest-swap only)
-
-No other `domains/*` path is allowed in this service folder.
+`party_service.js` uses service-owned modules (`auto_party_runtime.js`, `priest_swap_runtime.js`) and service/public dependencies only.
 
 ## Migration note
 
-`installAutoParty` is service-native (`auto_party_runtime.js`).
-
-`installPriestSwap` still uses legacy domain code; migrate it into `lib/services/party/*` to remove the final party bridge import.
+`installAutoParty` and `installPriestSwap` are both service-native under `lib/services/party/*`.

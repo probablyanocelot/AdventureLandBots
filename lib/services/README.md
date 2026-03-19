@@ -10,11 +10,11 @@ Service layer for runtime behavior modules.
 
 ## Current migration status
 
-- `orchestrator` service wrapper created.
-- `party` is partially service-native (`auto-party` native, `priest swap` still bridged).
-- `cm` service wrappers created (`upkeep`, `unpack requester`).
+- `orchestrator` service is service-native (no domain bridge).
+- `party` service is service-native (`auto-party`, `priest swap`, no domain bridge).
+- `cm` service is service-native (`upkeep`, `unpack requester`, no domain bridge).
 - `combat` service is service-native (`event combat`, no domain bridge).
-- `farming` service wrapper created (`no-event farming`).
+- `farming` service is in phase-2 extraction (service-local runtime bridge remains; helper logic moved to `lib/services/farming/runtime_helpers.js`).
 - `events` service is service-native (`join event`, no domain bridge).
 - Additional services can be migrated incrementally.
 
@@ -29,5 +29,5 @@ Service layer for runtime behavior modules.
 
 ## Bridge policy
 
-- Only designated `*_service.js` bridge files may import legacy `domains/*` (or `al_farming_config.js` for farming).
+- Only designated bridge files may import legacy `domains/*` (or `al_farming_config.js` during farming phase-1 extraction).
 - All other service files should remain domain-agnostic and use contracts/public service entrypoints.

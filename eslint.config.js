@@ -40,69 +40,7 @@ module.exports = [
     },
   },
   {
-    files: ["lib/services/orchestrator/orchestrator_service.js"],
-    rules: {
-      "no-restricted-imports": [
-        "error",
-        {
-          patterns: [
-            {
-              group: [
-                "../../domains/**",
-                "!../../domains/orchestrator/index.js",
-                "../../al_farming_config.js",
-              ],
-              message:
-                "Orchestrator bridge may only import ../../domains/orchestrator/index.js",
-            },
-          ],
-        },
-      ],
-    },
-  },
-  {
-    files: ["lib/services/party/party_service.js"],
-    rules: {
-      "no-restricted-imports": [
-        "error",
-        {
-          patterns: [
-            {
-              group: [
-                "../../domains/**",
-                "!../../domains/party/swap.js",
-                "../../al_farming_config.js",
-              ],
-              message:
-                "Party bridge may only import ../../domains/party/swap.js",
-            },
-          ],
-        },
-      ],
-    },
-  },
-  {
-    files: ["lib/services/cm/cm_service.js"],
-    rules: {
-      "no-restricted-imports": [
-        "error",
-        {
-          patterns: [
-            {
-              group: [
-                "../../domains/**",
-                "!../../domains/cm/index.js",
-                "../../al_farming_config.js",
-              ],
-              message: "CM bridge may only import ../../domains/cm/index.js",
-            },
-          ],
-        },
-      ],
-    },
-  },
-  {
-    files: ["lib/services/farming/farming_service.js"],
+    files: ["lib/services/farming/no_event_farming_runtime.js"],
     rules: {
       "no-restricted-imports": [
         "error",
@@ -111,7 +49,7 @@ module.exports = [
             {
               group: ["../../domains/**"],
               message:
-                "Farming bridge must not import domains directly (keep aggregation in al_farming_config.js).",
+                "Farming runtime bridge must not import domains directly (use ../../al_farming_config.js during phase-1 extraction).",
             },
           ],
         },

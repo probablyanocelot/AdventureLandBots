@@ -5,6 +5,8 @@
 Exported from `lib/services/combat/index.js`:
 
 - `createEventCombatService({ cfg })`
+- `runMageSupport({ assigned })`
+- `runPriestSupport({ cfg })`
 
 Returns a validated disposable resource exposing:
 
