@@ -21,6 +21,16 @@ Avoid reading or editing unrelated domains/services unless the user explicitly r
 - Each service must expose a public `index.js` entrypoint and keep service internals private.
 - New cross-service behavior should be modeled through contracts and service entrypoints, not private file imports.
 
+## Proxied loader runtime constraints (mandatory)
+
+This repo is designed to run inside Adventure Land via `proxied_require`.
+
+- Treat `lib/bootstrap/index.js` as the runtime bootstrap root, and `lib/al_main.js` as the required entry (exports `main`).
+- Prefer `await require("./path.js")` for internal modules; avoid ESM-only syntax that assumes bundling.
+- Guard Node/Electron-only modules behind `window.require` checks; provide safe fallbacks when unavailable.
+- Keep bootstrap logic thin: loader setup + environment wiring only. Feature behavior belongs in `lib/services/*`.
+- When changing loader behavior, keep `proxied_require` async evaluation semantics (top-level `await`) intact.
+
 ## Root ↔ service interface contract (producer/consumer only)
 
 Treat root runtime/module code and each service as boundary peers with explicit ports:
