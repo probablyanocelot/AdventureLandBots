@@ -31,3 +31,10 @@ All other CM service files should remain domain-agnostic.
 ## Migration note
 
 `installUpkeep` and `installUnpackRequester` are implemented in `lib/services/cm/*_runtime.js` and exported through `lib/services/cm/index.js`.
+
+## Upkeep economy extensions
+
+- Upkeep now delegates upgrades to `item_upgrade_runtime.js` (and `item_upgrade.js` parity).
+- Any class can auto-upgrade non-compoundables up to `cfg.upkeep.upgrade.maxLevelAnyClass` when a computer/supercomputer is present.
+- Upgrades past that cap are merchant-only up to `cfg.upkeep.upgrade.maxLevelMerchant`.
+- Upgrade scrolls are purchased on demand via `buy(scrollName, 1)` when missing.
