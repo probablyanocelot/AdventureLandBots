@@ -47,6 +47,10 @@
     {
       "name": "cm-module-adapters",
       "path": "lib/modules"
+    },
+    {
+      "name": ".github",
+      "path": ".github"
     }
   ],
   "settings": {
