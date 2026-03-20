@@ -1,8 +1,8 @@
 {
   "folders": [
     {
-      "name": "cm-service",
-      "path": "lib/services/cm"
+      "name": "helper-movement-service",
+      "path": "lib/services/helper-movement"
     },
     {
       "name": "helpers",
@@ -15,10 +15,6 @@
     {
       "name": "helper-data-structures",
       "path": "lib/services/helper-data-structures"
-    },
-    {
-      "name": "helper-movement",
-      "path": "lib/services/helper-movement"
     },
     {
       "name": "helper-roster",
@@ -45,7 +41,7 @@
       "path": "lib/contracts"
     },
     {
-      "name": "cm-module-adapters",
+      "name": "helper-movement-module-adapter",
       "path": "lib/modules"
     }
   ],

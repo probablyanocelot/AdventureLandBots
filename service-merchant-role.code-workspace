@@ -1,8 +1,8 @@
 {
   "folders": [
     {
-      "name": "cm-service",
-      "path": "lib/services/cm"
+      "name": "merchant-role-service",
+      "path": "lib/services/merchant_role"
     },
     {
       "name": "helpers",
@@ -45,7 +45,7 @@
       "path": "lib/contracts"
     },
     {
-      "name": "cm-module-adapters",
+      "name": "merchant-role-module-adapter",
       "path": "lib/modules"
     }
   ],
