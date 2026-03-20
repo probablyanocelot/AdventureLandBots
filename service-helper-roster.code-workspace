@@ -1,8 +1,8 @@
 {
   "folders": [
     {
-      "name": "cm-service",
-      "path": "lib/services/cm"
+      "name": "helper-roster-service",
+      "path": "lib/services/helper-roster"
     },
     {
       "name": "helpers",
@@ -19,10 +19,6 @@
     {
       "name": "helper-movement",
       "path": "lib/services/helper-movement"
-    },
-    {
-      "name": "helper-roster",
-      "path": "lib/services/helper-roster"
     },
     {
       "name": "helper-targeting",
@@ -45,7 +41,7 @@
       "path": "lib/contracts"
     },
     {
-      "name": "cm-module-adapters",
+      "name": "helper-roster-module-adapter",
       "path": "lib/modules"
     }
   ],

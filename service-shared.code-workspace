@@ -1,8 +1,8 @@
 {
   "folders": [
     {
-      "name": "cm-service",
-      "path": "lib/services/cm"
+      "name": "shared-service",
+      "path": "lib/services/shared"
     },
     {
       "name": "helpers",
@@ -33,10 +33,6 @@
       "path": "lib/services/helper-time"
     },
     {
-      "name": "shared",
-      "path": "lib/services/shared"
-    },
-    {
       "name": "state",
       "path": "lib/services/state"
     },
@@ -45,7 +41,7 @@
       "path": "lib/contracts"
     },
     {
-      "name": "cm-module-adapters",
+      "name": "shared-module-adapter",
       "path": "lib/modules"
     }
   ],

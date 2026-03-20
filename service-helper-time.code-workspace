@@ -1,8 +1,8 @@
 {
   "folders": [
     {
-      "name": "cm-service",
-      "path": "lib/services/cm"
+      "name": "helper-time-service",
+      "path": "lib/services/helper-time"
     },
     {
       "name": "helpers",
@@ -29,10 +29,6 @@
       "path": "lib/services/helper-targeting"
     },
     {
-      "name": "helper-time",
-      "path": "lib/services/helper-time"
-    },
-    {
       "name": "shared",
       "path": "lib/services/shared"
     },
@@ -45,7 +41,7 @@
       "path": "lib/contracts"
     },
     {
-      "name": "cm-module-adapters",
+      "name": "helper-time-module-adapter",
       "path": "lib/modules"
     }
   ],

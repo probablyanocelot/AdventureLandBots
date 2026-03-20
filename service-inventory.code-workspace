@@ -1,8 +1,8 @@
 {
   "folders": [
     {
-      "name": "cm-service",
-      "path": "lib/services/cm"
+      "name": "inventory-service",
+      "path": "lib/services/inventory"
     },
     {
       "name": "helpers",
@@ -45,7 +45,7 @@
       "path": "lib/contracts"
     },
     {
-      "name": "cm-module-adapters",
+      "name": "inventory-module-adapter",
       "path": "lib/modules"
     }
   ],
