@@ -16,7 +16,6 @@ In-game startup chain:
 - `lib/characters/` — character classes + composition helpers.
 - `lib/modules/` — installable runtime modules (`install(ctx) -> disposable`).
 - `lib/services/` — service-layer implementations (CM, combat, events, movement, inventory, party, state, gathering).
-- `lib/domains/` — legacy domain layer (migration-only; prefer services).
 - `lib/contracts/` — service interfaces and runtime contract validators.
 - `lib/infra/` — adapters over game globals (`send_cm`, `join`, `smart_move`, ...).
 - `lib/telemetry/` — telemetry client/server.

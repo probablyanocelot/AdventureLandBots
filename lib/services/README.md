@@ -25,6 +25,7 @@ Service layer for runtime behavior modules.
 - `helper-data-structures` service owns generic data-structure manipulation helpers.
 - `helper-time` service owns generic time utilities.
 - `helper-roster` service owns generic roster metadata helpers.
+- `helpers` bundle exposes a swiss-army helper entrypoint.
 - Additional services can be migrated incrementally.
 
 ## Service docs
@@ -44,6 +45,7 @@ Service layer for runtime behavior modules.
 - `helper-data-structures` → `lib/services/helper-data-structures/README.md`
 - `helper-time` → `lib/services/helper-time/README.md`
 - `helper-roster` → `lib/services/helper-roster/README.md`
+- `helpers` → `lib/services/helpers/README.md`
 
 ## Bridge policy
 
@@ -65,5 +67,5 @@ Service layer for runtime behavior modules.
 ## Helper-category policy
 
 - Any non-feature-specific helper logic must live under `lib/services/helper-*`.
-- Domain helper files should be thin delegates only when still referenced.
 - New runtime/service code should import helper-category services directly.
+- If a service needs multiple helper categories, prefer `lib/services/helpers/index.js`.

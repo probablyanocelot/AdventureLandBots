@@ -16,7 +16,6 @@ Core bot runtime and service logic.
 - `modules/` — runtime installables (`install(ctx) -> disposable`).
 - `services/` — source-of-truth behavior by service.
 - `contracts/` — service API contracts and validation helpers.
-- `domains/` — legacy domain layer (migration-only).
 - `services/shared/` — cross-service helper utilities (time, roster, location, game/data/math helpers).
 - `services/orchestrator/` — orchestrator coordination runtime.
 - `infra/` — adapters for engine globals.

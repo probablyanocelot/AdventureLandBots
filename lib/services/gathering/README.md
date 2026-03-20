@@ -11,4 +11,4 @@ Exported from `lib/services/gathering/index.js`:
 ## Ownership
 
 - Merchant runtime should consume gather behavior via this service entrypoint.
-- Character/runtime callers should not import `lib/domains/gathering/index.js` directly.
+- Character/runtime callers should not import legacy paths directly.

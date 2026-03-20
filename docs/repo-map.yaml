@@ -29,10 +29,6 @@ layers:
     owns:
       - service-level feature runtime composition
       - service entrypoints and contracts
-  domains:
-    path: lib/domains
-    owns:
-      - legacy migration-only domain modules
   infra:
     path: lib/infra
     owns:
