@@ -4,15 +4,16 @@
 
 - `lib/runtime/*` orchestrates startup and module lifecycle.
 - `lib/characters/*` should remain thin (composition and class-specific glue).
-- `lib/domains/*` owns behavior/state logic.
+- `lib/services/*` owns behavior/state logic.
+- `lib/domains/*` is legacy/migration-only.
 - `lib/modules/*` are install adapters exposing `install(ctx)`.
 - `lib/infra/*` wraps direct game globals when feasible.
 
 ## Import guidance
 
-- Prefer domain imports over root legacy paths.
+- Prefer service imports over root legacy paths.
 - Avoid adding new root-level compatibility shims.
-- Keep cross-domain imports minimal and explicit.
+- Keep cross-service imports minimal and explicit.
 - `lib/modules/*` must delegate feature behavior to `lib/services/*` and consume services through `lib/services/<service>/index.js`.
 - `lib/modules/*` should not import `lib/domains/*` or direct runtime implementations.
 

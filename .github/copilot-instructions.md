@@ -37,7 +37,7 @@ Prefer opening the narrow workspace that matches the service under construction:
 - `lib/contracts/**` defines interfaces, validation helpers, and message shapes only.
 - `lib/services/**` contains service implementations and service-local middleware.
 - `lib/modules/**` are runtime installers/adapters (`install(ctx)` + disposable resource).
-- `lib/domains/**` remains legacy behavior ownership during migration.
+- `lib/domains/**` is legacy/migration-only and should not own new behavior.
 
 For new work, treat `lib/domains/**` as migration-only legacy surface; place net-new feature logic in `lib/services/**`.
 

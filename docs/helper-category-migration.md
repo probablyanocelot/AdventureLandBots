@@ -22,9 +22,9 @@ Use service entrypoints:
 - `await require("../services/helper-time/index.js")`
 - `await require("../services/helper-roster/index.js")`
 
-## Removed Ownership (Legacy Paths)
+## Legacy Paths (Do Not Use)
 
-These paths are no longer feature owners and are now compatibility delegates:
+These paths are legacy and should not be used for new work:
 
 - `lib/domains/movement/move_manager.js`
 - `lib/domains/combat/targeting.js`

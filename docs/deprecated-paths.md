@@ -1,6 +1,6 @@
 # Deprecated / Removed Paths
 
-The following root-level compatibility shim files were removed. Use direct domain/character/runtime paths instead.
+The following root-level compatibility shim files were removed. Use direct service/character/runtime paths instead.
 
 ## Removed shims
 
@@ -30,9 +30,9 @@ The following root-level compatibility shim files were removed. Use direct domai
 ## Replacement patterns
 
 - `class_*` -> `lib/characters/*_character.js`
-- `cm_*` -> `lib/domains/cm/*`
-- `combat_*` -> `lib/domains/combat/*`
-- `event_*` -> `lib/domains/events/*`
-- `group_*` -> `lib/domains/party/*`
-- `st_bool` -> `lib/domains/state/flags.js`
-- `st_smart_move` -> `lib/domains/movement/move_manager.js`
+- `cm_*` -> `lib/services/cm/*`
+- `combat_*` -> `lib/services/combat/*`
+- `event_*` -> `lib/services/events/*`
+- `group_*` -> `lib/services/party/*`
+- `st_bool` -> `lib/services/state/flags.js`
+- `st_smart_move` -> `lib/services/movement/move_manager.js`
