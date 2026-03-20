@@ -43,6 +43,10 @@
     {
       "name": "helper-movement-module-adapter",
       "path": "lib/modules"
+    },
+    {
+      "name": ".github",
+      "path": ".github"
     }
   ],
   "settings": {

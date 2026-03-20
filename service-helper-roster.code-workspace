@@ -43,6 +43,10 @@
     {
       "name": "helper-roster-module-adapter",
       "path": "lib/modules"
+    },
+    {
+      "name": ".github",
+      "path": ".github"
     }
   ],
   "settings": {
