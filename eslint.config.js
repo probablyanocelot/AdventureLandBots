@@ -68,6 +68,23 @@ module.exports = [
     },
   },
   {
+    files: ["lib/runtime/**/*.js", "lib/characters/**/*.js"],
+    rules: {
+      "no-restricted-imports": [
+        "error",
+        {
+          patterns: [
+            {
+              group: ["../services/*/**", "!../services/*/index.js"],
+              message:
+                "Runtime/characters must consume services via public index.js entrypoints only.",
+            },
+          ],
+        },
+      ],
+    },
+  },
+  {
     files: ["lib/services/farming/no_event_farming_runtime_impl.js"],
     rules: {
       "no-restricted-imports": "off",
