@@ -32,14 +32,7 @@ layers:
   domains:
     path: lib/domains
     owns:
-      - cm
-      - combat
-      - events
-      - movement
-      - inventory
-      - party
-      - state
-      - gathering
+      - legacy migration-only domain modules
   infra:
     path: lib/infra
     owns:
@@ -49,6 +42,6 @@ important_files:
   - lib/runtime/module_registry.js
   - lib/modules/*.module.js
   - lib/characters/base_character.js
-  - lib/domains/cm/sustain.js
+  - lib/services/cm/sustain.js
 deprecated:
   doc: docs/deprecated-paths.md
