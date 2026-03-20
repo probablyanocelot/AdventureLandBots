@@ -15,7 +15,8 @@ Service layer for runtime behavior modules.
 - `cm` service is service-native (`upkeep`, `unpack requester`, no domain bridge).
 - `combat` service is service-native (`event combat`, no domain bridge).
 - `farming` service runtime is fully service-owned via `lib/services/farming/no_event_farming_runtime_impl.js` (root runtime impl removed).
-- `gathering` service owns merchant gather runtime behavior (`MerchantGatherFsm`, `createMerchantBehavior`, `buyFromPonty`).
+- `merchant` service owns merchant runtime orchestration and composes merchant-gathering + merchant-role boundaries.
+- `merchant_role` service owns non-ctype merchant-role utilities (tool provisioning today; bank crafting/unpacking later).
 - `events` service is service-native (`join event`, no domain bridge).
 - `telemetry` service is service-native (`telemetry.module.js` -> `services/telemetry`).
 - `inventory` service owns runtime chest-loot helpers used by characters/runtime.
@@ -35,7 +36,8 @@ Service layer for runtime behavior modules.
 - `cm` → `lib/services/cm/README.md`
 - `combat` → `lib/services/combat/README.md`
 - `farming` → `lib/services/farming/README.md`
-- `gathering` → `lib/services/gathering/README.md`
+- `merchant` → `lib/services/merchant/README.md`
+- `merchant_role` → `lib/services/merchant_role/README.md`
 - `events` → `lib/services/events/README.md`
 - `telemetry` → `lib/services/telemetry/README.md`
 - `inventory` → `lib/services/inventory/README.md`
