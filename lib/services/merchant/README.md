@@ -25,7 +25,20 @@ The returned service contract is validated by `lib/contracts/merchant_api.js` an
   - `gatherLoc: { fishing: Location, mining: Location }`
   - `gatherOrder: string[]`
   - `gatherRepeatMs: number`
+  - `cfg: Config` (optional merged runtime config)
 - Producers: character runtime (`lib/characters/merchant_character.js`).
+
+- Merchant runtime config payload (`cfg.merchantRuntime`):
+  - `massExchange.enabled: boolean`
+  - `mluck.enabled: boolean`
+  - `mluck.range: number`
+  - `mluck.refreshMsThreshold: number`
+  - `emotions.enabled: boolean`
+  - `emotions.emotionName: string`
+  - `emotions.intervalMs: number`
+  - `keybinds.enabled: boolean`
+  - `keybinds.giveSparesKey: string`
+  - `keybinds.devToolsKey: string`
 
 ### Produced outputs (producer side)
 
@@ -33,6 +46,11 @@ The returned service contract is validated by `lib/contracts/merchant_api.js` an
   - `goGather(strGatherType)`
   - `doVendorRuns()`
   - `stander()`
+- Merchant runtime effects:
+  - `mluck` nearby-player maintenance
+  - `massexchange`/`massexchangepp` aura upkeep
+  - optional merchant emote emission
+  - optional merchant keybind registration
 - Inventory maintenance outcomes delegated to inventory service:
   - `checkForTools() -> { boughtRod: boolean, boughtPickaxe: boolean }`
 - Consumers: merchant character runtime (single consumer today; contract supports additional consumers without changing producer internals).
