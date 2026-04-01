@@ -39,6 +39,32 @@ The returned service contract is validated by `lib/contracts/merchant_api.js` an
   - `keybinds.enabled: boolean`
   - `keybinds.giveSparesKey: string`
   - `keybinds.devToolsKey: string`
+  - `telegram.enabled: boolean`
+  - `telegram.token: string | null`
+  - `telegram.chatId: string | null`
+  - `telegram.minIntervalMs: number`
+  - `rareMobScan.enabled: boolean`
+  - `rareMobScan.names: string[]`
+  - `rareMobScan.scanIntervalMs: number`
+  - `rareMobScan.alertRepeatMs: number`
+  - `rareMobScan.announceToGameLog: boolean`
+  - `discountBuy.enabled: boolean`
+  - `discountBuy.scanIntervalMs: number`
+  - `discountBuy.maxDistance: number`
+  - `discountBuy.maxPriceRatio: number`
+  - `discountBuy.includeItemNames: string[]`
+  - `discountBuy.excludeItemNames: string[]`
+  - `discountBuy.maxPriceByItem: Record<string, number>`
+  - `discountBuy.maxQtyPerPurchase: number`
+  - `bankOverview.enabled: boolean`
+  - `bankHanoi.enabled: boolean`
+  - `bankHanoi.intervalMs: number`
+  - `compound.enabled: boolean`
+  - `compound.intervalMs: number`
+  - `compound.maxItemLevel: number`
+  - `compound.allowItemNames: string[]`
+  - `compound.denyItemNames: string[]`
+  - `citizen0Lure.enabled: boolean`
 
 ### Produced outputs (producer side)
 
@@ -51,6 +77,13 @@ The returned service contract is validated by `lib/contracts/merchant_api.js` an
   - `massexchange`/`massexchangepp` aura upkeep
   - optional merchant emote emission
   - optional merchant keybind registration
+  - optional Telegram notifications (dynamic token/chatId)
+  - optional rare-mob scanning and alerts
+  - optional nearby discount stand purchases
+  - optional Bank Overview UI bootstrap (`46BankOverview.46.js`)
+  - optional bank hanoi/slot compaction
+  - optional inventory compounding
+  - optional citizen0 lure routine usage from farming service
 - Inventory maintenance outcomes delegated to inventory service:
   - `checkForTools() -> { boughtRod: boolean, boughtPickaxe: boolean }`
 - Consumers: merchant character runtime (single consumer today; contract supports additional consumers without changing producer internals).
