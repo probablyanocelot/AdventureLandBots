@@ -1,0 +1,62 @@
+{
+  "My_Time": "~14:00",
+  "EUPVP": {
+    "schedule": {
+      "time_offset": 1,
+      "dailies": [13, 20],
+      "nightlies": [23],
+      "night": false
+    },
+    "egghunt": true,
+    "wabbit": {
+      "x": -1012.1072649249145,
+      "y": 60.508885806518265,
+      "live": true,
+      "map": "main",
+      "hp": 32000,
+      "max_hp": 32000
+    },
+    "goobrawl": {
+      "end": "2026-04-03T19:09:00.005Z"
+    }
+  },
+  "EUI": {
+    "schedule": {
+      "time_offset": 1,
+      "dailies": [13, 20],
+      "nightlies": [23],
+      "night": false
+    },
+    "egghunt": true,
+    "wabbit": {
+      "live": false,
+      "spawn": "2026-04-03T19:41:37.666Z"
+    }
+  },
+  "USI": {
+    "schedule": {
+      "time_offset": -5,
+      "dailies": [13, 20],
+      "nightlies": [23],
+      "night": false
+    },
+    "egghunt": true,
+    "wabbit": {
+      "live": false,
+      "spawn": "2026-04-03T19:48:43.441Z"
+    }
+  },
+  "ASIAI": {
+    "schedule": {
+      "time_offset": 7,
+      "dailies": [13, 20],
+      "nightlies": [23],
+      "night": true
+    },
+    "egghunt": true,
+    "wabbit": {
+      "live": false,
+      "spawn": "2026-04-03T20:08:06.651Z"
+    }
+  }
+}
