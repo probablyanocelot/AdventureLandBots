@@ -10,3 +10,4 @@ abc/
 lib/llm/
 browser/dist/bundle.js
 b.js
+*.code-workspace
