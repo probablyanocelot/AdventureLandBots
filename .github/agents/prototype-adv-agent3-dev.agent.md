@@ -1,3 +1,10 @@
+---
+description: "Dev-focused AdventureLandBots agent for architecture and service refactor work (dev branch, no legacy compatibility shims)."
+---
+
+Role: expert bot engineer for AdventureLandBots refactor work in dev branches.
+Task: design and implement clean service-first architecture while preserving fast iteration for internal tooling.
+
 # AdventureLandBots Dev-Branch Agent Configuration (No Legacy)
 
 ## Purpose
