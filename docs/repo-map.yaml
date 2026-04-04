@@ -1,15 +1,32 @@
-version: 1
+version: 2
 project: AdventureLandBots
+agent_docs:
+  - docs/llm-agent-guide.md
+  - docs/agent-index.json
 entrypoints:
   - file: lib/zCLIENT_BOOTSTRAP.js
-    role: in-game bootstrap
+    role: host bootstrap loader
+    calls:
+      - lib/bootstrap/index.js#runClientBootstrap
+  - file: lib/bootstrap/index.js
+    role: client bootstrap
     calls:
       - lib/al_main.js#main
   - file: lib/al_main.js
     role: bot runtime entry
     calls:
       - lib/runtime/character_runtime.js#bootCharacterRuntime
+runtime_flow:
+  - lib/zCLIENT_BOOTSTRAP.js
+  - lib/bootstrap/index.js#runClientBootstrap
+  - lib/al_main.js#main
+  - lib/runtime/character_runtime.js#bootCharacterRuntime
 layers:
+  bootstrap:
+    path: lib/bootstrap
+    owns:
+      - proxied loader wiring
+      - telemetry/swap bootstrap injection
   runtime:
     path: lib/runtime
     owns:
@@ -24,6 +41,13 @@ layers:
   modules:
     path: lib/modules
     contract: install(ctx) -> disposable
+    ctx_shape:
+      - cfg
+      - runtimeScope
+  contracts:
+    path: lib/contracts
+    owns:
+      - canonical service API boundary validation
   services:
     path: lib/services
     owns:
@@ -34,10 +58,96 @@ layers:
     owns:
       - game global adapters
 important_files:
+  - lib/bootstrap/index.js
+  - lib/al_main.js
   - lib/runtime/character_runtime.js
+  - lib/runtime/lifecycle.js
+  - lib/runtime/module_contract.js
   - lib/runtime/module_registry.js
   - lib/modules/*.module.js
   - lib/characters/base_character.js
-  - lib/services/cm/sustain.js
+  - lib/contracts/*.js
+stable_extension_points:
+  - path: lib/services/<service>/index.js
+    purpose: public service entrypoint
+  - path: lib/contracts/<service>_api.js
+    purpose: canonical service API contract
+  - path: lib/modules/<feature>.module.js
+    purpose: runtime install adapter
+  - path: lib/runtime/module_registry.js
+    purpose: module policy routing
+  - path: lib/characters/*_character.js
+    purpose: class behavior wiring
+service_contracts:
+  - service: cm
+    entrypoint: lib/services/cm/index.js
+    contract: lib/contracts/cm_api.js
+    required_methods:
+      - stopRoutine
+  - service: combat
+    entrypoint: lib/services/combat/index.js
+    contract: lib/contracts/combat_api.js
+    required_methods:
+      - stopRoutine
+  - service: events
+    entrypoint: lib/services/events/index.js
+    contract: lib/contracts/events_api.js
+    required_shape:
+      - result.ok:boolean (join-event)
+  - service: farming
+    entrypoint: lib/services/farming/index.js
+    contract: lib/contracts/farming_api.js
+    required_methods:
+      - stopRoutine
+  - service: inventory
+    entrypoint: lib/services/inventory/index.js
+    contract: lib/contracts/inventory_api.js
+    required_methods:
+      - stopRoutine
+  - service: merchant
+    entrypoint: lib/services/merchant/index.js
+    contract: lib/contracts/merchant_api.js
+    required_methods:
+      - botLoop
+      - start
+      - stander
+      - goGather
+      - doVendorRuns
+      - checkForTools
+      - stopRoutine
+  - service: merchant_role
+    entrypoint: lib/services/merchant_role/index.js
+    contract: lib/contracts/merchant_role_api.js
+    required_methods:
+      - checkForTools
+      - stopRoutine
+  - service: orchestrator
+    entrypoint: lib/services/orchestrator/index.js
+    contract: lib/contracts/orchestrator_api.js
+    required_methods:
+      - init
+      - stopRoutine
+  - service: party
+    entrypoint: lib/services/party/index.js
+    contract: lib/contracts/party_api.js
+    required_methods:
+      - stopRoutine
+quick_edit_map:
+  combat_behavior:
+    - lib/services/combat/index.js
+    - lib/services/combat/*
+  movement_behavior:
+    - lib/services/helper-movement/index.js
+    - lib/services/helper-movement/*
+  add_runtime_module:
+    - lib/modules/*.module.js
+    - lib/runtime/module_registry.js
+  add_character_behavior:
+    - lib/characters/*_character.js
+  startup_or_lifecycle:
+    - lib/bootstrap/index.js
+    - lib/al_main.js
+    - lib/runtime/character_runtime.js
+    - lib/runtime/lifecycle.js
 deprecated:
   doc: docs/deprecated-paths.md
