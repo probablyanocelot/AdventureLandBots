@@ -21,6 +21,7 @@ Core bot runtime and service logic.
 - `infra/` — adapters for engine globals.
 - `telemetry/` — websocket telemetry services.
 - `bootstrap/` — client bootstrap pipeline modules (`proxied_require`, telemetry bootstrap, swap-routing bootstrap).
+- `runtime/` — runtime boot flow and module orchestration (`runtime/README.md`).
 - root entrypoints (`client_bootstrap.js`, `al_main.js`) — launch/runtime roots only.
 
 ## Minimal-context read map

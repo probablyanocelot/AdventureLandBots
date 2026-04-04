@@ -6,7 +6,7 @@ Adventure Land MMORPG bot framework with a runtime-first architecture.
 
 In-game startup chain:
 
-1. `lib/zCLIENT_BOOTSTRAP.js`
+1. `lib/client_entry.js`
 2. `lib/bootstrap/index.js` (`runClientBootstrap`)
 3. `lib/al_main.js` (`main`)
 4. `lib/runtime/character_runtime.js` (`bootCharacterRuntime`)
@@ -40,17 +40,69 @@ In-game startup chain:
 
 Core contract-backed services:
 
-| Service         | Entrypoint                            | Contract file                        | Module ctx shape                                                                            | Lifecycle expectation                                              |
-| --------------- | ------------------------------------- | ------------------------------------ | ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------ |
-| `cm`            | `lib/services/cm/index.js`            | `lib/contracts/cm_api.js`            | `{ cfg, runtimeScope }` to module installer; factories consume `{ cfg }`                    | services expose `stopRoutine()`                                    |
-| `combat`        | `lib/services/combat/index.js`        | `lib/contracts/combat_api.js`        | `{ cfg, runtimeScope }` to module installer; factory consumes `{ cfg }`                     | service exposes `stopRoutine()`                                    |
-| `events`        | `lib/services/events/index.js`        | `lib/contracts/events_api.js`        | module installer currently uses no ctx for join flow                                        | one-shot `runJoinEventModuleService()`; listener install/stop pair |
-| `farming`       | `lib/services/farming/index.js`       | `lib/contracts/farming_api.js`       | `{ cfg, runtimeScope }` to module installer; role sync accepts `{ cfg, ownerName, reason }` | services expose `stopRoutine()`                                    |
-| `inventory`     | `lib/services/inventory/index.js`     | `lib/contracts/inventory_api.js`     | service factory `createChestLootingService({ intervalMs })`                                 | service exposes `stopRoutine()`                                    |
-| `merchant`      | `lib/services/merchant/index.js`      | `lib/contracts/merchant_api.js`      | character/service creation accepts `{ cfg, home, gatherLoc, gatherOrder, gatherRepeatMs }`  | service exposes `stopRoutine()` and disposal methods               |
-| `merchant_role` | `lib/services/merchant_role/index.js` | `lib/contracts/merchant_role_api.js` | factories consume `{ cfg }`                                                                 | services expose `stopRoutine()`                                    |
-| `orchestrator`  | `lib/services/orchestrator/index.js`  | `lib/contracts/orchestrator_api.js`  | module service currently no ctx args                                                        | `init()` on creation; supports stop/dispose                        |
-| `party`         | `lib/services/party/index.js`         | `lib/contracts/party_api.js`         | `{ cfg, runtimeScope }` to module installer; factories consume `{ cfg }`                    | services expose `stopRoutine()`                                    |
+```yaml
+services:
+  cm:
+    entrypoint: lib/services/cm/index.js
+    contract: lib/contracts/cm_api.js
+    module_ctx_shape:
+      - cfg
+      - runtimeScope
+    lifecycle: services expose stopRoutine()
+  combat:
+    entrypoint: lib/services/combat/index.js
+    contract: lib/contracts/combat_api.js
+    module_ctx_shape:
+      - cfg
+      - runtimeScope
+    lifecycle: service exposes stopRoutine()
+  events:
+    entrypoint: lib/services/events/index.js
+    contract: lib/contracts/events_api.js
+    module_ctx_shape: []
+    lifecycle: one-shot runJoinEventModuleService(); listener install/stop pair
+  farming:
+    entrypoint: lib/services/farming/index.js
+    contract: lib/contracts/farming_api.js
+    module_ctx_shape:
+      - cfg
+      - runtimeScope
+    lifecycle: services expose stopRoutine()
+  inventory:
+    entrypoint: lib/services/inventory/index.js
+    contract: lib/contracts/inventory_api.js
+    factory_args:
+      - intervalMs
+    lifecycle: service exposes stopRoutine()
+  merchant:
+    entrypoint: lib/services/merchant/index.js
+    contract: lib/contracts/merchant_api.js
+    factory_args:
+      - cfg
+      - home
+      - gatherLoc
+      - gatherOrder
+      - gatherRepeatMs
+    lifecycle: service exposes stopRoutine() and disposal methods
+  merchant_role:
+    entrypoint: lib/services/merchant_role/index.js
+    contract: lib/contracts/merchant_role_api.js
+    module_ctx_shape:
+      - cfg
+    lifecycle: services expose stopRoutine()
+  orchestrator:
+    entrypoint: lib/services/orchestrator/index.js
+    contract: lib/contracts/orchestrator_api.js
+    module_ctx_shape: []
+    lifecycle: init() on creation; supports stop/dispose
+  party:
+    entrypoint: lib/services/party/index.js
+    contract: lib/contracts/party_api.js
+    module_ctx_shape:
+      - cfg
+      - runtimeScope
+    lifecycle: services expose stopRoutine()
+```
 
 ## Quick edit map
 
