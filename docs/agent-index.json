@@ -1,0 +1,250 @@
+{
+  "version": 1,
+  "project": "AdventureLandBots",
+  "runtimeBootFlow": [
+    "lib/zCLIENT_BOOTSTRAP.js",
+    "lib/bootstrap/index.js#runClientBootstrap",
+    "lib/al_main.js#main",
+    "lib/runtime/character_runtime.js#bootCharacterRuntime"
+  ],
+  "architectureNodes": [
+    {
+      "name": "bootstrap",
+      "path": "lib/bootstrap",
+      "owns": [
+        "host wiring",
+        "proxied loader boot",
+        "bootstrap config injection"
+      ]
+    },
+    {
+      "name": "runtime",
+      "path": "lib/runtime",
+      "owns": [
+        "boot orchestration",
+        "module policy execution",
+        "runtime lifecycle cleanup"
+      ]
+    },
+    {
+      "name": "modules",
+      "path": "lib/modules",
+      "owns": ["install(ctx) adapters for runtime modules"]
+    },
+    {
+      "name": "contracts",
+      "path": "lib/contracts",
+      "owns": ["canonical public service API validation"]
+    },
+    {
+      "name": "services",
+      "path": "lib/services",
+      "owns": ["feature logic and service entrypoints"]
+    },
+    {
+      "name": "characters",
+      "path": "lib/characters",
+      "owns": ["character class behavior shells"]
+    }
+  ],
+  "stableExtensionPoints": [
+    {
+      "path": "lib/services/<service>/index.js",
+      "purpose": "public service entrypoint"
+    },
+    {
+      "path": "lib/contracts/<service>_api.js",
+      "purpose": "canonical service boundary contract"
+    },
+    {
+      "path": "lib/modules/<feature>.module.js",
+      "purpose": "runtime module adapter with install(ctx)"
+    },
+    {
+      "path": "lib/runtime/module_registry.js",
+      "purpose": "module policy registration and routing"
+    },
+    {
+      "path": "lib/characters/*_character.js",
+      "purpose": "class-specific behavior wiring"
+    }
+  ],
+  "serviceContracts": [
+    {
+      "service": "cm",
+      "entrypoint": "lib/services/cm/index.js",
+      "contractFile": "lib/contracts/cm_api.js",
+      "exportedFunctions": [
+        "createUpkeepModuleService",
+        "createUnpackRequesterModuleService",
+        "installBaseCmCommands",
+        "installMagiportAutoAccept",
+        "installMageMagiportService",
+        "magiportTargets"
+      ],
+      "expectedCtxShape": {
+        "moduleInstall": ["cfg", "runtimeScope"],
+        "factories": ["cfg"]
+      },
+      "lifecycle": "validated services expose stopRoutine()"
+    },
+    {
+      "service": "combat",
+      "entrypoint": "lib/services/combat/index.js",
+      "contractFile": "lib/contracts/combat_api.js",
+      "exportedFunctions": [
+        "createEventCombatModuleService",
+        "runMageSupport",
+        "runPriestSupport"
+      ],
+      "expectedCtxShape": {
+        "moduleInstall": ["cfg", "runtimeScope"],
+        "factories": ["cfg"]
+      },
+      "lifecycle": "validated event combat service exposes stopRoutine()"
+    },
+    {
+      "service": "events",
+      "entrypoint": "lib/services/events/index.js",
+      "contractFile": "lib/contracts/events_api.js",
+      "exportedFunctions": [
+        "joinFirstActiveEventService",
+        "runJoinEventModuleService",
+        "broadcastCodeLoadedService",
+        "isJoinableEventService",
+        "getActiveJoinableEventsService",
+        "createEventTaskEmitter",
+        "installGlobalRuntimeListeners",
+        "stopGlobalRuntimeListeners"
+      ],
+      "expectedCtxShape": {
+        "moduleInstall": [],
+        "factories": []
+      },
+      "lifecycle": "join-event result validates result.ok:boolean; listeners use explicit install/stop pair"
+    },
+    {
+      "service": "farming",
+      "entrypoint": "lib/services/farming/index.js",
+      "contractFile": "lib/contracts/farming_api.js",
+      "exportedFunctions": [
+        "createNoEventFarmingModuleService",
+        "createRoleSyncRequesterService"
+      ],
+      "expectedCtxShape": {
+        "moduleInstall": ["cfg", "runtimeScope"],
+        "factories": ["cfg", "ownerName", "reason"]
+      },
+      "lifecycle": "validated services expose stopRoutine()"
+    },
+    {
+      "service": "inventory",
+      "entrypoint": "lib/services/inventory/index.js",
+      "contractFile": "lib/contracts/inventory_api.js",
+      "exportedFunctions": ["createChestLootingService"],
+      "expectedCtxShape": {
+        "moduleInstall": [],
+        "factories": ["intervalMs"]
+      },
+      "lifecycle": "validated chest looting service exposes stopRoutine()"
+    },
+    {
+      "service": "merchant",
+      "entrypoint": "lib/services/merchant/index.js",
+      "contractFile": "lib/contracts/merchant_api.js",
+      "exportedFunctions": ["createMerchantService"],
+      "expectedCtxShape": {
+        "moduleInstall": [],
+        "factories": [
+          "cfg",
+          "home",
+          "gatherLoc",
+          "gatherOrder",
+          "gatherRepeatMs"
+        ]
+      },
+      "lifecycle": "validated service exposes botLoop/start/stopRoutine plus dispose symbols"
+    },
+    {
+      "service": "merchant_role",
+      "entrypoint": "lib/services/merchant_role/index.js",
+      "contractFile": "lib/contracts/merchant_role_api.js",
+      "exportedFunctions": [
+        "createToolProvisioningService",
+        "createBankCraftingService",
+        "createUnpackSupportService"
+      ],
+      "expectedCtxShape": {
+        "moduleInstall": [],
+        "factories": ["cfg"]
+      },
+      "lifecycle": "validated services expose stopRoutine(); tool provisioning includes checkForTools()"
+    },
+    {
+      "service": "orchestrator",
+      "entrypoint": "lib/services/orchestrator/index.js",
+      "contractFile": "lib/contracts/orchestrator_api.js",
+      "exportedFunctions": ["createOrchestratorModuleService"],
+      "expectedCtxShape": {
+        "moduleInstall": [],
+        "factories": []
+      },
+      "lifecycle": "service validates init/stopRoutine; init runs on creation"
+    },
+    {
+      "service": "party",
+      "entrypoint": "lib/services/party/index.js",
+      "contractFile": "lib/contracts/party_api.js",
+      "exportedFunctions": [
+        "createPartyModuleService",
+        "createPriestSwapModuleService",
+        "setCharacterAction",
+        "clearCharacterAction",
+        "partyInvite",
+        "partyAccept",
+        "partyLeave"
+      ],
+      "expectedCtxShape": {
+        "moduleInstall": ["cfg", "runtimeScope"],
+        "factories": ["cfg"]
+      },
+      "lifecycle": "validated party services expose stopRoutine()"
+    },
+    {
+      "service": "telemetry",
+      "entrypoint": "lib/services/telemetry/index.js",
+      "contractFile": null,
+      "exportedFunctions": ["createTelemetryModuleService"],
+      "expectedCtxShape": {
+        "moduleInstall": ["cfg", "runtimeScope"],
+        "factories": ["cfg"]
+      },
+      "lifecycle": "returns telemetry runtime service object"
+    }
+  ],
+  "quickEditMap": [
+    {
+      "change": "combat behavior",
+      "files": ["lib/services/combat/index.js", "lib/services/combat/*"]
+    },
+    {
+      "change": "movement behavior",
+      "files": [
+        "lib/services/helper-movement/index.js",
+        "lib/services/helper-movement/*",
+        "lib/services/movement/index.js"
+      ]
+    },
+    {
+      "change": "add runtime module",
+      "files": ["lib/modules/*.module.js", "lib/runtime/module_registry.js"]
+    },
+    {
+      "change": "add character behavior",
+      "files": [
+        "lib/characters/*_character.js",
+        "lib/runtime/character_runtime.js"
+      ]
+    }
+  ]
+}
