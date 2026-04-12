@@ -26,6 +26,15 @@ Exports from `index.js`:
 - `sortRowsByRatio(rows)` — sorts monster rows by ascending ratio.
 - `getCollectedMonsterRows(item, statKey, options)` — collects monster drop-stat rows from `G.drops.monsters`.
 - `printTopRows(params)` — logs the top monster rows with the best stat-to-drop ratio.
+- `getMonsterXp(monster)` — returns the XP reward for a monster definition.
+- `getMonsterHp(monster)` — returns the monster hit points.
+- `getMonsterTimeToKillSeconds(monster, characterAttack, characterFrequency)` — estimates seconds to kill a monster.
+- `getMonsterXpPerSecond(monster, characterAttack, characterFrequency)` — computes estimated XP/sec for the given character attack and frequency.
+- `buildMonsterXpRow(mtype, characterAttack, characterFrequency)` — builds a rank row with time-to-kill and XP/sec.
+- `filterValidXpRows(rows)` — removes invalid XP/sec rows.
+- `sortRowsByXpPerSecond(rows)` — sorts monster rows by descending XP/sec.
+- `getCollectedMonsterXpRows(characterAttack, characterFrequency)` — collects XP/sec rows for all `G.monsters`.
+- `printTopXpRows(params)` — logs the top XP/sec monster rows.
 
 ## Usage
 
@@ -45,6 +54,16 @@ helperData.printTopRows({
   statKey: "max_hp",
   limit: 10,
   options: { includeOpen: true },
+});
+
+const xpRows = helperData.getCollectedMonsterXpRows(
+  character.attack,
+  character.frequency,
+);
+helperData.printTopXpRows({
+  attack: character.attack,
+  frequency: character.frequency,
+  limit: 15,
 });
 ```
 
