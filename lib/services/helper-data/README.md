@@ -16,6 +16,10 @@ Exports from `index.js`:
 - `getNestedDropName(drop)` — returns the nested drop table name for an `open` entry.
 - `getNestedDropTable(dropName)` — resolves a nested drop table from `G.drops`.
 - `getItemDropChance(dropTable, item, options)` — computes the chance to drop an item from a drop table.
+- `getItemDropProbability(dropTable, item, options)` — computes the actual independent chance to receive at least one of an item from a drop table, including nested `open` entries when `includeOpen` is true.
+- `getGlobalDropProbability(item, options)` — returns the probability of an item dropping from `G.drops.maps.global`.
+- `getMapDropProbability(mapName, item, options)` — returns the probability of an item dropping from a specific map's drop table.
+- `getMapAndGlobalDropProbability(mapName, item, options)` — returns the combined probability of an item dropping from global and map drop tables.
 - `DEFAULT_STAT_KEY` — default monster stat key for ratio calculations (`max_hp`).
 - `getRatio(numerator, denominator, options)` — safe ratio calculation with finite fallback.
 - `getMonsterValue(monster, statKey)` — numeric stat value from a monster definition.
@@ -55,6 +59,15 @@ helperData.printTopRows({
   limit: 10,
   options: { includeOpen: true },
 });
+
+const globalChance = helperData.getGlobalDropProbability("goldenegg", {
+  includeOpen: true,
+});
+const totalChance = helperData.getMapAndGlobalDropProbability(
+  "forest",
+  "goldenegg",
+  { includeOpen: true },
+);
 
 const xpRows = helperData.getCollectedMonsterXpRows(
   character.attack,
