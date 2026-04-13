@@ -29,7 +29,6 @@ Exports from `index.js`:
 - `filterValidRows(rows)` — removes rows with zero chance or stat.
 - `sortRowsByRatio(rows)` — sorts monster rows by ascending ratio.
 - `getCollectedMonsterRows(item, statKey, options)` — collects monster drop-stat rows from `G.drops.monsters`.
-- `printTopRows(params)` — logs the top monster rows with the best stat-to-drop ratio.
 - `getMonsterXp(monster)` — returns the XP reward for a monster definition.
 - `getMonsterHp(monster)` — returns the monster hit points.
 - `getMonsterTimeToKillSeconds(monster, characterAttack, characterFrequency)` — estimates seconds to kill a monster.
