@@ -1,0 +1,40 @@
+name: CI
+
+on:
+    push:
+        branches:
+            - main
+            - dev
+    pull_request:
+        branches:
+            - main
+            - dev
+
+jobs:
+    build:
+        name: Build and lint
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout repository
+              uses: actions/checkout@v4
+
+            - name: Set up Node.js
+              uses: actions/setup-node@v4
+              with:
+                  node-version: 20
+                  cache: "npm"
+
+            - name: Install dependencies
+              run: npm ci
+
+            - name: Run lint
+              run: npm run lint
+
+            - name: Run requires check
+              run: npm run requires:check
+
+            - name: Run smoke tests
+              run: |
+                  npm test
+                  echo "Smoke tests passed successfully"

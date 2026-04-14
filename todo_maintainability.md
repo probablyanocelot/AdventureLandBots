@@ -5,10 +5,13 @@
 - [ ] Make lint pass on core runtime/services first
   - Focus on `lib/services/**` and `lib/runtime/**`.
   - Defer legacy/UI (`lib/gui`, `lib/unused`) behind explicit ignore or a scoped cleanup plan.
-- [ ] Add minimal CI
+  - `.eslintignore` added for `lib/gui/**` and `lib/unused/**`.
+- [x] Add minimal CI
   - On PR: install → lint → requires check.
-- [ ] Add smoke tests
-  - Even 5–10 boundary tests for module install/disposal and core service contracts.
+  - Workflow created at `.github/workflows/ci.yml`.
+- [x] Add smoke tests
+  - Even 5–10 boundary tests for module install/disposal and service contract validation.
+  - Tests added at `test/smoke.test.js`.
 
 ## Priority 1 (Medium Effort)
 

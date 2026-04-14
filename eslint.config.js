@@ -2,7 +2,13 @@ const globals = require("globals");
 
 module.exports = [
   {
-    ignores: ["game_codes/**", "examples/**", "lib/dist/**"],
+    ignores: [
+      "game_codes/**",
+      "examples/**",
+      "lib/dist/**",
+      "lib/gui/**",
+      "lib/unused/**",
+    ],
   },
   {
     languageOptions: {
