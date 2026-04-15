@@ -1,13 +1,8 @@
 99Secrets.99.js
 node_modules/
 package-lock.json
-package.json
 .env
-adventure-land.code-workspace
-monsterhunt_strat.txt
-lib.zip
 abc/
 lib/llm/
 browser/dist/bundle.js
-b.js
 *.code-workspace
