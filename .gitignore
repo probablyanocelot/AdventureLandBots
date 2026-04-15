@@ -16,6 +16,8 @@ coverage/
 dist/
 .cache/
 *.tsbuildinfo
+.eslint-report*.json
+.eslint_telegram.json
 
 # Local environment files
 .env.local
