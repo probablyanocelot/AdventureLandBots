@@ -2,8 +2,9 @@
 
 This directory contains the Bank Overview UI bundle and future split modules for the enhanced bank overview feature.
 
-- `bank_overview.js` — runtime wrapper entrypoint for the bank overview feature
-- `bank_overview.legacy.js` — preserved legacy bundle implementation
+- `bank_overview.js` — public runtime entrypoint for the bank overview feature
+- `bank_overview.source.js` — new source entrypoint that currently delegates to the legacy bundle
+- `bank_overview.legacy.js` — preserved legacy bundle implementation/artifact
 - `index.js` — compatibility entrypoint for package-style imports
 - `bank_data.js` — starter module for bank state and grouping logic
 - `bank_render.js` — starter module for UI rendering helpers
