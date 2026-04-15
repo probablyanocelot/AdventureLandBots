@@ -1,0 +1,45 @@
+{
+  "name": "adventure-land-bots",
+  "private": true,
+  "version": "0.0.0",
+  "type": "commonjs",
+  "scripts": {
+    "lint": "eslint \"lib/**/*.js\"",
+    "precommit": "npm run lint",
+    "build:browser": "webpack --config lib/webpack.config.js",
+    "build:ingame": "webpack --config lib/webpack.ingame.config.js",
+    "deploy:ingame": "node scripts/deploy-ingame-bundle.js",
+    "ingame": "npm run build:ingame && npm run deploy:ingame",
+    "sync:lib": "node scripts/sync-lib-to-codes.js",
+    "sync:lib:once": "node scripts/sync-lib-to-codes.js --once",
+    "sync:proxied-entry": "node scripts/sync-proxied-entry.js",
+    "sync:proxied-entry:once": "node scripts/sync-proxied-entry.js --once",
+    "dev:runtime": "node scripts/dev-runtime.js",
+    "dev:runtime:deploy": "node scripts/dev-runtime.js --deploy",
+    "dev:runtime:dry": "node scripts/dev-runtime.js --dry-run",
+    "start:browser": "node scripts/serve-browser-bootstrap.js",
+    "browser": "npm run build:browser && npm run start:browser",
+    "telemetry:server": "node lib/telemetry/server.js",
+    "symbols:lib": "node scripts/log-lib-symbols.js",
+    "docs:new-service-boundary": "node scripts/new-service-boundary-doc.js",
+    "requires:check": "node scripts/fix-broken-requires.js --root lib",
+    "requires:fix": "node scripts/fix-broken-requires.js --root lib --write",
+    "test": "node --test ./test/smoke.test.js",
+    "test:smoke": "npm test",
+    "maintainability:report": "node scripts/report-maintainability.js"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "ws": "^8.18.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.29.0",
+    "@babel/preset-env": "^7.29.0",
+    "babel-loader": "^10.1.1",
+    "eslint": "^9.20.0",
+    "globals": "^17.3.0",
+    "path-browserify": "^1.0.1",
+    "webpack": "^5.105.4",
+    "webpack-cli": "^7.0.0"
+  }
+}
