@@ -2,10 +2,10 @@
 
 ## Priority 0 (High Impact, Low-Medium Effort)
 
-- [ ] Make lint pass on core runtime/services first
+- [x] Make lint pass on core runtime/services first
   - Focus on `lib/services/**` and `lib/runtime/**`.
   - Defer legacy/UI (`lib/gui`, `lib/unused`) behind explicit ignore or a scoped cleanup plan.
-  - `.eslintignore` added for `lib/gui/**` and `lib/unused/**`.
+  - `eslint.config.cjs` added for `lib/gui/**` and `lib/unused/**`.
 - [x] Add minimal CI
   - On PR: install → lint → requires check.
   - Workflow created at `.github/workflows/ci.yml`.
@@ -15,17 +15,17 @@
 
 ## Priority 1 (Medium Effort)
 
-- [ ] Split top hotspot files
+- [x] Split top hotspot files
   - Break up `lib/services/combat/hunt_runner.js` (strategy selection, movement, safety, engage phases).
-  - Treat `lib/gui/46BankOverview.46.js` as legacy bundle candidate; isolate source and build artifact.
-- [ ] Standardize service surface
+  - Treat `lib/gui/bank_overview` as legacy bundle candidate; isolate source and build artifact.
+- [x] Standardize service surface
   - Ensure every service has both `index.js` and `README.md`.
 
 ## Priority 2 (Process Hardening)
 
-- [ ] Add contributor ergonomics
+- [x] Add contributor ergonomics
   - `CONTRIBUTING.md`, `.editorconfig`, `.env.example`, optional pre-commit lint hook.
-- [ ] Track maintainability KPI trend
+- [x] Track maintainability KPI trend
   - Lint issues, max file LOC, and service coverage in CI summary.
 
 ---
