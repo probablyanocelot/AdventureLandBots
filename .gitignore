@@ -6,3 +6,22 @@ abc/
 lib/llm/
 browser/dist/bundle.js
 *.code-workspace
+
+# Node and build artifacts
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+coverage/
+dist/
+.cache/
+*.tsbuildinfo
+
+# Local environment files
+.env.local
+.env.*.local
+
+# Editor/OS files
+.vscode/
+.idea/
+.DS_Store
