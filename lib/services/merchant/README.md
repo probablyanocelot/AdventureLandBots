@@ -80,7 +80,7 @@ The returned service contract is validated by `lib/contracts/merchant_api.js` an
   - optional Telegram notifications (dynamic token/chatId)
   - optional rare-mob scanning and alerts
   - optional nearby discount stand purchases
-  - optional Bank Overview UI bootstrap (`46BankOverview.46.js`)
+  - optional Bank Overview UI bootstrap (`gui/bank_overview`)
   - optional bank hanoi/slot compaction
   - optional inventory compounding
   - optional citizen0 lure routine usage from farming service

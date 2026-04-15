@@ -46,8 +46,7 @@ phases:
     tasks:
       - id: 3.1
         name: Split Hotspot Files
-        scope:
-          [lib/services/combat/hunt_runner.js, lib/gui/bank_overview/**]
+        scope: [lib/services/combat/hunt_runner.js, lib/gui/bank_overview/**]
         steps:
           - For each file, segment into logical modules (strategy, movement, etc.)
           - For UI, isolate build artifact from source if possible

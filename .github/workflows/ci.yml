@@ -38,3 +38,6 @@ jobs:
               run: |
                   npm test
                   echo "Smoke tests passed successfully"
+
+            - name: Maintainability KPI summary
+              run: npm run maintainability:report
