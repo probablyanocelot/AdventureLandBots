@@ -6,21 +6,27 @@ Thank you for helping improve AdventureLandBots.
 
 1. Fork or clone this repository.
 2. Install dependencies:
+
    ```bash
    npm install
    ```
+
 3. Create a local `.env` from `.env.example`:
+
    ```bash
    cp .env.example .env
    ```
+
    Replace placeholder values with your own secrets or runtime config.
 
 ## Code style
 
 - Run lint before committing and opening a PR:
+
   ```bash
   npm run lint
   ```
+
 - Use 2-space indentation, LF line endings, and UTF-8 encoding.
 - Markdown files should preserve table formatting and have a final newline.
 
@@ -52,13 +58,17 @@ This runs the project lint step.
 ## Testing
 
 - Run the smoke test suite:
+
   ```bash
   npm test
   ```
+
 - Check maintainability metrics before and after refactors:
+
   ```bash
   npm run maintainability:report
   ```
+
 - If you add new service behavior, include simple tests under `test/`.
 
 ## Documentation
