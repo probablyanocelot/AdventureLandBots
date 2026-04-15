@@ -42,13 +42,21 @@ const walkJsFiles = (dir) => {
     if (entry.isDirectory()) {
       if (entry.name === "node_modules" || entry.name.startsWith(".")) continue;
       const rel = path.relative(cwd, abs).replace(/\\/g, "/");
-      if (ignoredPaths.some((pattern) => rel.startsWith(pattern.replace(/\*\*/g, "")))) {
+      if (
+        ignoredPaths.some((pattern) =>
+          rel.startsWith(pattern.replace(/\*\*/g, "")),
+        )
+      ) {
         continue;
       }
       files.push(...walkJsFiles(abs));
     } else if (entry.isFile() && entry.name.endsWith(".js")) {
       const rel = path.relative(cwd, abs).replace(/\\/g, "/");
-      if (ignoredPaths.some((pattern) => rel.startsWith(pattern.replace(/\*\*/g, "")))) {
+      if (
+        ignoredPaths.some((pattern) =>
+          rel.startsWith(pattern.replace(/\*\*/g, "")),
+        )
+      ) {
         continue;
       }
       files.push(abs);
