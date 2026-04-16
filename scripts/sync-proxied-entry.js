@@ -1,7 +1,7 @@
 const fs = require("fs");
 const path = require("path");
 
-const SOURCE_ENTRY = path.resolve(__dirname, "../lib/zCLIENT_BOOTSTRAP.js");
+const SOURCE_ENTRY = path.resolve(__dirname, "../lib/client_entry.js");
 const WATCH_INTERVAL_MS = 250;
 const TARGET_FILENAME = "93proxied_entry.93.js";
 
