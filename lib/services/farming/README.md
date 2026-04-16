@@ -5,11 +5,13 @@
 Exported from `lib/services/farming/index.js`:
 
 - `createFarmingModuleService({ cfg })`
-- `createNoEventFarmingModuleService({ cfg })` (backward-compatible alias)
+- `getFarmingConfig(cfg)`
 
 `createFarmingModuleService` is the module-facing helper used by
 `lib/modules/farming.module.js`.
-`createNoEventFarmingModuleService` remains available as a backward-compatible alias.
+
+Service code should read farming config through `getFarmingConfig(cfg)` and
+prefer `cfg.farming` over legacy `cfg.noEventFarming`.
 
 Configuration now supports both `cfg.farming` and legacy `cfg.noEventFarming`.
 `cfg.farming` is the preferred name for new configurations.
