@@ -6,6 +6,8 @@ Exported from `lib/services/farming/index.js`:
 
 - `createFarmingModuleService({ cfg })`
 - `getFarmingConfig(cfg)`
+- `runCrab({ cfg, mover })`
+- `runMonsterhunt({ cfg, st, targetOverride, getTarget, mover, rallyPoint, focusAllyName, huntGroupNames, passiveOnly, trackerEnabled })`
 
 `createFarmingModuleService` is the module-facing helper used by
 `lib/modules/farming.module.js`.
@@ -60,4 +62,4 @@ Phase-12 completed: service runtime composition is owned at `lib/services/farmin
 
 Phase-13 completed: `lib/al_farming_config.js` compatibility adapter removed.
 
-Phase-14 completed: root runtime implementation `lib/services/farming/farming_runtime_impl.js` removed; farming runtime now lives fully under `lib/services/farming/*`.
+Phase-14 completed: farming runtime now lives fully under `lib/services/farming/*` and is composed through `lib/services/farming/farming_runtime_impl.js`.

@@ -89,11 +89,22 @@ service_contracts:
     contract: lib/contracts/combat_api.js
     required_methods:
       - stopRoutine
-  - service: events
+  - service: server-events
     entrypoint: lib/services/server-events/index.js
     contract: lib/contracts/events_api.js
     required_shape:
       - result.ok:boolean (join-event)
+  - service: runtime-listeners
+    entrypoint: lib/services/runtime-listeners/index.js
+    contract: lib/contracts/runtime_listeners_api.js
+    required_methods:
+      - onCharacter
+      - onGame
+      - waitForCharacterEvent
+      - waitForCm
+      - waitForCmBatch
+      - installGlobalRuntimeListeners
+      - stopGlobalRuntimeListeners
   - service: farming
     entrypoint: lib/services/farming/index.js
     contract: lib/contracts/farming_api.js

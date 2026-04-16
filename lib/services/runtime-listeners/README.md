@@ -29,3 +29,5 @@ Exported from `lib/services/runtime-listeners/index.js`:
 - `lib/services/server-events` may use these helpers for event-specific flows.
 - other services should import `lib/services/runtime-listeners/index.js` directly
   when they need generic listener behavior.
+- Do not import runtime listener implementation files directly from
+  `lib/services/runtime-listeners/`.

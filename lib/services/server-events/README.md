@@ -18,9 +18,10 @@ Exported from `lib/services/server-events/index.js`:
 `runJoinEventModuleService()` is a module-facing one-shot helper for
 `lib/modules/join_event.module.js`; it runs the join flow and returns `null`.
 
-## Allowed legacy import path
+## Allowed import path
 
-None.
+- `lib/services/server-events/index.js` is the public entrypoint for server-event behavior.
+- `lib/services/runtime-listeners/index.js` is the public entrypoint for generic runtime listener plumbing.
 
 Runtime listener helpers are now owned by `lib/services/runtime-listeners/index.js`
 instead of being exposed directly by the server-events service.
