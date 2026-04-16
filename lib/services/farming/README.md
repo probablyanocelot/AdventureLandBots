@@ -4,10 +4,15 @@
 
 Exported from `lib/services/farming/index.js`:
 
-- `createNoEventFarmingModuleService({ cfg })`
+- `createFarmingModuleService({ cfg })`
+- `createNoEventFarmingModuleService({ cfg })` (backward-compatible alias)
 
-`createNoEventFarmingModuleService` is the module-facing helper used by
-`lib/modules/no_event_farming.module.js`.
+`createFarmingModuleService` is the module-facing helper used by
+`lib/modules/farming.module.js`.
+`createNoEventFarmingModuleService` remains available as a backward-compatible alias.
+
+Configuration now supports both `cfg.farming` and legacy `cfg.noEventFarming`.
+`cfg.farming` is the preferred name for new configurations.
 
 Returns a validated disposable resource exposing:
 

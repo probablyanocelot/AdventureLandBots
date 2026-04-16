@@ -19,7 +19,7 @@ This document is intended for both humans and agents to understand the execution
 3. It loads `al_main.js`, extracts `main()`, and calls `await main()`.
 4. `al_main.js` delegates to `bootCharacterRuntime()` in `lib/runtime/character_runtime.js`.
 5. `bootCharacterRuntime()` creates a new `LifecycleScope` and disposes any previous runtime.
-6. Global runtime listeners are installed via `services/events/index.js`.
+6. Global runtime listeners are installed via `services/server-events/index.js` and owned by `services/runtime-listeners/index.js`.
 7. Config and runtime context are loaded from `lib/config/index.js`.
 8. A `moduleRegistry` is created with configured module installers and policies.
 9. The `preBot` policy is started before character instantiation.

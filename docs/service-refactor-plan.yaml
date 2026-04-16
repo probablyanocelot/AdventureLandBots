@@ -72,9 +72,9 @@ migration_tasks:
       Rename lib/services/events to lib/services/server-events and update public
       API names and module imports.
     files:
-      - lib/services/events/index.js
-      - lib/services/events/README.md
-      - lib/services/events/*.js
+      - lib/services/server-events/index.js
+      - lib/services/server-events/README.md
+      - lib/services/server-events/*.js
       - lib/modules/join_event.module.js
   - id: audit_cm_service_boundary
     description: >

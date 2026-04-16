@@ -36,7 +36,7 @@ Read in this order and stop as soon as you have enough context:
 
 - Party behavior → `services/party/index.js`, one of `party.js|party_actions.js|swap.js`
 - Combat behavior → `services/combat/index.js`, one of `hunt_runner.js|world_event_runner.js|support_runner.js|position_store.js|skills.js|targeting.js|event_combat.js`
-- Event handling/CM waits → `services/events/index.js`, `listeners.js` (+ specific event module)
+- Event handling/CM waits → `services/server-events/index.js`, `services/runtime-listeners/index.js` (+ specific event module)
 - Farming assignment/chaining → `services/farming/index.js`, target module under `services/farming/*`
 - Merchant gather loop → `services/gathering/index.js`, target module
 - Inventory/chest logic → `services/inventory/index.js`, target module

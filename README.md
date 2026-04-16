@@ -56,8 +56,8 @@ services:
       - cfg
       - runtimeScope
     lifecycle: service exposes stopRoutine()
-  events:
-    entrypoint: lib/services/events/index.js
+  server-events:
+    entrypoint: lib/services/server-events/index.js
     contract: lib/contracts/events_api.js
     module_ctx_shape: []
     lifecycle: one-shot runJoinEventModuleService(); listener install/stop pair

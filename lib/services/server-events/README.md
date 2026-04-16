@@ -1,11 +1,8 @@
-# Events Service Compatibility Alias
-
-This folder remains as a compatibility redirect to the new
-`lib/services/server-events` service.
+# Server-Events Service
 
 ## Public API
 
-Exported from `lib/services/server-events/index.js` via `lib/services/events/index.js`:
+Exported from `lib/services/server-events/index.js`:
 
 - `joinFirstActiveEventService()`
 - `runJoinEventModuleService()`
@@ -25,9 +22,8 @@ Exported from `lib/services/server-events/index.js` via `lib/services/events/ind
 
 None.
 
-`events_service.js` uses service-owned files (`join_flow.js`, `active_event_catalog.js`) and `infra/game_api.js` only.
-
-Runtime listener helpers are now owned by `lib/services/runtime-listeners/index.js` instead of being exposed directly by the events service.
+Runtime listener helpers are now owned by `lib/services/runtime-listeners/index.js`
+instead of being exposed directly by the server-events service.
 
 ## Migration note
 

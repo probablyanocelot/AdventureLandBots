@@ -106,7 +106,7 @@ module.exports = [
     },
   },
   {
-    files: ["lib/services/events/broadcast_runtime.js"],
+    files: ["lib/services/server-events/broadcast_runtime.js"],
     rules: {
       "no-restricted-imports": "off",
     },

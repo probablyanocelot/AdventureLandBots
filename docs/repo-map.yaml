@@ -90,7 +90,7 @@ service_contracts:
     required_methods:
       - stopRoutine
   - service: events
-    entrypoint: lib/services/events/index.js
+    entrypoint: lib/services/server-events/index.js
     contract: lib/contracts/events_api.js
     required_shape:
       - result.ok:boolean (join-event)
