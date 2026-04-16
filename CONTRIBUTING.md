@@ -47,6 +47,8 @@ This runs the project lint step.
 - Write commit messages in present tense and include a short scope:
   - `fix: correct bank render delegation`
   - `chore: add CONTRIBUTING and editorconfig`
+  - `feat: implement party service and module templates`
+  - `docs(templates-contrib): add example micro-scaffold for contribution templates`
 
 ## Service boundary guidance
 
