@@ -14,7 +14,7 @@ Service layer for runtime behavior modules.
 - `party` service is service-native (`auto-party`, `priest swap`, no domain bridge).
 - `cm` service is service-native (`upkeep`, `unpack requester`, no domain bridge).
 - `combat` service is service-native (`event combat`, no domain bridge).
-- `farming` service runtime is fully service-owned via `lib/services/farming/no_event_farming_runtime_impl.js` (root runtime impl removed).
+- `farming` service runtime is fully service-owned via `lib/services/farming/farming_runtime_impl.js` (root runtime impl removed).
 - `merchant` service owns merchant runtime orchestration and composes merchant-gathering + merchant-role boundaries.
 - `merchant_role` service owns non-ctype merchant-role utilities (tool provisioning today; bank crafting/unpacking later).
 - `server-events` service is service-native (`join event`, no domain bridge).

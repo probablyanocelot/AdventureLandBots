@@ -24,8 +24,8 @@ Returns a validated disposable resource exposing:
 
 Service runtime now resolves through:
 
-- `./no_event_farming_runtime.js`
-- `./no_event_farming_runtime_impl.js`
+- `./farming_runtime.js`
+- `./farming_runtime_impl.js`
 
 Service callers must only depend on `lib/services/farming/index.js`.
 
@@ -33,7 +33,7 @@ Direct `../../domains/*` imports are not allowed in this service folder outside 
 
 ## Migration note
 
-Phase-1 completed: `farming_service.js` now depends on service-local runtime bridge (`no_event_farming_runtime.js`) instead of importing `al_farming_config.js` directly.
+Phase-1 completed: `farming_service.js` now depends on service-local runtime bridge (`farming_runtime.js`) instead of importing `al_farming_config.js` directly.
 
 Phase-2 in progress: shared farming runtime helpers now live in `lib/services/farming/runtime_helpers.js` and are consumed by the legacy runtime.
 
@@ -55,8 +55,8 @@ Phase-10 in progress: execution tail (regroup handling + combat/support dispatch
 
 Phase-11 completed: runtime bridge import was decoupled from direct `../../al_farming_config.js` usage by routing through service-local runtime entrypoints.
 
-Phase-12 completed: service runtime composition is owned at `lib/services/farming/no_event_farming_runtime_impl.js`.
+Phase-12 completed: service runtime composition is owned at `lib/services/farming/farming_runtime_impl.js`.
 
 Phase-13 completed: `lib/al_farming_config.js` compatibility adapter removed.
 
-Phase-14 completed: root runtime implementation `lib/no_event_farming_runtime_impl.js` removed; no-event farming runtime now lives fully under `lib/services/farming/*`.
+Phase-14 completed: root runtime implementation `lib/no_event_farming_runtime_impl.js` removed; farming runtime now lives fully under `lib/services/farming/*`.

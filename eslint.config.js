@@ -91,7 +91,7 @@ module.exports = [
     },
   },
   {
-    files: ["lib/services/farming/no_event_farming_runtime_impl.js"],
+    files: ["lib/services/farming/farming_runtime_impl.js"],
     rules: {
       "no-restricted-imports": "off",
     },

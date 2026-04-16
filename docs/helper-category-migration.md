@@ -33,7 +33,7 @@ These legacy paths were deleted during the service migration:
 
 ## Caller Migration Applied
 
-- `lib/services/farming/no_event_farming_runtime_impl.js`
+- `lib/services/farming/farming_runtime_impl.js`
   - movement helper import moved to `helper-movement`
   - time helper import moved to `helper-time`
   - roster helper import moved to `helper-roster`

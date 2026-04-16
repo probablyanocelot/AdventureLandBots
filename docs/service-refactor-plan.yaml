@@ -113,7 +113,7 @@ migration_tasks:
       - lib/services/combat/hunt_runner.js
       - lib/services/farming/monsterhunt_state.js
       - lib/services/farming/monsterhunt_runner.js
-      - lib/services/farming/no_event_farming_runtime_impl.js
+      - lib/services/farming/farming_runtime_impl.js
   - id: tighten_combat_contract
     description: >
       Ensure combat service exports only reusable combat helpers and support
