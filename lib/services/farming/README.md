@@ -37,21 +37,21 @@ Phase-1 completed: `farming_service.js` now depends on service-local runtime bri
 
 Phase-2 in progress: shared farming runtime helpers now live in `lib/services/farming/runtime_helpers.js` and are consumed by the legacy runtime.
 
-Phase-3 in progress: CM message handling block was extracted into `lib/services/farming/no_event_farming_cm_handler.js`.
+Phase-3 in progress: CM message handling block was extracted into `lib/services/farming/farming_cm_handler.js`.
 
-Phase-4 in progress: non-world-event leader assignment/build logic was extracted into `lib/services/farming/no_event_farming_assignment_builder.js`.
+Phase-4 in progress: non-world-event leader assignment/build logic was extracted into `lib/services/farming/farming_assignment_builder.js`.
 
-Phase-5 in progress: world-event leader control flow (assignment + role broadcast + local run path) was extracted into `lib/services/farming/no_event_farming_world_event_flow.js`.
+Phase-5 in progress: world-event leader control flow (assignment + role broadcast + local run path) was extracted into `lib/services/farming/farming_world_event_flow.js`.
 
-Phase-6 in progress: hunt-chain lifecycle blocks (bootstrap, pending finalize, and turn-in chain branch) were extracted into `lib/services/farming/no_event_farming_hunt_chain_flow.js`.
+Phase-6 in progress: hunt-chain lifecycle blocks (bootstrap, pending finalize, and turn-in chain branch) were extracted into `lib/services/farming/farming_hunt_chain_flow.js`.
 
-Phase-7 in progress: non-world-event leader assignment publish cadence (state update + role broadcast retry/ack gate) was extracted into `lib/services/farming/no_event_farming_assignment_publish.js`.
+Phase-7 in progress: non-world-event leader assignment publish cadence (state update + role broadcast retry/ack gate) was extracted into `lib/services/farming/farming_assignment_publish.js`.
 
-Phase-8 in progress: position persist/broadcast runtime path was extracted into `lib/services/farming/no_event_farming_position_flow.js`.
+Phase-8 in progress: position persist/broadcast runtime path was extracted into `lib/services/farming/farming_position_flow.js`.
 
-Phase-9 in progress: NPC-mage hold runtime block was extracted into `lib/services/farming/no_event_farming_npc_hold_flow.js`.
+Phase-9 in progress: NPC-mage hold runtime block was extracted into `lib/services/farming/farming_npc_hold_flow.js`.
 
-Phase-10 in progress: execution tail (regroup handling + combat/support dispatch) was extracted into `lib/services/farming/no_event_farming_execution_flow.js`.
+Phase-10 in progress: execution tail (regroup handling + combat/support dispatch) was extracted into `lib/services/farming/farming_execution_flow.js`.
 
 Phase-11 completed: runtime bridge import was decoupled from direct `../../al_farming_config.js` usage by routing through service-local runtime entrypoints.
 
@@ -59,4 +59,4 @@ Phase-12 completed: service runtime composition is owned at `lib/services/farmin
 
 Phase-13 completed: `lib/al_farming_config.js` compatibility adapter removed.
 
-Phase-14 completed: root runtime implementation `lib/no_event_farming_runtime_impl.js` removed; farming runtime now lives fully under `lib/services/farming/*`.
+Phase-14 completed: root runtime implementation `lib/farming_runtime_impl.js` removed; farming runtime now lives fully under `lib/services/farming/*`.
