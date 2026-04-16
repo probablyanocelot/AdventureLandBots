@@ -59,4 +59,4 @@ Phase-12 completed: service runtime composition is owned at `lib/services/farmin
 
 Phase-13 completed: `lib/al_farming_config.js` compatibility adapter removed.
 
-Phase-14 completed: root runtime implementation `lib/farming_runtime_impl.js` removed; farming runtime now lives fully under `lib/services/farming/*`.
+Phase-14 completed: root runtime implementation `lib/services/farming/farming_runtime_impl.js` removed; farming runtime now lives fully under `lib/services/farming/*`.
