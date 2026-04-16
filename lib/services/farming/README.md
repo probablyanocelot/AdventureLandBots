@@ -11,10 +11,9 @@ Exported from `lib/services/farming/index.js`:
 `lib/modules/farming.module.js`.
 
 Service code should read farming config through `getFarmingConfig(cfg)` and
-prefer `cfg.farming` over legacy `cfg.noEventFarming`.
+use `cfg.farming` exclusively.
 
-Configuration now supports both `cfg.farming` and legacy `cfg.noEventFarming`.
-`cfg.farming` is the preferred name for new configurations.
+`cfg.farming` is the supported configuration path for farming features.
 
 Returns a validated disposable resource exposing:
 

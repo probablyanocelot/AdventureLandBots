@@ -32,7 +32,7 @@ The following root-level compatibility shim files were removed. Use direct servi
 - `class_*` -> `lib/characters/*_character.js`
 - `cm_*` -> `lib/services/cm/*`
 - `combat_*` -> `lib/services/combat/*`
-- `event_*` -> `lib/services/events/*`
+- `event_*` -> `lib/services/server-events/*`
 - `group_*` -> `lib/services/party/*`
 - `st_bool` -> `lib/services/state/flags.js`
 - `st_smart_move` -> `lib/services/movement/move_manager.js`

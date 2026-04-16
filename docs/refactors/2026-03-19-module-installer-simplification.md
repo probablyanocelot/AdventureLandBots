@@ -23,10 +23,9 @@ This refactor centralizes that pattern to reduce repetition and keep modules thi
   - Added eager init support in the orchestrator service (later folded into
     `createOrchestratorModuleService()` during API tightening).
   - Added `runJoinEventModuleService()` in
-    `lib/services/events/events_service.js`.
+    `lib/services/server-events/events_service.js`.
   - Added consistent module-facing aliases (`*ModuleService`) in service wrappers:
     - `createEventCombatModuleService`
-    - `createNoEventFarmingModuleService`
     - `createPartyModuleService`
     - `createPriestSwapModuleService`
     - `createTelemetryModuleService`

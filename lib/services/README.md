@@ -38,7 +38,7 @@ Service layer for runtime behavior modules.
 - `farming` → `lib/services/farming/README.md`
 - `merchant` → `lib/services/merchant/README.md`
 - `merchant_role` → `lib/services/merchant_role/README.md`
-- `events` → `lib/services/events/README.md`
+- `server-events` → `lib/services/server-events/README.md`
 - `telemetry` → `lib/services/telemetry/README.md`
 - `inventory` → `lib/services/inventory/README.md`
 - `helper-movement` → `lib/services/helper-movement/README.md`

@@ -129,7 +129,6 @@
       "contractFile": "lib/contracts/farming_api.js",
       "exportedFunctions": [
         "createFarmingModuleService",
-        "createNoEventFarmingModuleService",
         "createRoleSyncRequesterService"
       ],
       "expectedCtxShape": {
