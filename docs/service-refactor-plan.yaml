@@ -1,0 +1,153 @@
+version: 1
+summary: >
+  Refactor service boundaries for AdventureLandBots so combat, farming, and
+  server event responsibilities are clearly separated.
+
+objectives:
+  - name: server-events service rename and focus
+    purpose: >
+      Make the events service own only world/server event catalog, join flow,
+      and server-event-specific runtime behavior.
+      Treat server-events as a farming sub-routine provider rather than a
+      standalone bot behavior layer.
+  - name: combat service helper contract
+    purpose: >
+      Keep combat as a reusable helper service for skills, targeting, support,
+      and engagement primitives.
+      Avoid embedding farming-specific monsterhunt orchestration here.
+  - name: farming service routine ownership
+    purpose: >
+      Make farming own situational routines, assignment selection, and
+      monsterhunt flow.
+      Monsterhunt toggling should not affect general combat helper behavior.
+      Simplify naming by removing the needlessly verbose "no-event" prefix;
+      farming is the default non-merchant behavior.
+
+service_boundaries:
+  cm:
+    entrypoint: lib/services/cm/index.js
+    owns:
+      - character messaging command handlers and CM-based state sharing
+      - bot-to-bot protocol for upkeep, unpack requests, magiport, and base CM commands
+      - CM lifecycle and CM-based peer coordination
+    avoids:
+      - event catalog or world event join policy
+      - farming assignment logic
+      - low-level combat or skill engagement heuristics
+  server-events:
+    entrypoint: lib/services/server-events/index.js
+    owns:
+      - server event metadata and active event catalog
+      - join-event flow and joinable event helpers
+      - broadcast code-loaded event notifications
+      - server-event support for farming sub-routines
+    avoids:
+      - generic runtime event listener plumbing unless tied to server events
+      - owning farming routine policy
+      - owning combat logic
+  combat:
+    entrypoint: lib/services/combat/index.js
+    owns:
+      - skill usage helper APIs
+      - monster targeting and engagement support
+      - mage/priest support runner helpers
+      - combat outcome estimation
+    avoids:
+      - monsterhunt lifecycle orchestration
+      - farming assignment or group-role selection
+  farming:
+    entrypoint: lib/services/farming/index.js
+    owns:
+      - farming routine orchestration
+      - assignment selection and role state
+      - monsterhunt routine and turn-in logic
+      - hunt-chain and position/movement flows
+    avoids:
+      - low-level combat helper implementation details
+      - server-event join/catalog behavior
+
+migration_tasks:
+  - id: rename_events_service
+    description: >
+      Rename lib/services/events to lib/services/server-events and update public
+      API names and module imports.
+    files:
+      - lib/services/events/index.js
+      - lib/services/events/README.md
+      - lib/services/events/*.js
+      - lib/modules/join_event.module.js
+  - id: audit_cm_service_boundary
+    description: >
+      Treat CM as a dedicated character messaging service with its own runtime
+      contract and avoid mixing CM protocol logic into farming or event lifecycle.
+    files:
+      - lib/services/cm/index.js
+      - lib/services/cm/cm_service.js
+      - lib/services/cm/base_cm_commands.js
+      - lib/services/cm/mage_magiport_service.js
+      - lib/services/cm/unpack_requester.js
+      - lib/services/cm/*_runtime.js
+  - id: extract_runtime_listener_boundary
+    description: >
+      Create an explicit runtime listener helper service for onCharacter/onGame
+      subscriptions and CM wait utilities.
+    files:
+      - lib/services/server-events/listeners.js
+      - lib/services/runtime-listeners/index.js
+      - lib/services/runtime-listeners/*.js
+  - id: simplify_farming_naming
+    description: >
+      Rename or simplify the verbose "no-event" farming naming so farming is
+      the default non-merchant routine and fewer service paths imply default
+      behavior.
+    files:
+      - lib/modules/no_event_farming.module.js
+      - lib/services/farming/index.js
+      - lib/services/farming/*.js
+      - lib/config/defaults.js
+  - id: move_monsterhunt_to_farming
+    description: >
+      Extract runMonsterhunt and monsterhunt-specific gating from combat into
+      farming so monsterhunt is a farming routine.
+    files:
+      - lib/services/combat/hunt_runner.js
+      - lib/services/farming/monsterhunt_state.js
+      - lib/services/farming/monsterhunt_runner.js
+      - lib/services/farming/no_event_farming_runtime_impl.js
+  - id: tighten_combat_contract
+    description: >
+      Ensure combat service exports only reusable combat helpers and support
+      runners, not farming-specific flows.
+    files:
+      - lib/services/combat/index.js
+      - lib/services/combat/combat_service.js
+      - lib/services/combat/README.md
+  - id: document_boundaries
+    description: >
+      Update service README docs and repo service map with the new boundaries
+      and public API contracts.
+    files:
+      - lib/services/server-events/README.md
+      - lib/services/combat/README.md
+      - lib/services/farming/README.md
+      - lib/services/cm/README.md
+      - AdventureLandBots/docs/repo-map.yaml
+
+validation:
+  - Run AdventureLandBots/scripts/check_service_wiring.js and ensure no deep
+    service imports are present.
+  - Confirm module installers only import public service entrypoints: lib/modules/event_combat.module.js, lib/modules/no_event_farming.module.js, lib/modules/join_event.module.js.
+  - Verify service README docs reflect final boundary names and exported APIs.
+
+notes:
+  - server-events should be semantically distinct from runtime "event listeners".
+  - farming is the default non-merchant runtime; remove the needlessly verbose
+    "no-event" naming convention.
+  - server-events should be treated as a farming sub-routine provider, not a
+    top-level standalone behavior layer.
+  - monsterhunt should be classified as a farming sub-routine and remain a
+    farming feature toggle.
+  - combat must avoid owning monsterhunt lifecycle orchestration or farming
+    assignment policy.
+  - If listener helpers are shared across services, they should live in a
+    dedicated runtime-listener service contract.
