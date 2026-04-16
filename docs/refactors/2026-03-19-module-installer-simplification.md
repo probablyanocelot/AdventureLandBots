@@ -11,7 +11,7 @@ This refactor centralizes that pattern to reduce repetition and keep modules thi
 - Refactored these modules to use the shared installer factory:
   - `event_combat.module.js`
   - `join_event.module.js`
-  - `no_event_farming.module.js`
+  - `farming.module.js`
   - `orchestrator.module.js`
   - `party.module.js`
   - `priest_swap.module.js`

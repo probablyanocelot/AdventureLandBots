@@ -101,7 +101,7 @@ migration_tasks:
       the default non-merchant routine and fewer service paths imply default
       behavior.
     files:
-      - lib/modules/no_event_farming.module.js
+      - lib/modules/farming.module.js
       - lib/services/farming/index.js
       - lib/services/farming/*.js
       - lib/config/defaults.js
@@ -136,7 +136,7 @@ migration_tasks:
 validation:
   - Run AdventureLandBots/scripts/check_service_wiring.js and ensure no deep
     service imports are present.
-  - Confirm module installers only import public service entrypoints: lib/modules/event_combat.module.js, lib/modules/no_event_farming.module.js, lib/modules/join_event.module.js.
+  - Confirm module installers only import public service entrypoints: lib/modules/event_combat.module.js, lib/modules/farming.module.js, lib/modules/join_event.module.js.
   - Verify service README docs reflect final boundary names and exported APIs.
 
 notes:
