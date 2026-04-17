@@ -38,7 +38,6 @@ Read in this order and stop as soon as you have enough context:
 - Combat behavior → `services/combat/index.js`, one of `hunt_runner.js|world_event_runner.js|support_runner.js|position_store.js|skills.js|targeting.js|event_combat.js`
 - Event handling/CM waits → `services/events/index.js`, `listeners.js` (+ specific event module)
 - Farming assignment/chaining → `services/farming/index.js`, target module under `services/farming/*`
-- Merchant gather loop → `services/gathering/index.js`, target module
 - Inventory/chest logic → `services/inventory/index.js`, target module
 - Movement routing → `services/movement/index.js`, `move_manager.js`
 - State flags/guards → `services/state/index.js`, `flags.js`

@@ -16,7 +16,7 @@ In-game startup chain:
 - `lib/runtime/` — lifecycle, module contract, module registry, character boot.
 - `lib/characters/` — character classes + composition helpers.
 - `lib/modules/` — installable runtime modules (`install(ctx) -> disposable`).
-- `lib/services/` — service-layer implementations (CM, combat, events, movement, inventory, party, state, gathering).
+- `lib/services/` — service-layer implementations (CM, combat, events, movement, inventory, party, state).
 - `lib/contracts/` — service interfaces and runtime contract validators.
 - `lib/telemetry/` — telemetry client/server.
 - `game_codes/` — game-specific scripts and runner compatibility.

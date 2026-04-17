@@ -16,13 +16,3 @@ Exported from `lib/services/orchestrator/index.js`:
 
 `createOrchestratorModuleService()` is used by
 `lib/modules/orchestrator.module.js`.
-
-## Allowed legacy import path
-
-None.
-
-This service is now service-native and must not import `domains/*`.
-
-## Migration note
-
-Legacy orchestrator bridge import has been removed. Callers should continue to use `lib/services/orchestrator/index.js`.
