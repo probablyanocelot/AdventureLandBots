@@ -6,7 +6,7 @@ Adventure Land MMORPG bot framework with a runtime-first architecture.
 
 In-game startup chain:
 
-1. `lib/client_entry.js`
+1. `codes/93proxied_entry.93.js` (mirror of `lib/client_entry.js`)
 2. `lib/bootstrap/index.js` (`runClientBootstrap`)
 3. `lib/al_main.js` (`main`)
 4. `lib/runtime/character_runtime.js` (`bootCharacterRuntime`)
@@ -18,7 +18,6 @@ In-game startup chain:
 - `lib/modules/` — installable runtime modules (`install(ctx) -> disposable`).
 - `lib/services/` — service-layer implementations (CM, combat, events, movement, inventory, party, state, gathering).
 - `lib/contracts/` — service interfaces and runtime contract validators.
-- `lib/infra/` — adapters over game globals (`send_cm`, `join`, `smart_move`, ...).
 - `lib/telemetry/` — telemetry client/server.
 - `game_codes/` — game-specific scripts and runner compatibility.
 - `examples/` — sample configs and outputs.
@@ -39,6 +38,8 @@ In-game startup chain:
 - Runtime module install contract: `lib/modules/*.module.js` with `install(ctx)`
 
 Core contract-backed services:
+
+<!-- TODO: ensure this is up-to-date -->
 
 ```yaml
 services:
@@ -106,6 +107,8 @@ services:
 
 ## Quick edit map
 
+<!-- TODO: ensure this is up-to-date -->
+
 - Change combat behavior → `lib/services/combat/index.js` and files in `lib/services/combat/*`
 - Change movement behavior → `lib/services/helpers/movement/index.js` (plus `lib/services/movement/index.js` consumer alias)
 - Add runtime module → `lib/modules/*.module.js` + `lib/runtime/module_registry.js`
@@ -120,4 +123,4 @@ services:
 - `docs/repo-map.yaml` — machine-readable architecture map.
 - `docs/agent-index.json` — stable file/service index for automation.
 - `docs/architecture-rules.md` — layering/import rules.
-- `docs/deprecated-paths.md` — removed shim paths and replacements.
+- `docs/deprecated-paths.md` — re-create during/end of major refactors for debugging.

@@ -1,3 +1,4 @@
+# TODO: ensure all sections up-to-date
 version: 2
 project: AdventureLandBots
 agent_docs:
@@ -53,10 +54,7 @@ layers:
     owns:
       - service-level feature runtime composition
       - service entrypoints and contracts
-  infra:
-    path: lib/infra
-    owns:
-      - game global adapters
+
 important_files:
   - lib/bootstrap/index.js
   - lib/al_main.js

@@ -11,13 +11,12 @@ Machine-friendly guide for making safe, architecture-aligned edits in `Adventure
 - `lib/services/` — feature ownership and service implementations.
 - `lib/characters/` — character class shells and character-level composition.
 - `lib/config/` — configuration assembly and runtime config context.
-- `lib/infra/` — wrappers around game globals and external side effects.
 
 ## Runtime boot flow (self-contained)
 
 Primary chain used in-game:
 
-1. `lib/zCLIENT_BOOTSTRAP.js`
+1. `codes/93proxied_entry.js`
 2. `lib/bootstrap/index.js#runClientBootstrap`
 3. `lib/al_main.js#main`
 4. `lib/runtime/character_runtime.js#bootCharacterRuntime`
@@ -85,18 +84,105 @@ Service public entrypoints: `lib/services/<service>/index.js`
 
 ### Contract-backed service boundary map
 
-| service         | entrypoint                            | exported service functions                                                                                                                                                                         | expected ctx shape                                                                           | lifecycle behavior                                                                     |
-| --------------- | ------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
-| `cm`            | `lib/services/cm/index.js`            | `createUpkeepModuleService`, `createUnpackRequesterModuleService`, `installBaseCmCommands`, `installMagiportAutoAccept`, `installMageMagiportService`, `magiportTargets`                           | module install ctx: `{ cfg, runtimeScope }`; factories: `{ cfg }`                            | upkeep/unpack services validate `stopRoutine()`                                        |
-| `combat`        | `lib/services/combat/index.js`        | `createEventCombatModuleService`, `runMageSupport`, `runPriestSupport`                                                                                                                             | module install ctx: `{ cfg, runtimeScope }`; factory: `{ cfg }`                              | event combat service validates `stopRoutine()`                                         |
-| `events`        | `lib/services/events/index.js`        | `joinFirstActiveEventService`, `runJoinEventModuleService`, `broadcastCodeLoadedService`, `isJoinableEventService`, `getActiveJoinableEventsService`, `createEventTaskEmitter`, listener functions | module installer currently no args for join flow                                             | join-event call validates `{ ok: boolean }`; listeners support install/stop lifecycle  |
-| `farming`       | `lib/services/farming/index.js`       | `createNoEventFarmingModuleService`, `createRoleSyncRequesterService` (+ re-exported farming helpers)                                                                                              | module install ctx: `{ cfg, runtimeScope }`; role sync service: `{ cfg, ownerName, reason }` | no-event and role-sync services validate `stopRoutine()`                               |
-| `inventory`     | `lib/services/inventory/index.js`     | `createChestLootingService` (+ re-exported inventory helpers)                                                                                                                                      | service args: `{ intervalMs }`                                                               | chest looting service validates `stopRoutine()`                                        |
-| `merchant`      | `lib/services/merchant/index.js`      | `createMerchantService`                                                                                                                                                                            | service args: `{ cfg, home, gatherLoc, gatherOrder, gatherRepeatMs }`                        | service validates required methods; includes `stopRoutine`, `dispose`, symbol disposal |
-| `merchant_role` | `lib/services/merchant_role/index.js` | `createToolProvisioningService`, `createBankCraftingService`, `createUnpackSupportService` (+ re-exports)                                                                                          | service args: `{ cfg }`                                                                      | each validated service exposes `stopRoutine()`; tooling exposes `checkForTools()`      |
-| `orchestrator`  | `lib/services/orchestrator/index.js`  | `createOrchestratorModuleService` (+ orchestrator re-exports)                                                                                                                                      | module service currently no args                                                             | service validates `init` + `stopRoutine`; init is invoked during creation              |
-| `party`         | `lib/services/party/index.js`         | `createPartyModuleService`, `createPriestSwapModuleService`, `setCharacterAction`, `clearCharacterAction`, `partyInvite`, `partyAccept`, `partyLeave`, swap helpers                                | module install ctx: `{ cfg, runtimeScope }`; factories: `{ cfg }`                            | party/priest-swap module services validate `stopRoutine()`                             |
-| `telemetry`     | `lib/services/telemetry/index.js`     | `createTelemetryModuleService`                                                                                                                                                                     | module install ctx: `{ cfg, runtimeScope }`; factory: `{ cfg }`                              | telemetry module returns runtime-managed service object                                |
+```yaml
+services:
+  - service: cm
+    entrypoint: lib/services/cm/index.js
+    exportedServiceFunctions:
+      - createUpkeepModuleService
+      - createUnpackRequesterModuleService
+      - installBaseCmCommands
+      - installMagiportAutoAccept
+      - installMageMagiportService
+      - magiportTargets
+    expectedCtxShape: "module install ctx: { cfg, runtimeScope }; factories: { cfg }"
+    lifecycleBehavior: "upkeep/unpack services validate stopRoutine()"
+
+  - service: combat
+    entrypoint: lib/services/combat/index.js
+    exportedServiceFunctions:
+      - createEventCombatModuleService
+      - runMageSupport
+      - runPriestSupport
+    expectedCtxShape: "module install ctx: { cfg, runtimeScope }; factory: { cfg }"
+    lifecycleBehavior: "event combat service validates stopRoutine()"
+
+  - service: events
+    entrypoint: lib/services/events/index.js
+    exportedServiceFunctions:
+      - joinFirstActiveEventService
+      - runJoinEventModuleService
+      - broadcastCodeLoadedService
+      - isJoinableEventService
+      - getActiveJoinableEventsService
+      - createEventTaskEmitter
+      - listener functions
+    expectedCtxShape: "module installer currently no args for join flow"
+    lifecycleBehavior: "join-event call validates { ok: boolean }; listeners support install/stop lifecycle"
+
+  - service: farming
+    entrypoint: lib/services/farming/index.js
+    exportedServiceFunctions:
+      - createNoEventFarmingModuleService
+      - createRoleSyncRequesterService
+      - re-exported farming helpers
+    expectedCtxShape: "module install ctx: { cfg, runtimeScope }; role sync service: { cfg, ownerName, reason }"
+    lifecycleBehavior: "no-event and role-sync services validate stopRoutine()"
+
+  - service: inventory
+    entrypoint: lib/services/inventory/index.js
+    exportedServiceFunctions:
+      - createChestLootingService
+      - re-exported inventory helpers
+    expectedCtxShape: "service args: { intervalMs }"
+    lifecycleBehavior: "chest looting service validates stopRoutine()"
+
+  - service: merchant
+    entrypoint: lib/services/merchant/index.js
+    exportedServiceFunctions:
+      - createMerchantService
+    expectedCtxShape: "service args: { cfg, home, gatherLoc, gatherOrder, gatherRepeatMs }"
+    lifecycleBehavior: "service validates required methods; includes stopRoutine, dispose, symbol disposal"
+
+  - service: merchant_role
+    entrypoint: lib/services/merchant_role/index.js
+    exportedServiceFunctions:
+      - createToolProvisioningService
+      - createBankCraftingService
+      - createUnpackSupportService
+      - re-exports
+    expectedCtxShape: "service args: { cfg }"
+    lifecycleBehavior: "each validated service exposes stopRoutine(); tooling exposes checkForTools()"
+
+  - service: orchestrator
+    entrypoint: lib/services/orchestrator/index.js
+    exportedServiceFunctions:
+      - createOrchestratorModuleService
+      - orchestrator re-exports
+    expectedCtxShape: "module service currently no args"
+    lifecycleBehavior: "service validates init + stopRoutine; init is invoked during creation"
+
+  - service: party
+    entrypoint: lib/services/party/index.js
+    exportedServiceFunctions:
+      - createPartyModuleService
+      - createPriestSwapModuleService
+      - setCharacterAction
+      - clearCharacterAction
+      - partyInvite
+      - partyAccept
+      - partyLeave
+      - swap helpers
+    expectedCtxShape: "module install ctx: { cfg, runtimeScope }; factories: { cfg }"
+    lifecycleBehavior: "party/priest-swap module services validate stopRoutine()"
+
+  - service: telemetry
+    entrypoint: lib/services/telemetry/index.js
+    exportedServiceFunctions:
+      - createTelemetryModuleService
+    expectedCtxShape: "module install ctx: { cfg, runtimeScope }; factory: { cfg }"
+    lifecycleBehavior: "telemetry module returns runtime-managed service object"
+```
 
 ## Stable extension points
 

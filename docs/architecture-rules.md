@@ -6,7 +6,7 @@
 - `lib/characters/*` should remain thin (composition and class-specific glue).
 - `lib/services/*` owns behavior/state logic.
 - `lib/modules/*` are install adapters exposing `install(ctx)`.
-- `lib/infra/*` wraps direct game globals when feasible.
+- `lib/services/helpers/*` are shared/general-use utilities.
 
 ## Root ↔ service boundaries
 
