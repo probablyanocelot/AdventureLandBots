@@ -1,0 +1,4 @@
+# Helper Service Todo
+
+- update helper service imports to match new folder structure (search for "helper-" and remove it; file names are otherwise unchanged)
+- might consolidate data & data-structures
