@@ -230,8 +230,8 @@
     {
       "change": "movement behavior",
       "files": [
-        "lib/services/helper-movement/index.js",
-        "lib/services/helper-movement/*",
+        "lib/services/helpers/movement/index.js",
+        "lib/services/helpers/movement/*",
         "lib/services/movement/index.js"
       ]
     },

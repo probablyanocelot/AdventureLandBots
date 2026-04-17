@@ -1,4 +1,4 @@
-# helper-combat
+# helpers/combat
 
 Service-owned combat utility helpers shared across combat flows.
 

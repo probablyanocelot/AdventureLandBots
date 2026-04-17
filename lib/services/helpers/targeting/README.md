@@ -1,4 +1,4 @@
-# helper-targeting
+# helpers/targeting
 
 Service-owned targeting and engagement helpers.
 

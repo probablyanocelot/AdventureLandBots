@@ -1,4 +1,4 @@
-# helper-roster
+# helpers/roster
 
 Service-owned roster/party metadata helpers.
 

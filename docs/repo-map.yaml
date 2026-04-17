@@ -137,8 +137,8 @@ quick_edit_map:
     - lib/services/combat/index.js
     - lib/services/combat/*
   movement_behavior:
-    - lib/services/helper-movement/index.js
-    - lib/services/helper-movement/*
+    - lib/services/helpers/movement/index.js
+    - lib/services/helpers/movement/*
   add_runtime_module:
     - lib/modules/*.module.js
     - lib/runtime/module_registry.js

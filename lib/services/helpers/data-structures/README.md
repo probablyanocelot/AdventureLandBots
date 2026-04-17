@@ -1,4 +1,4 @@
-# helper-data-structures
+# helpers/data-structures
 
 Service-owned data manipulation and indexing helpers.
 

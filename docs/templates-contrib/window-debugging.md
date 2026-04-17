@@ -46,7 +46,7 @@ This keeps the surface small and avoids adding new globals just for debugging.
 
 If the helper is deep inside a service and not already exposed, add one deliberate helper property.
 
-Example in `lib/services/helper-data/monster_ratio.js`:
+Example in `lib/services/helpers/data/monster_ratio.js`:
 
 ```js
 const { calculateMonsterRatio } = require("./monster_ratio_impl.js");

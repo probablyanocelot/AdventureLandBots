@@ -1,4 +1,4 @@
-# helper-time
+# helpers/time
 
 Service-owned time utilities.
 

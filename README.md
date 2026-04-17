@@ -107,7 +107,7 @@ services:
 ## Quick edit map
 
 - Change combat behavior → `lib/services/combat/index.js` and files in `lib/services/combat/*`
-- Change movement behavior → `lib/services/helper-movement/index.js` (plus `lib/services/movement/index.js` consumer alias)
+- Change movement behavior → `lib/services/helpers/movement/index.js` (plus `lib/services/movement/index.js` consumer alias)
 - Add runtime module → `lib/modules/*.module.js` + `lib/runtime/module_registry.js`
 - Add character behavior → `lib/characters/*_character.js`
 - Change class resolution → `lib/runtime/character_runtime.js` (`CLASS_REGISTRY`)

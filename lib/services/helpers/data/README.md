@@ -1,4 +1,4 @@
-# helper-data
+# helpers/data
 
 Data analysis helper utilities for AdventureLand.
 
@@ -42,7 +42,7 @@ Exports from `index.js`:
 ## Usage
 
 ```js
-const helperData = await require("./lib/services/helper-data");
+const helperData = await require("./lib/services/helpers/data");
 
 const dropTable = G.drops?.monsters?.rock ?? [];
 const chance = helperData.getItemDropChance(dropTable, "goldenegg", {

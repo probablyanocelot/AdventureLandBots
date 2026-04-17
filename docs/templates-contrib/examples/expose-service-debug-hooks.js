@@ -4,7 +4,7 @@
 
 const {
   getItemDropChance,
-} = require("../lib/services/helper-data/drop_chance.js");
+} = require("../lib/services/helpers/data/drop_chance.js");
 
 // Keep the public surface small and intentional.
 // Do not expose the entire module or all helper functions.

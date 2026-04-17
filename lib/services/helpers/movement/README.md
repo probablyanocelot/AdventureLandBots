@@ -1,4 +1,4 @@
-# helper-movement
+# helpers/movement
 
 Service-owned movement helper utilities.
 

@@ -20,12 +20,12 @@ Service layer for runtime behavior modules.
 - `events` service is service-native (`join event`, no domain bridge).
 - `telemetry` service is service-native (`telemetry.module.js` -> `services/telemetry`).
 - `inventory` service owns runtime chest-loot helpers used by characters/runtime.
-- `helper-movement` service owns generic movement/request-throttling helpers.
-- `helper-targeting` service owns generic target selection + engagement helpers.
-- `helper-combat` service owns shared combat utility helpers.
-- `helper-data-structures` service owns generic data-structure manipulation helpers.
-- `helper-time` service owns generic time utilities.
-- `helper-roster` service owns generic roster metadata helpers.
+- `helpers/movement` service owns generic movement/request-throttling helpers.
+- `helpers/targeting` service owns generic target selection + engagement helpers.
+- `helpers/combat` service owns shared combat utility helpers.
+- `helpers/data-structures` service owns generic data-structure manipulation helpers.
+- `helpers/time` service owns generic time utilities.
+- `helpers/roster` service owns generic roster metadata helpers.
 - `helpers` bundle exposes a swiss-army helper entrypoint.
 - Additional services can be migrated incrementally.
 
@@ -41,12 +41,12 @@ Service layer for runtime behavior modules.
 - `events` → `lib/services/events/README.md`
 - `telemetry` → `lib/services/telemetry/README.md`
 - `inventory` → `lib/services/inventory/README.md`
-- `helper-movement` → `lib/services/helper-movement/README.md`
-- `helper-targeting` → `lib/services/helper-targeting/README.md`
-- `helper-combat` → `lib/services/helper-combat/README.md`
-- `helper-data-structures` → `lib/services/helper-data-structures/README.md`
-- `helper-time` → `lib/services/helper-time/README.md`
-- `helper-roster` → `lib/services/helper-roster/README.md`
+- `helpers/movement` → `lib/services/helpers/movement/README.md`
+- `helpers/targeting` → `lib/services/helpers/targeting/README.md`
+- `helpers/combat` → `lib/services/helpers/combat/README.md`
+- `helpers/data-structures` → `lib/services/helpers/data-structures/README.md`
+- `helpers/time` → `lib/services/helpers/time/README.md`
+- `helpers/roster` → `lib/services/helpers/roster/README.md`
 - `helpers` → `lib/services/helpers/README.md`
 
 ## Bridge policy
@@ -68,6 +68,6 @@ Service layer for runtime behavior modules.
 
 ## Helper-category policy
 
-- Any non-feature-specific helper logic must live under `lib/services/helper-*`.
+- Any non-feature-specific helper logic must live under `lib/services/helpers/*`.
 - New runtime/service code should import helper-category services directly.
 - If a service needs multiple helper categories, prefer `lib/services/helpers/index.js`.

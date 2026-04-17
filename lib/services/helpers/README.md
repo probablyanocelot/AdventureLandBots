@@ -8,12 +8,12 @@ Swiss-army entrypoint that bundles helper-category services for convenient acces
 
 Exported from `lib/services/helpers/index.js`:
 
-- `movement` → helper-movement service
-- `targeting` → helper-targeting service
-- `combat` → helper-combat service
-- `dataStructures` → helper-data-structures service
-- `time` → helper-time service
-- `roster` → helper-roster service
+- `movement` → helpers/movement service
+- `targeting` → helpers/targeting service
+- `combat` → helpers/combat service
+- `dataStructures` → helpers/data-structures service
+- `time` → helpers/time service
+- `roster` → helpers/roster service
 
 ## Usage
 

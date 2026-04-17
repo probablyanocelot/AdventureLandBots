@@ -114,8 +114,8 @@ Use these first for net-new behavior:
   - `lib/services/combat/index.js`
   - `lib/services/combat/*`
 - Change movement behavior
-  - `lib/services/helper-movement/index.js`
-  - `lib/services/helper-movement/*`
+  - `lib/services/helpers/movement/index.js`
+  - `lib/services/helpers/movement/*`
   - (consumer alias) `lib/services/movement/index.js`
 - Add a runtime module
   - `lib/modules/<name>.module.js`
